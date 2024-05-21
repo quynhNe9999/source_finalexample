@@ -37,7 +37,7 @@ public class WebSecurityConfig {
 //				.antMatchers("/view/**", "/user/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 				.and().formLogin()
-				.loginPage("/authentication-login")
+				.loginPage("/login")
 				.defaultSuccessUrl("/")
 				.permitAll()
 				.and()
