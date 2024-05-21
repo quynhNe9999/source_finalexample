@@ -10,14 +10,14 @@ public class FinalexampleApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FinalexampleApplication.class, args);
-        // Create an instance of BCryptPasswordEncoder
+/*        // Create an instance of BCryptPasswordEncoder
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         // Encode the password
         String encodedPassword = passwordEncoder.encode("123123123");
 
         // Print the encoded password
-        System.out.println("Encoded Password: " + encodedPassword);
+        System.out.println("Encoded Password: " + encodedPassword);*/
 	}
 
 
