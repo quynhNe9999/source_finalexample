@@ -1,11 +1,19 @@
 package com.quynhtadinh.finalexample.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.quynhtadinh.finalexample.entity.ImageGallery;
+import com.quynhtadinh.finalexample.service.ImageGalleryService;
+
 @Controller
 public class MainController {
+	
+	private ImageGalleryService imageGalleryService;
 
 	@RequestMapping(value = "/welcome", method=RequestMethod.GET)
 	public String Welcome() {
@@ -65,6 +73,14 @@ public class MainController {
 	public String Uitypography() {
 		System.out.println("name ui-typography");
 		return "ui-typography";
+	}
+	
+	@RequestMapping(value = "/table", method=RequestMethod.GET)
+	public String Table( Model map) {
+//		List<ImageGallery> images = imageGalleryService.getAllActiveImages();
+//		map.addAttribute("images", images);
+		System.out.println("name table");
+		return "table";
 	}
 
 }

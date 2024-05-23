@@ -30,7 +30,7 @@
           <ul id="sidebarnav">
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">Home</span>
+              <span class="hide-menu">Trang chủ</span>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="./index" aria-expanded="false">
@@ -42,7 +42,15 @@
             </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">UI COMPONENTS</span>
+              <span class="hide-menu">Thư mục quản lý</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./table" aria-expanded="false">
+                <span>
+                  <i class="ti ti-article"></i>
+                </span>
+                <span class="hide-menu">Table</span>
+              </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="./ui-buttons" aria-expanded="false">
@@ -86,14 +94,14 @@
             </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">AUTH</span>
+              <span class="hide-menu">Tài Khoản</span>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="./authentication-login" aria-expanded="false">
                 <span>
                   <i class="ti ti-login"></i>
                 </span>
-                <span class="hide-menu">Login</span>
+                <span class="hide-menu">Đăng nhập</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -101,7 +109,7 @@
                 <span>
                   <i class="ti ti-user-plus"></i>
                 </span>
-                <span class="hide-menu">Register</span>
+                <span class="hide-menu">Đăng ký tài khoản</span>
               </a>
             </li>
             <li class="nav-small-cap">
@@ -172,18 +180,18 @@
                   <div class="message-body">
                     <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                       <i class="ti ti-user fs-6"></i>
-                      <p class="mb-0 fs-3">My Profile</p>
+                      <p class="mb-0 fs-3">Thông tin của tôi</p>
                     </a>
                     <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                       <i class="ti ti-mail fs-6"></i>
-                      <p class="mb-0 fs-3">My Account</p>
+                      <p class="mb-0 fs-3">Tài khoản của tôi</p>
                     </a>
                     <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                       <i class="ti ti-list-check fs-6"></i>
-                      <p class="mb-0 fs-3">My Task</p>
+                      <p class="mb-0 fs-3">Việc của tôi</p>
                     </a>
                     <form th:action="@{/logout}" method="post">
-  						<input class="btn btn-outline-primary mx-3 mt-2 d-block" type="submit" value="Logout" width="198"/>
+  						<input class="btn btn-outline-primary mx-3 mt-2 d-block" type="submit" value="Đăng Xuất" width="198"/>
 					</form>
                     <!-- <a th:action="@{/login}"  class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a> -->
                   </div>
