@@ -10,10 +10,10 @@
 <!-- Default nav bar -->
 
 <nav th:fragment="nav-default" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark"
-     style="height: 4rem; opacity: .9; background-color: #404040 !important">
+     style="height: 60; opacity: .9; background-color: #000000 !important">
 <!--     <a class="navbar-brand" href="./home.html">Quynh Hill</a> -->
-              <a href="./homeview" class="text-nowrap logo-img">
-            <img src="../assets/images/logos/dark-logo.png" width="180" hight="76" alt="" />
+              <a href="./home" class="text-nowrap logo-img">
+            <img src="../assets/images/logos/dark-logo.png" width="180" height="76" alt="" />
           </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,16 +23,24 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="btn btn-outline-warning ml-5 " style="border: none;"
-                   th:href="@{/products}">Sản phẩm</i></a>
+                <a class="btn btn-outline-warning ml-5" style="border: none;"
+                   th:href="@{/products}">TRANG CHỦ</i></a>
             </li>
             <li class="nav-item">
                 <a class="btn btn-outline-warning ml-5" style="border: none;"
-                   href="#">Giảm giá</i></a>
+                   href="#">THÔNG TIN</i></a>
             </li>
             <li class="nav-item">
                 <a class="btn btn-outline-warning ml-5" style="border: none;"
-                   href="#">Liên hệ</i></a>
+                   href="#">THỰC ĐƠN</i></a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-warning ml-5" style="border: none;"
+                   href="#">KHUYẾN MÃI</i></a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-warning ml-5" style="border: none;"
+                   href="#">TIN TỨC</i></a>
             </li>
         </ul>
 
@@ -49,10 +57,10 @@
         <ul class="navbar-nav ml-auto mr-2">
             <li class="nav-item dropdown active">
                 <a class="nav-link dropdown-toggle mr-5" href="#" id="navbarDropdown"
-                   style="color: green; font-size: 2.5rem" role="button" data-toggle="dropdown"
+                   style="color: #000000; font-size: 2.5rem" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-cart-plus mr-2" style="color: #e9ecef; font-size: 2.5rem"></i>
-                    <sup th:if="${session.listCart} and ${session.listCart.size()}!=0" style="color: #fcae00 !important"
+                    <sup th:if="${session.listCart} and ${session.listCart.size()}!=0" style="color: #cccccc !important"
                          th:text="${session.listCart.size()}">5</sup>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -106,30 +114,32 @@
     <section id="footer">
         <div class="container">
             <div class="row text-center text-xs-center text-sm-left text-md-left">
-<!--                 <div class="col-xs-12 col-sm-4 col-md-4">
+                 <div class="col-xs-12 col-sm-4 col-md-4">
                     <ul class="list-unstyled quick-links">
-                        <img src="images/My_Facebook_Code.png" alt="" style="height: 250px">
-                    </ul>
-                </div> -->
+
+              <a href="./home" class="text-nowrap logo-img">
+            <img src="../assets/images/logos/dark-logo.png" width="300" height="200" alt="" />
+          </a>                    </ul>
+                </div> 
                 <div class="col-xs-12 col-sm-4 col-md-4">
-                    <h5>About Website</h5>
+                    <h5>Gới thiệu Website</h5>
                     <ul class="list-unstyled quick-links">
                         <li><a href="/homeview"><i
                                 class="fa fa-angle-double-right"></i>Trang chủ</a></li>
-                        <li><a href="talble"><i class="fa fa-angle-double-right"></i>Giới thiệu</a></li>
+                        <li><a href="talble"><i class="fa fa-angle-double-right"></i>Thông tin</a></li>
                         <li><a href="#"><i
-                                class="fa fa-angle-double-right"></i>Sản phẩm</a></li>
+                                class="fa fa-angle-double-right"></i>Thực đơn</a></li>
                         <li><a href="#"><i
-                                class="fa fa-angle-double-right"></i>Giảm giá bây giờ</a></li>
+                                class="fa fa-angle-double-right"></i>Khuyến mãi</a></li>
                         <li><a href="#"><i
-                                class="fa fa-angle-double-right"></i>Thêm tài khoản</a></li>
+                                class="fa fa-angle-double-right"></i>Tin  tức</a></li>
                         <li><a href="
-                                http://localhost:8080/HousewareShop/login">
+                                http://localhost:8899/login">
                             <i class="fa fa-angle-double-right"></i>Đăng nhập</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4">
-                    <h5>Contact</h5>
+                    <h5>Liên hệ</h5>
 
                     <ul class="list-unstyled quick-links">
                         <li><a><i class="fas fa-phone-volume"></i>0984368800</a><a><i
@@ -157,7 +167,7 @@
                                 class="fab fa-instagram"></i></a></li>
                         <li class="list-inline-item"><a href="#"><i class="fas fa-phone-volume"></i></a></li>
                         <li class="list-inline-item"><a
-                                href="mailto:hamruouvanghuyenthu@gmail.com?cc=name2@rapidtables.com&amp;bcc=name3@rapidtables.com
+                                href="mailto:tdquynh09@gmail.com?cc=name2@rapidtables.com&amp;bcc=name3@rapidtables.com
                                                         &amp;subject=The%20subject%20of%20the%20email
                                                         &amp;body=The%20body%20of%20the%20email" target="_blank"><i
                                 class="fa fa-envelope"></i></a></li>
@@ -167,9 +177,6 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
-                    <p><u><a href="#">National Transaction Corporation</a></u> is a
-                        Registered MSP/ISO of Elavon, Inc. Georgia [a wholly owned subsidiary of U.S. Bancorp,
-                        Minneapolis, MN]</p>
                     <p class="h6">© copyright by <a class="text-green" href="#"
                                                     target="_blank">Quynh Hill</a></p>
                 </div>
