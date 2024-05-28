@@ -51,4 +51,5 @@ public class WebSecurityConfig {
 	public AuthenticationManager authenticationManager() throws Exception {
 		return authConfiguration.getAuthenticationManager();
 	}
+
 }

@@ -1,0 +1,10 @@
+package com.quynhtadinh.finalexample.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.quynhtadinh.finalexample.entity.StatusCategory;
+
+@Repository
+public interface StatusCategoryRepository extends JpaRepository<StatusCategory,Integer> {
+}
