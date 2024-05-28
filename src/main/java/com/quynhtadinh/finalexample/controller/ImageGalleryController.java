@@ -44,9 +44,9 @@ public class ImageGalleryController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@GetMapping(value = {"/home"})
+	@GetMapping(value = {"/hill"})
 	public String addProductPage() {
-		return "home";
+		return "hill";
 	}
 
 	@PostMapping("/image/saveImageDetails")
@@ -127,12 +127,12 @@ public class ImageGalleryController {
 					model.addAttribute("price", imageGallery.get().getPrice());
 					return "imagedetails";
 				}
-				return "redirect:/home";
+				return "redirect:/hill";
 			}
-		return "redirect:/home";
+		return "redirect:/hill";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "redirect:/home";
+			return "redirect:/hill";
 		}	
 	}
 

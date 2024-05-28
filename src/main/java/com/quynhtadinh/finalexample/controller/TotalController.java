@@ -53,9 +53,9 @@ public class TotalController {
     public String hello(){
         return "hello";
     }
-    @GetMapping("/homview")
+    @GetMapping("/home")
     public String index() {
-        return "homeview";
+        return "home";
     }
 
     @GetMapping("/products")
