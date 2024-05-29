@@ -83,4 +83,10 @@ public class AdminController {
 		return "table";
 	}
 
+	@RequestMapping(value = "/add-products", method=RequestMethod.GET)
+	public String AddProducts() {
+		System.out.println("name add-products");
+		return "add-products";
+	}
+	
 }
