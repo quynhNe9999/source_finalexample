@@ -291,4 +291,9 @@ public class TotalController {
         model.addAttribute("totalPage", products.getTotalPages());
         return "listProduct";
     }
+    
+    @GetMapping("/ui-about")
+    public String UiAbout() {
+        return "ui-about";
+    }
 }
