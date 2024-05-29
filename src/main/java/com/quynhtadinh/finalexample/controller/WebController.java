@@ -33,7 +33,7 @@ import com.quynhtadinh.finalexample.repository.ShippingRepository;
 import com.quynhtadinh.finalexample.util.MathFunction;
 
 @Controller
-public class TotalController {
+public class WebController {
     @Autowired
     ProductRepository productRepository;
 
@@ -295,5 +295,20 @@ public class TotalController {
     @GetMapping("/ui-about")
     public String UiAbout() {
         return "ui-about";
+    }
+    
+    @GetMapping("/ui-news")
+    public String UiNews() {
+        return "ui-news";
+    }
+    
+    @GetMapping("/ui-menu")
+    public String UiMenu() {
+        return "ui-menu";
+    }
+    
+    @GetMapping("/ui-promotion")
+    public String UiPromotion() {
+        return "ui-promotion";
     }
 }

@@ -11,7 +11,7 @@ import com.quynhtadinh.finalexample.entity.ImageGallery;
 import com.quynhtadinh.finalexample.service.ImageGalleryService;
 
 @Controller
-public class MainController {
+public class AdminController {
 	
 	private ImageGalleryService imageGalleryService;
 
