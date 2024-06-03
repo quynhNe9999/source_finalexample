@@ -311,4 +311,9 @@ public class WebController {
     public String UiPromotion() {
         return "ui-promotion";
     }
+    
+    @GetMapping("/thanks")
+    public String getThank() {
+        return "thanks";
+    }
 }

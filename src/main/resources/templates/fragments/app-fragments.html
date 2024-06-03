@@ -27,17 +27,30 @@
                    th:href="@{/products}">TRANG CHỦ</i></a>
             </li>
           
-            <li class="nav-item">
-            
-                <a class="btn btn-outline-warning ml-5" style="border: none;"
-                   th:href="@{/ui-about}">THÔNG TIN</i></a>
-            </li>
+ 			<li class="nav-item dropdown">
+		        <a class="btn btn-outline-warning ml-5" style="border: none;" 
+		        th:href="@{/ui-about}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          THÔNG TIN
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" th:href="@{/ui-about}">Về chúng tôi</a>
+		          <a class="dropdown-item" th:href="@{/ui-about}">Về cửa hàng</a>
+		          <a class="dropdown-item" th:href="@{/ui-about}">Về khách hàng</a>
+		        </div>
+      		</li>
            
-            <li class="nav-item">
-                <a class="btn btn-outline-warning ml-5" style="border: none;"
-                   th:href="@{/ui-menu}">THỰC ĐƠN</i></a>
-            </li>
-           
+            <li class="nav-item dropdown">
+		        <a class="btn btn-outline-warning ml-5" style="border: none;" th:href="@{/ui-menu}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          THỰC ĐƠN
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" th:href="@{/ui-menu}">Đầu bếp giới thiệu</a>
+		          <a class="dropdown-item" th:href="@{/ui-menu}">Đồ ăn</a>
+		          <a class="dropdown-item" th:href="@{/ui-menu}">Đồ uống</a>
+		          <a class="dropdown-item" th:href="@{/ui-menu}">Combo theo set</a>
+		        </div>
+		    </li>
+
             <li class="nav-item">
                 <a class="btn btn-outline-warning ml-5" style="border: none;"
                    th:href="@{/ui-promotion}">KHUYẾN MÃI</i></a>
@@ -90,7 +103,8 @@
             <div class="btn-group">
                 <a class="nav-link btn btn-outline-primary mt-2 ml-2"
                    href="#">
-                    Tạ Đình Quỳnh
+                         <span th:utext="${#request.userPrincipal.name}"></span>
+                    <!-- Tạ Đình Quỳnh -->
                     <i class="fas fa-user-plus ml-2"></i>
                 </a>
 
@@ -100,7 +114,7 @@
                        onclick="openOrder()">Đặt Hàng</a>
                     <a class="dropdown-item" href="#">Lịch sử</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/logout">Đăng xuất</a>
+                    <a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a>
                 </div>
             </div>
         </ul>

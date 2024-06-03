@@ -1,6 +1,7 @@
 package com.quynhtadinh.finalexample.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,8 +74,10 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-    public String welcome(Model model) {
+    public String welcome(Model model , Principal principal) {
         model.addAttribute("username", securityService.findLoggedInUsername());
+        UserDetails loginedUser = (UserDetails) ((Authentication) principal).getPrincipal();
+
         return "index";
     }
     
