@@ -2,14 +2,14 @@ package com.quynhtadinh.finalexample.entity;
 import javax.persistence.*;
 
 @Entity
-public class OrderDetail {
+public class ImportDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @JoinColumn(name = "import_id")
+    private Import anImport;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -27,12 +27,12 @@ public class OrderDetail {
         this.id = id;
     }
 
-    public Order getOrder() {
-        return order;
+    public Import getAnImport() {
+        return anImport;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setAnImport(Import anImport) {
+        this.anImport = anImport;
     }
 
     public Product getProduct() {
@@ -58,6 +58,4 @@ public class OrderDetail {
     public void setPrice(Double price) {
         this.price = price;
     }
-
-    // Getters and setters
 }

@@ -10,122 +10,115 @@
 <!-- Default nav bar -->
 
 <nav th:fragment="nav-default" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark"
-     style="height: 60; opacity: .9; background-color: #000000 !important">
-<!--     <a class="navbar-brand" href="./home.html">Quynh Hill</a> -->
-              <a href="./home" class="text-nowrap logo-img">
-            <img src="../assets/images/logos/dark-logo.png" width="180" height="76" alt="" />
-          </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+     style="height: 4rem; opacity: .9; background-color: #404040 !important">
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="btn btn-outline-warning ml-5" style="border: none;"
-                   th:href="@{/products}">TRANG CHỦ</i></a>
-            </li>
-          
- 			<li class="nav-item dropdown">
-		        <a class="btn btn-outline-warning ml-5" style="border: none;" 
-		        th:href="@{/ui-about}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		          THÔNG TIN
-		        </a>
-		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" th:href="@{/ui-about}">Về chúng tôi</a>
-		          <a class="dropdown-item" th:href="@{/ui-about}">Về cửa hàng</a>
-		          <a class="dropdown-item" th:href="@{/ui-about}">Về khách hàng</a>
-		        </div>
-      		</li>
-           
-            <li class="nav-item dropdown">
-		        <a class="btn btn-outline-warning ml-5" style="border: none;" th:href="@{/ui-menu}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		          THỰC ĐƠN
-		        </a>
-		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" th:href="@{/ui-menu}">Đầu bếp giới thiệu</a>
-		          <a class="dropdown-item" th:href="@{/ui-menu}">Đồ ăn</a>
-		          <a class="dropdown-item" th:href="@{/ui-menu}">Đồ uống</a>
-		          <a class="dropdown-item" th:href="@{/ui-menu}">Combo theo set</a>
-		        </div>
-		    </li>
+    <div class="header_section">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand"href="/index"><img src="images/logo.png"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/index">TRANG CHỦ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">GIỚI THIỆU</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/coffees">MENU</a>
+                        </li>
+                        <!--                     <li class="nav-item">-->
+                        <!--                        <a class="nav-link" href="/shop">SHOP</a>-->
+                        <!--                     </li>-->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/BLOG">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/lIÊN HỆ">Contact</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <div class="login_bt">
+                            <ul>
+                                <!--                           <a th:href="@{/api/auth/login}">Login</a> | <a th:href="@{/api/auth/register}">Register</a>-->
 
-            <li class="nav-item">
-                <a class="btn btn-outline-warning ml-5" style="border: none;"
-                   th:href="@{/ui-promotion}">KHUYẾN MÃI</i></a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="btn btn-outline-warning ml-5" style="border: none;"
-                    th:href="@{/ui-news}">TIN TỨC</i></a>
-            </li>
-        </ul>
-
-
-        <form th:action="@{/search}" id="frm">
-            <div class="search-box">
-                <input class="search-txt" name="keyword" type="text" placeholder="Type to search">
-                <input type="hidden" th:value="${page}" name="page">
-                <a th:onclick="this.form.submit()" class="search-btn">
-                    <i class="fas fa-search text-center" style="margin-top:12px;color: white"></i>
-                </a>
-            </div>
-        </form>
-        <ul class="navbar-nav ml-auto mr-2">
-            <li class="nav-item dropdown active">
-                <a class="nav-link dropdown-toggle mr-5" href="#" id="navbarDropdown"
-                   style="color: #000000; font-size: 2.5rem" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-cart-plus mr-2" style="color: #e9ecef; font-size: 2.5rem"></i>
-                    <sup th:if="${session.listCart} and ${session.listCart.size()}!=0" style="color: #cccccc !important"
-                         th:text="${session.listCart.size()}">5</sup>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <div class="popup-list-cart">
-                        <table>
-                            <tbody>
-                            <tr th:each="c: ${session.listCart}">
-                                <td class="px-2"><img th:src="'images/'+*{c.productImageUrl}"></td>
-                                <td class="f-small"><a href="#" th:text="*{c.productName}">Repair Tool</a></td>
-                                <td class="px-3 f-small" th:text="' x '+ *{c.quantity}">x 1</td>
-                            </tr>
-
-                            </tbody>
-                        </table>
+                                <li><a th:href="@{/login}"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>ĐĂNG NHẬP</a></li>
+                                <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+        </div>
+        <!-- banner section start -->
+        <div class="banner_section layout_padding">
+            <div class="container">
+                <div id="banner_slider" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="banner_taital_main">
+                                        <h1 class="banner_taital">WINE <br>SHOP</h1>
+                                        <p class="banner_text">more-or-less normal distribution of letters, as opposed to using </p>
+                                        <div class="btn_main">
+                                            <div class="about_bt active"><a href="#">About Us</a></div>
+                                            <div class="callnow_bt"><a href="#">Call Now</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="banner_taital_main">
+                                        <h1 class="banner_taital">WINE <br>SHOP</h1>
+                                        <p class="banner_text">more-or-less normal distribution of letters, as opposed to using </p>
+                                        <div class="btn_main">
+                                            <div class="about_bt active"><a href="#">About Us</a></div>
+                                            <div class="callnow_bt"><a href="#">Call Now</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="banner_taital_main">
+                                        <h1 class="banner_taital">WINE <br>SHOP</h1>
+                                        <p class="banner_text">more-or-less normal distribution of letters, as opposed to using </p>
+                                        <div class="btn_main">
+                                            <div class="about_bt active"><a href="#">About Us</a></div>
+                                            <div class="callnow_bt"><a href="#">Call Now</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" th:href="@{/carts}">Danh sách giỏ hàng</a>
-                </div>
-            </li>
-
-            <!-- Example single danger button -->
-            <div class="btn-group">
-                <a class="nav-link btn btn-outline-primary mt-2 ml-2"
-                   href="#">
-                         <span th:utext="${#request.userPrincipal.name}"></span>
-                    <!-- Tạ Đình Quỳnh -->
-                    <i class="fas fa-user-plus ml-2"></i>
-                </a>
-
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Trang cá nhân</a>
-                    <a class="dropdown-item" href="#"
-                       onclick="openOrder()">Đặt Hàng</a>
-                    <a class="dropdown-item" href="#">Lịch sử</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a>
+                    <a class="carousel-control-prev" href="#banner_slider" role="button" data-slide="prev">
+                        <i class="fa fa-arrow-left"></i>
+                    </a>
+                    <a class="carousel-control-next" href="#banner_slider" role="button" data-slide="next">
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
-        </ul>
+        </div>
+        <!-- banner section end -->
     </div>
 </nav>
 
 <!-- Admin Navigator -->
 
 <ul th:fragment="nav-admin">
-    <li><a th:href="@{/admin/products}">Quản Lý Sản Phẩm</a></li>
-    <li><a th:href="@{/admin/orders}">Quản Lý Giỏ Hàng</a></li>
+    <li><a th:href="@{/admin/products}">Product Management</a></li>
+    <li><a th:href="@{/admin/orders}">Order Management</a></li>
 </ul>
 
 
@@ -133,43 +126,41 @@
     <section id="footer">
         <div class="container">
             <div class="row text-center text-xs-center text-sm-left text-md-left">
-                 <div class="col-xs-12 col-sm-4 col-md-4">
-                    <ul class="list-unstyled quick-links">
-
-              <a href="./home" class="text-nowrap logo-img">
-            <img src="../assets/images/logos/dark-logo.png" width="300" height="200" alt="" />
-          </a>                    </ul>
-                </div> 
                 <div class="col-xs-12 col-sm-4 col-md-4">
-                    <h5>Gới thiệu Website</h5>
                     <ul class="list-unstyled quick-links">
-                        <li><a href="/homeview"><i
-                                class="fa fa-angle-double-right"></i>Trang chủ</a></li>
-                        <li><a href="talble"><i class="fa fa-angle-double-right"></i>Thông tin</a></li>
-                        <li><a href="#"><i
-                                class="fa fa-angle-double-right"></i>Thực đơn</a></li>
-                        <li><a href="#"><i
-                                class="fa fa-angle-double-right"></i>Khuyến mãi</a></li>
-                        <li><a href="#"><i
-                                class="fa fa-angle-double-right"></i>Tin  tức</a></li>
-                        <li><a href="
-                                http://localhost:8899/login">
-                            <i class="fa fa-angle-double-right"></i>Đăng nhập</a></li>
+                        <img src="images/My_Facebook_Code.png" alt="" style="height: 250px">
                     </ul>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4">
-                    <h5>Liên hệ</h5>
+                    <h5>About Website</h5>
+                    <ul class="list-unstyled quick-links">
+                        <li><a href="/"><i
+                                class="fa fa-angle-double-right"></i>Home</a></li>
+                        <li><a href="/about"><i class="fa fa-angle-double-right"></i>About</a></li>
+                        <li><a href="/products"><i
+                                class="fa fa-angle-double-right"></i>Product</a></li>
+                        <li><a href="#"><i
+                                class="fa fa-angle-double-right"></i>Sale now</a></li>
+                        <li><a href="#"><i
+                                class="fa fa-angle-double-right"></i>Singup</a></li>
+                        <li><a href="
+                                http://localhost:8080/HousewareShop/login">
+                            <i class="fa fa-angle-double-right"></i>Your-Profile</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h5>Contact</h5>
 
                     <ul class="list-unstyled quick-links">
                         <li><a><i class="fas fa-phone-volume"></i>0984368800</a><a><i
                                 class="fa fa-envelope ml-3"></i>tdquynh09@gmail.com</a></li>
                         <li><a
-                                href="https://www.google.com/maps/dir/8d+P.H%C3%A0m+Long,+Phan+Chu+Trinh,+Ho%C3%A0n+Ki%E1%BA%BFm,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/8d+P.H%C3%A0m+Long,+Phan+Chu+Trinh,+Ho%C3%A0n+Ki%E1%BA%BFm,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.018737,105.849347,16z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x3135abed62a7c451:0x4379fd45bbd99bb7!2m2!1d105.8544969!2d21.0187271!1m5!1m1!1s0x3135abed62a7c451:0x4379fd45bbd99bb7!2m2!1d105.8544969!2d21.0187271!3e0?hl=vi&entry=ttu"><i
-                                class="fa fa-angle-double-right"></i>số 8D, phố Hàm Long, Hoàn Kiếm, Hà
+                                href="https://www.google.com/maps?ll=20.994897,105.523648&amp;z=15&amp;t=m&amp;hl=vi&amp;gl=US&amp;mapclient=embed&amp;saddr=QL21,+Th%E1%BA%A1ch+Ho%C3%A0,+Th%E1%BA%A1ch+Th%E1%BA%A5t,+H%C3%A0+N%E1%BB%99i&amp;daddr=Ng%C3%A3+ba+H%C3%B2a+L%E1%BA%A1c+-+QL+21,+H%C3%B2a+L%E1%BA%A1c,+Th%E1%BA%A1ch+Th%E1%BA%A5t,+H%C3%A0+N%E1%BB%99i&amp;dirflg=d"><i
+                                class="fa fa-angle-double-right"></i>21, Thôn 6, Xã Thạch Hòa, Huyện Thạch Thất, Hà
                             Nội, Việt Nam</a></li>
                         <div id="map" style="height:150px;">
                             <iframe
-                                    src="https://www.google.com/maps/dir/8d+P.H%C3%A0m+Long,+Phan+Chu+Trinh,+Ho%C3%A0n+Ki%E1%BA%BFm,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/8d+P.H%C3%A0m+Long,+Phan+Chu+Trinh,+Ho%C3%A0n+Ki%E1%BA%BFm,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.018737,105.849347,16z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x3135abed62a7c451:0x4379fd45bbd99bb7!2m2!1d105.8544969!2d21.0187271!1m5!1m1!1s0x3135abed62a7c451:0x4379fd45bbd99bb7!2m2!1d105.8544969!2d21.0187271!3e0?hl=vi&entry=ttu"
+                                    src="https://www.google.com/maps/embed?pb=!1m26!1m12!1m3!1d28951.161087040786!2d105.51070539259248!3d20.995169088270938!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m11!3e0!4m3!3m2!1d20.9946236!2d105.52396399999999!4m5!1s0x31345b9f825d11d7%3A0x1772bcf973ec956c!2zTmfDoyBiYSBIw7JhIEzhuqFjIC0gUUwgMjEsIEjDsmEgTOG6oWMsIFRo4bqhY2ggVGjhuqV0LCBIw6AgTuG7mWksIFZp4buHdCBOYW0!3m2!1d20.994598999999997!2d105.523479!5e0!3m2!1svi!2s!4v1573398015876!5m2!1svi!2s"
                                     width="250" height="100" frameborder="0" style="border:0;"
                                     allowfullscreen=""></iframe>
                         </div>
@@ -179,14 +170,14 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
                     <ul class="list-unstyled list-inline social text-center">
-                        <li class="list-inline-item"><a href="https://www.facebook.com/huyenthuwinecellar"><i
+                        <li class="list-inline-item"><a href="https://www.facebook.com/messages/t/xb.jamesgosling"><i
                                 class="fab fa-facebook"></i></a></li>
                         <li class="list-inline-item"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
                         <li class="list-inline-item"><a href="https://www.instagram.com/xbjamesgosling/?hl=vi"><i
                                 class="fab fa-instagram"></i></a></li>
                         <li class="list-inline-item"><a href="#"><i class="fas fa-phone-volume"></i></a></li>
                         <li class="list-inline-item"><a
-                                href="mailto:tdquynh09@gmail.com?cc=name2@rapidtables.com&amp;bcc=name3@rapidtables.com
+                                href="mailto:lehongquan15a@gmail.com?cc=name2@rapidtables.com&amp;bcc=name3@rapidtables.com
                                                         &amp;subject=The%20subject%20of%20the%20email
                                                         &amp;body=The%20body%20of%20the%20email" target="_blank"><i
                                 class="fa fa-envelope"></i></a></li>
@@ -196,8 +187,11 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                    <p><u><a href="#">National Transaction Corporation</a></u> is a
+                        Registered MSP/ISO of Elavon, Inc. Georgia [a wholly owned subsidiary of U.S. Bancorp,
+                        Minneapolis, MN]</p>
                     <p class="h6">© copyright by <a class="text-green" href="#"
-                                                    target="_blank">Quynh Hill</a></p>
+                                                    target="_blank">Restaurant Quynh Hill</a></p>
                 </div>
 
             </div>

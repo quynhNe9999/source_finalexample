@@ -3,9 +3,8 @@ package com.quynhtadinh.finalexample.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.quynhtadinh.finalexample.entity.Product;
+import com.quynhtadinh.finalexample.entity.Brand;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
-
+public interface BrandRepository extends JpaRepository<Brand,Long> {
 }

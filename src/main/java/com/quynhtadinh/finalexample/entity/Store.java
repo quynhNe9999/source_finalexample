@@ -3,24 +3,18 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Role {
+public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    private String address;
 
-    // Constructors, Getters and Setters
-
-    public Role() {}
-
-    public Role(String name) {
-        this.name = name;
-    }
+    @OneToMany(mappedBy = "store")
+    private Set<Employee> employees;
 
     public Long getId() {
         return id;
@@ -38,12 +32,19 @@ public class Role {
         this.name = name;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public String getAddress() {
+        return address;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 }
-
