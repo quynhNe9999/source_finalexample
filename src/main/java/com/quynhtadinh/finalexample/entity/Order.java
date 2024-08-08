@@ -1,113 +1,64 @@
 package com.quynhtadinh.finalexample.entity;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
-import java.sql.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
-import lombok.Data;
-import lombok.ToString;
-
-@Entity(name = "order_tbl")
-@Data
-//@Builder
-@ToString
+@Entity
+@Table(name = "Orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double totalPrice;
-    private String note;
-    private Date createdDate;
-
-    @OneToOne
-    @JoinColumn(name = "shipping_id")
-    private Shipping shipping;
-
     @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "status_id")
-    private StatusOrder status;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date orderDate;
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
-    private List<OrderDetail> orderDetails;
+    private String status;
 
-	public Long getId() {
-		return id;
-	}
+    @OneToMany(mappedBy = "order")
+    private Set<OrderDetail> orderDetails;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public double getTotalPrice() {
-		return totalPrice;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
+    public Customer getCustomer() {
+        return customer;
+    }
 
-	public String getNote() {
-		return note;
-	}
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
-	public void setNote(String note) {
-		this.note = note;
-	}
+    public Date getOrderDate() {
+        return orderDate;
+    }
 
-	public Date getCreatedDate() {
-		return createdDate;
-	}
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
 
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public Shipping getShipping() {
-		return shipping;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public void setShipping(Shipping shipping) {
-		this.shipping = shipping;
-	}
+    public Set<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
 
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
-	public StatusOrder getStatus() {
-		return status;
-	}
-
-	public void setStatus(StatusOrder status) {
-		this.status = status;
-	}
-
-	public List<OrderDetail> getOrderDetails() {
-		return orderDetails;
-	}
-
-	public void setOrderDetails(List<OrderDetail> orderDetails) {
-		this.orderDetails = orderDetails;
-	}
-    
-    
-
+    public void setOrderDetails(Set<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
 }
