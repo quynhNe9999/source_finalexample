@@ -7,6 +7,6 @@ import com.quynhtadinh.finalexample.entity.Role;
 
 
 public interface RoleRepository extends JpaRepository<Role, Long>{
-    Role findByName(String name);
+   // Role findByUsername(String name);
 
 }

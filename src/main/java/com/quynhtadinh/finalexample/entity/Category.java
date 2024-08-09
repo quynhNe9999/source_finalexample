@@ -1,40 +1,66 @@
 package com.quynhtadinh.finalexample.entity;
-import javax.persistence.*;
-import java.util.Set;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import lombok.Data;
+import lombok.ToString;
 
 @Entity
+@Data
+//@Builder
+@ToString
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
+    private String categoryName;
 
-    @Column(unique = true, nullable = false)
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private StatusCategory status;
 
-    @OneToMany(mappedBy = "category")
-    private Set<Product> products;
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+    private List<SubCategory> subCategories;
 
-    public Long getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getCategoryName() {
+		return categoryName;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 
-    public Set<Product> getProducts() {
-        return products;
-    }
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
+	public StatusCategory getStatus() {
+		return status;
+	}
 
+	public void setStatus(StatusCategory status) {
+		this.status = status;
+	}
+
+	public List<SubCategory> getSubCategories() {
+		return subCategories;
+	}
+
+	public void setSubCategories(List<SubCategory> subCategories) {
+		this.subCategories = subCategories;
+	}
+    
 }
