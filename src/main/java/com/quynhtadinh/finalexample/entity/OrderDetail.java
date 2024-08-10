@@ -1,11 +1,28 @@
 package com.quynhtadinh.finalexample.entity;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import lombok.Data;
+import lombok.ToString;
 
 @Entity
+@Data
+//@Builder
+@ToString
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private int quantity;
+    private double productPrice;
+    private String productName;
+    private String productImage;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
@@ -15,49 +32,61 @@ public class OrderDetail {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    private int quantity;
+	public Long getId() {
+		return id;
+	}
 
-    private Double price;
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public int getQuantity() {
+		return quantity;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
-    public Order getOrder() {
-        return order;
-    }
+	public double getProductPrice() {
+		return productPrice;
+	}
 
-    public void setOrder(Order order) {
-        this.order = order;
-    }
+	public void setProductPrice(double productPrice) {
+		this.productPrice = productPrice;
+	}
 
-    public Product getProduct() {
-        return product;
-    }
+	public String getProductName() {
+		return productName;
+	}
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 
-    public int getQuantity() {
-        return quantity;
-    }
+	public String getProductImage() {
+		return productImage;
+	}
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
+	}
 
-    public Double getPrice() {
-        return price;
-    }
+	public Order getOrder() {
+		return order;
+	}
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
+	public void setOrder(Order order) {
+		this.order = order;
+	}
 
-    // Getters and setters
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+    
 }

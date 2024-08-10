@@ -1,15 +1,29 @@
 package com.quynhtadinh.finalexample.service;
 
-import com.quynhtadinh.finalexample.entity.Role;
+
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.quynhtadinh.finalexample.entity.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
-import java.util.List;
 
-public interface UserService extends UserDetailsService {
-    User saveUser(User user);
-    Role saveRole(Role role);
-    void addRoleToUser(String username, String roleName);
-    User getUser(String username);
-    List<User> getUsers();
+public interface UserService {
+	void save(User user);
+
+	User findByUsername(String username);
+
+	Page<User> findAll(Pageable pageable);
+
+	User insert(User user);
+
+	boolean delete(long id);
+
+	User update(User user);
+
+	User findById(long id);
+
+	Page<User> searchSinhVien(Optional<String> keyword, Pageable pageable);
+	
 }

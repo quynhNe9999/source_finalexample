@@ -1,27 +1,23 @@
 package com.quynhtadinh.finalexample.entity;
-import javax.persistence.*;
+
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
 @Entity
+@Table(name = "role")
 public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(unique = true, nullable = false)
     private String name;
-
-    @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
-    // Constructors, Getters and Setters
-
-    public Role() {}
-
-    public Role(String name) {
-        this.name = name;
-    }
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }
@@ -38,6 +34,7 @@ public class Role {
         this.name = name;
     }
 
+    @ManyToMany(mappedBy = "roles")
     public Set<User> getUsers() {
         return users;
     }
@@ -46,4 +43,3 @@ public class Role {
         this.users = users;
     }
 }
-
