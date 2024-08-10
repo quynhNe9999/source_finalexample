@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head>
+    <title th:replace="${title}">Default Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Header -->
+    <div layout:fragment="header">
+        <div th:insert="fragments/header :: header"></div>
+    </div>
+
+    <!-- Sidebar -->
+    <div layout:fragment="sidebar">
+        <div th:insert="fragments/sidebar :: sidebar"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-wrapper" layout:fragment="content">
+        <!-- Nội dung mặc định -->
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org"-->
+<!--      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">-->
+
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <title>AdminLTE 2 | Blank Page</title>-->
+<!--    &lt;!&ndash; Tell the browser to be responsive to screen width &ndash;&gt;-->
+<!--    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">-->
+<!--    &lt;!&ndash; Bootstrap 3.3.7 &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="css/font-awesome.min.css">-->
+<!--    <link rel="stylesheet" href="css/AdminLTE.css">-->
+<!--    <link rel="stylesheet" href="css/_all-skins.min.css">-->
+<!--    <link rel="stylesheet" href="css/jquery-ui.css">-->
+<!--    <link rel="stylesheet" href="css/style.css" />-->
+<!--    <script src="js/angular.min.js"></script>-->
+<!--    <script src="js/app.js"></script>-->
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div class="wrapper">-->
+<!--    &lt;!&ndash; Header &ndash;&gt;-->
+<!--    <div layout:fragment="header">-->
+<!--        <div th:insert="fragments/header :: header"></div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Sidebar &ndash;&gt;-->
+<!--    <div layout:fragment="sidebar">-->
+<!--        <div th:insert="fragments/sidebar :: sidebar"></div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Main Content &ndash;&gt;-->
+<!--    <div class="content-wrapper" layout:fragment="content">-->
+<!--        &lt;!&ndash; Nội dung mặc định &ndash;&gt;-->
+<!--    </div>-->
+<!--</div>-->
+<!--&lt;!&ndash;<!jquery>&ndash;&gt;-->
+
+<!--<script src="js/jquery.min.js"></script>-->
+<!--<script src="js/jquery-ui.js"></script>-->
+<!--<script src="js/bootstrap.min.js"></script>-->
+<!--<script src="js/adminlte.min.js"></script>-->
+<!--<script src="js/dashboard.js"></script>-->
+<!--<script src="tinymce/tinymce.min.js"></script>-->
+<!--<script src="tinymce/config.js"></script>-->
+<!--<script src="js/function.js"></script>-->
+<!--</body>-->
+
+<!--</html>-->

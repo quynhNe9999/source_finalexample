@@ -12,34 +12,24 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "role")
 public class Role {
-    private Long id;
-    private String name;
-    private Set<User> users;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long getId() {
-        return id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long role_id;
+    private String role_name;
+
+    public Long getRole_id() {
+        return role_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRole_id(Long role_id) {
+        this.role_id = role_id;
     }
 
-    public String getName() {
-        return name;
+    public String getRole_name() {
+        return role_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @ManyToMany(mappedBy = "roles")
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setRole_name(String role_name) {
+        this.role_name = role_name;
     }
 }

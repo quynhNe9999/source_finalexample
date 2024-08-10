@@ -18,7 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @EnableJpaRepositories("com.quynhtadinh.finalexample.repository")
-@ComponentScan("com.quynhtadinh.finalexamples")
+@ComponentScan("com.quynhtadinh.finalexample")
 public class WebSecurityConfig {
 
 	@Autowired
@@ -71,7 +71,7 @@ public class WebSecurityConfig {
 		.and().formLogin()//
 				// Submit URL của trang login
 				.loginPage("/login")//
-				.defaultSuccessUrl("/")//
+				.defaultSuccessUrl("/index")//
 				.permitAll()
 				// Cấu hình cho Logout Page.
 				.and().logout().permitAll();

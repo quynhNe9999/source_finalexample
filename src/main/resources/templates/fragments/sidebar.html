@@ -1,0 +1,92 @@
+<!-- sidebar.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<!-- sidebar.html -->
+<div th:fragment="sidebar">
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="/images/user2-160x160.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>Administrator</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+        </div>
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+          <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+        </span>
+            </div>
+        </form>
+        <ul class="sidebar-menu" data-widget="tree">
+            <li>
+                <a href="kho.html">
+                    <i class="fa fa-th"></i> <span>Quản lý kho tổng</span>
+                </a>
+            </li>
+            <li>
+                <a href="user.html">
+                    <i class="fa fa-th"></i> <span>Quản lý người dùng</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Quản lý cửa hàng</span>
+                    <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Quản lý cửa hàng</a></li>
+                    <li class="treeview">
+                        <a href="#"><i class="fa fa-circle-o"></i> Cửa hàng wine 1
+                            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Quản lý kho cửa hàng</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Quản lý nhân viên cửa hàng</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Quản lý đơn hàng</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Quản lý khách hàng</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#"><i class="fa fa-circle-o"></i> Cửa hàng wine 2
+                            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Quản lý kho cửa hàng</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Quản lý nhân viên CH</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Quản lý đơn hàng</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Quản lý khách hàng</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa fa-th"></i> <span>Quản lý tổng nhân viên</span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa fa-th"></i> <span>Quản lý nhà cung cấp</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+</aside>
+</div>
+</body>
+</html>

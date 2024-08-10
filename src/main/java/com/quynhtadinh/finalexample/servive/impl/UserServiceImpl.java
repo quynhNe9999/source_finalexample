@@ -77,9 +77,9 @@ public class UserServiceImpl implements UserService {
 		return userRepository.getById(id);
 	}
 
-	@Override
-	public Page<User> searchSinhVien(Optional<String> keyword, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return userRepository.FindAllByUserName(keyword, pageable);
-	}
+//	@Override
+//	public Page<User> searchSinhVien(Optional<String> keyword, Pageable pageable) {
+//		// TODO Auto-generated method stub
+//		return userRepository.FindAllByUserName(keyword, pageable);
+//	}
 }

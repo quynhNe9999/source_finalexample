@@ -24,6 +24,6 @@ public interface UserService {
 
 	User findById(long id);
 
-	Page<User> searchSinhVien(Optional<String> keyword, Pageable pageable);
-	
+//	Page<User> searchSinhVien(Optional<String> keyword, Pageable pageable);
+//
 }

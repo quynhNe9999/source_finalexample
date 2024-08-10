@@ -1,66 +1,68 @@
 package com.quynhtadinh.finalexample.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import lombok.Data;
-import lombok.ToString;
+import javax.persistence.*;
 
 @Entity
-@Data
-//@Builder
-@ToString
+@Table(name = "category")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String categoryName;
+    private long category_id;
+
+    private String name;
+    private String description;
+    private Double price;
+    private Integer stock;
 
     @ManyToOne
-    @JoinColumn(name = "status_id")
-    private StatusCategory status;
+    @JoinColumn(name = "supplier_id")
+    private Suppliers supplier;
 
-    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-    private List<SubCategory> subCategories;
+    public long getCategory_id() {
+        return category_id;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public void setCategory_id(long category_id) {
+        this.category_id = category_id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getCategoryName() {
-		return categoryName;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public StatusCategory getStatus() {
-		return status;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setStatus(StatusCategory status) {
-		this.status = status;
-	}
+    public Double getPrice() {
+        return price;
+    }
 
-	public List<SubCategory> getSubCategories() {
-		return subCategories;
-	}
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
-	public void setSubCategories(List<SubCategory> subCategories) {
-		this.subCategories = subCategories;
-	}
-    
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public Suppliers getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Suppliers supplier) {
+        this.supplier = supplier;
+    }
 }

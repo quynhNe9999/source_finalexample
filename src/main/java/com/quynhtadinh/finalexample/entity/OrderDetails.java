@@ -1,0 +1,64 @@
+package com.quynhtadinh.finalexample.entity;
+
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "order_details")
+public class OrderDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long orderDetailID;
+
+    private long quantity;
+    private Float price;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Orders order;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Category product;
+
+    public long getOrderDetailID() {
+        return orderDetailID;
+    }
+
+    public void setOrderDetailID(long orderDetailID) {
+        this.orderDetailID = orderDetailID;
+    }
+
+    public long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public Orders getOrder() {
+        return order;
+    }
+
+    public void setOrder(Orders order) {
+        this.order = order;
+    }
+
+    public Category getProduct() {
+        return product;
+    }
+
+    public void setProduct(Category product) {
+        this.product = product;
+    }
+}
+

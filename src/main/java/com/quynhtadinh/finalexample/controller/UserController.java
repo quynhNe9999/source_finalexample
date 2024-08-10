@@ -81,27 +81,27 @@ public class UserController {
         return "index";
     }
     
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-	public ModelAndView home(@RequestParam(name = "keyword") Optional<String> keyword,
-			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, Model model
-			,Pageable pageable) throws IOException {
-
-			 pageable = PageRequest.of(page, size);
-			Page<User> listUsers;
-			// = userService.getAllUser(page,size);
-			// tìm kiếm
-			if (keyword.isPresent()) {
-				listUsers =  userService.searchSinhVien(keyword, pageable);
-
-				// listUsers = userService.findAllByFirstNameContaining(firstName.get(),
-				// pageable);
-			} else {
-				listUsers = userService.findAll(pageable);
-			}
-			Map<String, Object> modelMap = new HashMap<>();
-			modelMap.put("users", listUsers);
-			return new ModelAndView("user", modelMap);
-		}
+//    @RequestMapping(value = "/user", method = RequestMethod.GET)
+//	public ModelAndView home(@RequestParam(name = "keyword") Optional<String> keyword,
+//			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, Model model
+//			,Pageable pageable) throws IOException {
+//
+//			 pageable = PageRequest.of(page, size);
+//			Page<User> listUsers;
+//			// = userService.getAllUser(page,size);
+//			// tìm kiếm
+//			if (keyword.isPresent()) {
+//				listUsers =  userService.searchSinhVien(keyword, pageable);
+//
+//				// listUsers = userService.findAllByFirstNameContaining(firstName.get(),
+//				// pageable);
+//			} else {
+//				listUsers = userService.findAll(pageable);
+//			}
+//			Map<String, Object> modelMap = new HashMap<>();
+//			modelMap.put("users", listUsers);
+//			return new ModelAndView("user", modelMap);
+//		}
 	
     
 //    @RequestMapping(value = "/user", method = RequestMethod.GET)
@@ -112,47 +112,47 @@ public class UserController {
 //        return "user"; // return file 
 //    }
     
-    //them sv
-    @RequestMapping(value = "/addUser", method = RequestMethod.GET)
-    public String  viewAddUser()
-    {
-        return "addUser";
-    }
-    
-    @RequestMapping(value = "/insertUser", method = RequestMethod.POST)
-    public String insertUser(@ModelAttribute("insertUser") User user){
-    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	    String encodedPassword = passwordEncoder.encode(user.getPassword());
-	    user.setPassword(encodedPassword);
-        userService.insert(user);
-        return "redirect:/user";
-    }
-    
-    //update sv
-//    @PostMapping("/editUser/updateUser")
-    @RequestMapping(value = "/editUser/updateUser", method = RequestMethod.POST)
-
-    public String updateUser( @ModelAttribute("user") User user){
-        userService.update( user);
-        return "redirect:/user";
-    }
-//    @GetMapping("/editUser/{id}")
-    @RequestMapping(value = "/editUser/{id}", method = RequestMethod.GET)
-    public String  viewUpdateUser(@PathVariable("id") Long id,User user, Model model)
-    {
-    	
-        model.addAttribute("user", userService.findById(id));
-        return "updateUser";
-
-    }
-    
-    //xoa sv
-//    @GetMapping("/deleteUser/{id}")
-    @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.GET)
-    public String deleteUser(@PathVariable("id") Long id){
-        userService.delete(id);
-        return "redirect:/user";
-    }
+//    //them sv
+//    @RequestMapping(value = "/addUser", method = RequestMethod.GET)
+//    public String  viewAddUser()
+//    {
+//        return "addUser";
+//    }
+//
+//    @RequestMapping(value = "/insertUser", method = RequestMethod.POST)
+//    public String insertUser(@ModelAttribute("insertUser") User user){
+//    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//	    String encodedPassword = passwordEncoder.encode(user.getPassword());
+//	    user.setPassword(encodedPassword);
+//        userService.insert(user);
+//        return "redirect:/user";
+//    }
+//
+//    //update sv
+////    @PostMapping("/editUser/updateUser")
+//    @RequestMapping(value = "/editUser/updateUser", method = RequestMethod.POST)
+//
+//    public String updateUser( @ModelAttribute("user") User user){
+//        userService.update( user);
+//        return "redirect:/user";
+//    }
+////    @GetMapping("/editUser/{id}")
+//    @RequestMapping(value = "/editUser/{id}", method = RequestMethod.GET)
+//    public String  viewUpdateUser(@PathVariable("id") Long id,User user, Model model)
+//    {
+//
+//        model.addAttribute("user", userService.findById(id));
+//        return "updateUser";
+//
+//    }
+//
+//    //xoa sv
+////    @GetMapping("/deleteUser/{id}")
+//    @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.GET)
+//    public String deleteUser(@PathVariable("id") Long id){
+//        userService.delete(id);
+//        return "redirect:/user";
+//    }
     
 }
     
