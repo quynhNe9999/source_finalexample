@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class OrderDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long orderDetailID;
+    private long order_detail_id;
 
     private long quantity;
     private Float price;
@@ -21,12 +21,12 @@ public class OrderDetails {
     @JoinColumn(name = "product_id")
     private Category product;
 
-    public long getOrderDetailID() {
-        return orderDetailID;
+    public long getOrder_detail_id() {
+        return order_detail_id;
     }
 
-    public void setOrderDetailID(long orderDetailID) {
-        this.orderDetailID = orderDetailID;
+    public void setOrder_detail_id(long order_detail_id) {
+        this.order_detail_id = order_detail_id;
     }
 
     public long getQuantity() {

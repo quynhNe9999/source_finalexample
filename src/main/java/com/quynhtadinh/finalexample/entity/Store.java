@@ -7,6 +7,8 @@ import javax.persistence.*;
 public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     private long store_id;
 
     private String name;
@@ -16,6 +18,14 @@ public class Store {
     @OneToOne
     @JoinColumn(name = "manager_id")
     private Employees manager;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public long getStore_id() {
         return store_id;

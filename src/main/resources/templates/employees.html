@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Admin Wine</title>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/AdminLTE.css">
+	<link rel="stylesheet" href="/css/_all-skins.min.css">
+	<link rel="stylesheet" href="/css/jquery-ui.css">
+	<link rel="stylesheet" href="/css/style.css" />
+	<script src="/js/angular.min.js"></script>
+	<script src="/js/app.js"></script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+	<div th:replace="fragments/header :: header"></div>
+	<div th:replace="fragments/sidebar :: sidebar"></div>
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1>
+				Quản lý Sản phẩm (Danh sách)
+
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+				<li><a href="#">Examples</a></li>
+				<li class="active">Blank page</li>
+			</ol>
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+
+			<!-- Default box -->
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<a href="add-employees" class="btn btn-success">+Thêm mới Nhân viên</a>
+
+						<div class="box-tools">
+							<div class="input-group input-group-sm" style="width: 150px;">
+								<input type="text" name="table_search" class="form-control pull-right" placeholder="Tìm kiếm">
+
+								<div class="input-group-btn">
+									<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body table-responsive no-padding">
+		<table  class="table table-hover">
+<!--			<thead>-->
+<!--				<tr>-->
+<!--					<th>-->
+<!--						<a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">-->
+<!--							Employee First Name</a>-->
+<!--					</th>-->
+<!--					<th>-->
+<!--					<a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">-->
+<!--							Employee Last Name</a>-->
+<!--					</th>-->
+<!--					<th>-->
+<!--					<a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">-->
+<!--							Employee Email</a>-->
+<!--					</th>-->
+<!--					<th> Actions </th>-->
+<!--				</tr>-->
+<!--			</thead>-->
+			<tbody>
+			<tr>
+				<td>Tên Nhân viên</td>
+				<td>Địa chỉ</td>
+				<td>Số điện thoại</td>
+				<td>Email</td>
+				<td>Vị trí</td>
+				<td>Ngày Sinh</td>
+				<td>Chức năng</td>
+
+			</tr>
+				<tr th:each="employees : ${listEmployees}">
+					<td th:text="${employees.name}"></td>
+					<td th:text="${employees.address}"></td>
+					<td th:text="${employees.phone}"></td>
+					<td th:text="${employees.email}"></td>
+					<td th:text="${employees.positon}"></td>
+					<td th:text="${employees.dateOfBirth}"></td>
+
+					<td> <a th:href="@{/edit-employees/{id}(id=${employees.id})}" class="btn btn-primary">Update</a>
+					    <a th:href="@{/deleteEmployees/{id}(id=${employees.id})}" class="btn btn-danger">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+<!--		<div th:if = "${totalPages > 1}">-->
+<!--			<div class = "row col-sm-10">-->
+<!--				<div class = "col-sm-2">-->
+<!--					Total Rows: [[${totalItems}]] -->
+<!--				</div>-->
+<!--				<div class = "col-sm-1">-->
+<!--					<span th:each="i: ${#numbers.sequence(1, totalPages)}">-->
+<!--						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>-->
+<!--						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;-->
+<!--					</span>-->
+<!--				</div>-->
+<!--				<div class = "col-sm-1">-->
+<!--					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>-->
+<!--					<span th:unless="${currentPage < totalPages}">Next</span>-->
+<!--				</div>-->
+<!--				-->
+<!--				 <div class="col-sm-1">-->
+<!--    				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>-->
+<!--					<span th:unless="${currentPage < totalPages}">Last</span>-->
+<!--   				 </div>-->
+<!--			</div>-->
+<!--		</div>-->
+	</div>
+	<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+	</div>
+	<!-- /.box -->
+
+	</section>
+	<!-- /.content -->
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+	</div>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-ui.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/adminlte.min.js"></script>
+	<script src="/js/dashboard.js"></script>
+	<script src="/tinymce/tinymce.min.js"></script>
+	<script src="/tinymce/config.js"></script>
+	<script src="/js/function.js"></script>
+</body>
+</html>

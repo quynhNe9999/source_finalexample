@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Admin Wine</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/AdminLTE.css">
+  <link rel="stylesheet" href="/css/_all-skins.min.css">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="/js/angular.min.js"></script>
+  <script src="/js/app.js"></script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+<div th:replace="fragments/header :: header"></div>
+  <div th:replace="fragments/sidebar :: sidebar"></div>
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          Quản lý Sản phẩm (Danh sách)
+
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="#">Examples</a></li>
+          <li class="active">Blank page</li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+
+        <!-- Default box -->
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <a href="add-category" class="btn btn-success">+Thêm mới sẩn phẩm</a>
+
+              <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th>
+                    <a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+                      Employee First Name</a>
+                  </th>
+                  <th>
+                    <a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
+                      Employee Last Name</a>
+                  </th>
+                  <th>
+                    <a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+                      Employee Email</a>
+                  </th>
+                  <th> Actions </th>
+                </tr>
+                </thead>
+                <tbody><tr>
+                  <th>ID</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Thương hiệu</th>
+                  <th>Mô tả</th>
+                  <th>Giá</th>
+                  <th>Tùy chọn</th>
+                </tr>
+                <tr th:each="category : ${listCategories}">
+                  <td th:text="${category.category_id}">ID</td>
+                  <td th:text="${category.name}">Tên sản phẩm</td>
+                  <td th:text="${category.description}">Mô tả</td>
+                  <td th:text="${category.price}">Giá</td>
+                  <td th:text="${category.stock}">Cổ phần</td>
+                  <td>
+                    <a th:href="/@{'/edit/' + ${category.id}}">Sửa</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="/@{'/delete/' + ${category.id}}">Xóa</a>
+                  </td>
+                </tr>
+<!--                <tr>-->
+<!--                  <td>Trang chủ</td>-->
+<!--                  <td>____</td>-->
+<!--                  <td>10-10-2018</td>-->
+<!--                  <td><span class="label label-success">Hiển thị</span></td>-->
+<!--                  <td>-->
+<!--                    <a href="edit-menu.html" class="btn btn-success">Sửa</a>-->
+<!--                    <a href="" class="btn btn-danger">Xóa</a>-->
+
+<!--                  </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td>Thi đua khen thưởng</td>-->
+<!--                  <td>Đào tạo</td>-->
+<!--                  <td>10-10-2018</td>-->
+<!--                  <td><span class="label label-danger">Đang ẩn</span></td>-->
+<!--                  <td>-->
+<!--                    <a href="" class="btn btn-success">Sửa</a>-->
+<!--                    <a href="" class="btn btn-danger">Xóa</a>-->
+
+<!--                  </td>-->
+<!--                </tr>-->
+                </tbody></table>
+              <div th:if = "${totalPages > 1}">
+                <div class = "row col-sm-10">
+                  <div class = "col-sm-2">
+                    Total Rows: [[${totalItems}]]
+                  </div>
+                  <div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+                  </div>
+                  <div class = "col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                  </div>
+
+                  <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.box -->
+
+      </section>
+      <!-- /.content -->
+    </div>
+  <div th:replace="fragments/footer :: footer"></div>
+</div>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/adminlte.min.js"></script>
+<script src="/js/dashboard.js"></script>
+<script src="/tinymce/tinymce.min.js"></script>
+<script src="/tinymce/config.js"></script>
+<script src="/js/function.js"></script>
+</body>
+</html>

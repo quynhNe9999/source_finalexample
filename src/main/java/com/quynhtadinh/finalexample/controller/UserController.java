@@ -80,7 +80,13 @@ public class UserController {
 
         return "index";
     }
-    
+
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public String UserList() {
+//        model.addAttribute("userForm", new User());
+
+        return "user";
+    }
 //    @RequestMapping(value = "/user", method = RequestMethod.GET)
 //	public ModelAndView home(@RequestParam(name = "keyword") Optional<String> keyword,
 //			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, Model model
