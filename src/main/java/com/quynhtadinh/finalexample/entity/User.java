@@ -1,8 +1,19 @@
 package com.quynhtadinh.finalexample.entity;
 
+import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 @Entity
 @Table(name = "user")
 public class User {
@@ -15,7 +26,7 @@ public class User {
 	private String password;
 	private String passwordConfirm;
 	private String status;
-
+	private Date dateTao;
 	@OneToOne(mappedBy = "user")
 	private Employees employee;
 
@@ -84,6 +95,7 @@ public class User {
 		this.employee = employee;
 	}
 
+	
 //	public Employees getEmployees() {
 //		return employees;
 //	}
@@ -91,6 +103,14 @@ public class User {
 //	public void setEmployees(Employees employees) {
 //		this.employees = employees;
 //	}
+
+	public Date getDateTao() {
+		return dateTao;
+	}
+
+	public void setDateTao(Date dateTao) {
+		this.dateTao = dateTao;
+	}
 
 	public Set<Role> getRoles() {
 		return roles;

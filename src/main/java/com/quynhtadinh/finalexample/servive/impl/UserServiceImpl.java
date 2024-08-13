@@ -1,11 +1,10 @@
 package com.quynhtadinh.finalexample.servive.impl;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -36,9 +35,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Page<User> findAll(Pageable pageable) {
+	public List<User> findAll() {
 		// TODO Auto-generated method stub
-		return userRepository.findAll(pageable);
+		return userRepository.findAll();
 	}
 
 	@Override

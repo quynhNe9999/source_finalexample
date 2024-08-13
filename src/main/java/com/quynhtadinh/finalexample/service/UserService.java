@@ -1,20 +1,19 @@
 package com.quynhtadinh.finalexample.service;
 
 
-import java.util.Optional;
+import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import com.quynhtadinh.finalexample.entity.User;
 
-
+@Service
 public interface UserService {
 	void save(User user);
 
 	User findByUsername(String username);
 
-	Page<User> findAll(Pageable pageable);
+	List<User> findAll();
 
 	User insert(User user);
 

@@ -72,15 +72,15 @@
                 </tr>
                 </thead>
                 <tbody><tr>
-                  <th>Mã sản phẩm</th>
-                  <th>Tên sản phẩm</th>
-                  <th>Nam sản xuất</th>
-                  <th>Hạn sử dụng</th>
+                  <th>Mã nhà cung cấp</th>
+                  <th>Tên nhà cung cấp</th>
+                  <th>Mô tả</th>
+                  <th>Số điện thoại</th>
+                  <th>Email</th>
                   <th>Phân loại</th>
-                  <th>Ảnh sản phẩm</th>
                   <th>Tùy chọn</th>
                 </tr>
-                <tr th:each="category : ${listCategories}">
+                <!-- <tr th:each="category : ${listCategories}">
                   <td th:text="${category.category_id}">ID</td>
                   <td th:text="${category.name}">Tên sản phẩm</td>
                   <td th:text="${category.description}">Mô tả</td>
@@ -91,7 +91,7 @@
                     &nbsp;&nbsp;&nbsp;
                     <a th:href="/@{'/delete/' + ${category.id}}">Xóa</a>
                   </td>
-                </tr>
+                </tr> -->
 <!--                <tr>-->
 <!--                  <td>Trang chủ</td>-->
 <!--                  <td>____</td>-->

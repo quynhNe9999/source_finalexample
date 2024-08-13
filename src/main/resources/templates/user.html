@@ -19,11 +19,9 @@
 <div th:replace="fragments/header :: header"></div>
   <div th:replace="fragments/sidebar :: sidebar"></div>
  
-  <!-- =============================================== -->
-
-  <!-- Content Wrapper. Contains page content -->
+  Content Wrapper. Contains page content
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    Content Header (Page header)
     <section class="content-header">
       <h1>
         Quản lý người dùng trang giao diện
@@ -36,10 +34,10 @@
       </ol>
     </section>
 
-    <!-- Main content -->
+    Main content
     <section class="content">
 
-      <!-- Default box -->
+      Default box
       <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
@@ -55,7 +53,7 @@
                 </div>
               </div>
             </div>
-            <!-- /.box-header -->
+            /.box-header
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <tbody><tr>
@@ -70,8 +68,9 @@
                 <tr th:each="user : ${listUsers}">
                   <td th:text="${user.username}">Tên Đăng Nhập</td>
                   <td th:text="${user.email}">Email</td>
-                  <td th:text="${user.employee}">Mã nhân viên</td>
-                  <td th:text="${user.status}"Trangjg thái</td>
+                  <td th:text="${user.dateTao}">Ngày tạo</td>
+                  <td th:text="${user.role_id}">Vị trí</td>
+                  <td th:text="${user.status}"> Trạng thái</td>
                   <td>
                     <a th:href="/@{'/edit/' + ${user.id}}">Sửa</a>
                     &nbsp;&nbsp;&nbsp;
@@ -80,21 +79,21 @@
                 </tr>
               </tbody></table>
             </div>
-            <!-- /.box-body -->
+            /.box-body
           </div>
-          <!-- /.box -->
+          /.box
         </div>
-      <!-- /.box -->
+      /.box
 
     </section>
-    <!-- /.content -->
+    /.content
   </div>
-  <!-- /.content-wrapper -->
+  /.content-wrapper
   <div th:replace="fragments/footer :: footer"></div>
 </div>
-<!-- ./wrapper -->
+./wrapper
 
-<!-- jQuery 3 -->
+jQuery 3
 
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-ui.js"></script>
