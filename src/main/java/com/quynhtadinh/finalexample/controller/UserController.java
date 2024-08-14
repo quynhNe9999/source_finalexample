@@ -100,11 +100,10 @@ public class UserController {
 //		}
 	
     @GetMapping("/user")
-//    @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String home(Model model){
-//        List<User> listUsers = userService.findAll();
-////        System.out.println(users);
-//        model.addAttribute("listUsers",listUsers);
+        List<User> listUsers = userService.findAll();
+//        System.out.println(users);
+        model.addAttribute("listUsers",listUsers);
         return "user"; // return file 
     }
     

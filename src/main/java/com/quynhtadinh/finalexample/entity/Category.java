@@ -13,6 +13,7 @@ public class Category {
     private String description;
     private Double price;
     private Integer stock;
+    private byte[] image;
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")
@@ -64,5 +65,13 @@ public class Category {
 
     public void setSupplier(Suppliers supplier) {
         this.supplier = supplier;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

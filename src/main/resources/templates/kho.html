@@ -30,9 +30,8 @@
        
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Blank page</li>
+        <li><a href="index"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li><a href="kho">Quản lý kho tổng</a></li>
       </ol>
     </section>
 
@@ -43,7 +42,7 @@
       <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-           <a href="add-menu.html" class="btn btn-success">+Thêm mới Nhập xuất</a>
+           <a href="add-kho" class="btn btn-success">+Thêm mới Nhập xuất</a>
 
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -89,7 +88,7 @@
 				<td>Ngày nhập xuất</td>
 				<td>Hành động</td>
 			</tr>
-				<tr th:each="employees : ${listEmployees}">
+				<!--<tr th:each="employees : ${listEmployees}">
 					<td th:text="${employees.name}"></td>
 					<td th:text="${employees.address}"></td>
 					<td th:text="${employees.phone}"></td>
@@ -100,7 +99,7 @@
 					<td> <a th:href="@{/edit-employees/{id}(id=${employees.id})}" class="btn btn-primary">Update</a>
 					    <a th:href="@{/deleteEmployees/{id}(id=${employees.id})}" class="btn btn-danger">Delete</a>
 					</td>
-				</tr>
+				</tr>-->
 			</tbody>
 		</table>
 		

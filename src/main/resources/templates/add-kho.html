@@ -39,53 +39,52 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Thêm mới menu</h3>
+              <h3 class="box-title">Thêm mới Kho Sản phẩm</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Tên banner</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Banner trang chủ">
+                  <label for="import_id">Mã nhập kho</label>
+                  <input type="text" class="form-control" id="import_id" placeholder="Mã nhập kho">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">link banner</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="https://bachkhoa-aptech.edu.vn/bachkhoa-aptech-thong-bao-xet-tuyen-dot-3-tuyen-sinh-50-chi-tieu-den-het-20-09-2018/529.html">
+                  <label for="exampleInputEmail1">Mã nhà cung cấp</label>
+                  <input type="text" class="form-control" id="supplier_id" placeholder="Tên nhà cung cấp">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn banner</label>
-                  <div class="radio">
-                    <label>
-                      <input type="file" name=" " id="input " value="" checked="checked">
-                      
-                    </label>
-                  </div>
+                  <label for="supplier_name">Tên nhà cung cấp</label>
+                  <input type="text" class="form-control" id="supplier_name" placeholder="Banner trang chủ">
                 </div>
-
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn Vị trí</label>
+                  <label for="category_id">Mã sản phẩm</label>
+                  <input type="text" class="form-control" id="category_id" placeholder="Mã sản phẩm">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Số lượng</label>
+                  <input type="text" class="form-control" id="quantity" placeholder="Số lượng">
+                </div>
+                <div class="form-group">
+                  <label for="price">Đơn giá</label>
+                  <input type="text" class="form-control" id="price" placeholder="Đơn giá">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Thành tiền</label>
+                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Thành tiền">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Hang nhập xuất</label>
                   <select name="" id="input" class="form-control" required="required">
-                    <option value="">Chọn vị trí</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                    <option value="">Hang nhập xuất</option>
+                    <option value="">Nhập</option>
+                    <option value="">Xuất</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn trạng thái</label>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="" id="input" value="" checked="checked">
-                      Hiện
-                    </label>
-                    <label>
-                      <input type="radio" name="" id="input" value="" >
-                      Ẩn
-                    </label>
-                  </div>
+                  <label for="exampleInputEmail1">Ngày nhập xuất</label>
+                  <input type="date" class="form-control" id="datekho" placeholder="Ngày nhập xuất">
                 </div>
-                
               </div>
               <!-- /.box-body -->
 
