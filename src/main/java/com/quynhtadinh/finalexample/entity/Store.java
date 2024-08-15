@@ -14,6 +14,7 @@ public class Store {
     private String name;
     private String address;
     private String phone;
+    private String status;
 
     @OneToOne
     @JoinColumn(name = "manager_id")
@@ -65,5 +66,12 @@ public class Store {
 
     public void setManager(Employees manager) {
         this.manager = manager;
+    }
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

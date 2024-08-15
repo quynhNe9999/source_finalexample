@@ -23,11 +23,11 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Quản lý người dùng trang giao diện
+        Quản lý cửa hàng trang giao diện
       </h1>
       <ol class="breadcrumb">
         <li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="user">Quản lý người dùng</a></li>
+        <li><a href="user">Quản lý cửa hàng</a></li>
       </ol>
     </section>
 
@@ -36,7 +36,7 @@
       <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-           <a href="add-user" class="btn btn-success">+Thêm mới người dùng</a>
+           <a href="add-user" class="btn btn-success">+Thêm mới cửa hàng</a>
 
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -51,26 +51,24 @@
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <tbody><tr>
-                  <th>Tên đăng nhập</th>
-                  <th>Email</th>
-                  <th>Ngày tạo</th>
-                  <th>Mã nhân viên</th>
-                  <th>Vị trí</th>
+                  <th>ID cửa hàng</th>
+                  <th>Tên cửa hàng</th>
+                  <th>Địa chỉ</th>
+                  <th>Số điện thoại</th>
                   <th>Trạng thái</th>
                   <th>Tùy chọn</th>
                 </tr>
-                <tr th:each="user : ${listUsers}">
-                  <td th:text="${user.username}">Tên Đăng Nhập</td>
-                  <td th:text="${user.email}">Email</td>
-                  <td th:text="${user.dateTao}">Ngày tạo</td>
-                  <td th:text="${user.roles}">Vị trí</td>
-                  <td th:text="${user.employee}">Nhân viên</td>
-                  <td th:text="${user.status}"> Trạng thái</td>
-<!--                  <td>-->
-<!--                    <a th:href="/@{'/edit/' + ${user.id}}">Sửa</a>-->
-<!--                    &nbsp;&nbsp;&nbsp;-->
-<!--                    <a th:href="/@{'/delete/' + ${user.id}}">Xóa</a>-->
-<!--                  </td>-->
+                <tr th:each="store : ${listStores}">
+                  <td th:text="${store.store_id}">Mã cửa hàng</td>
+                  <td th:text="${store.name}">Tên cửa hàng</td>
+                  <td th:text="${store.address}">Địa chỉ</td>
+                  <td th:text="${store.phone}">Số điện thoại</td>
+                  <td th:text="${store.status}"> Trạng thái</td>
+                  <td>
+                    <a th:href="@{'/edit-store/' + ${store.id}}">Sửa</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/delete-store/' + ${store.id}}">Xóa</a>
+                  </td>
                 </tr>
               </tbody></table>
             </div>

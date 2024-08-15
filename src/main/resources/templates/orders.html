@@ -43,7 +43,7 @@
       <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-           <a href="add-menu.html" class="btn btn-success">+Thêm mới Nhập xuất</a>
+           <a href="add-menu.html" class="btn btn-success">+Thêm mới đơn hàng</a>
 
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -78,7 +78,7 @@
 			<tbody>
 			<tr>
 				<td>Mã đơn hàng</td>
-				<td>Tên khách hàng</td> //, số điện thoại, tên, email, mã sản phẩm, số lượng, giá, thành tiền, ngày mua.
+				<td>Tên khách hàng</td>
 				<td>Số điện thoại</td>
 				<td>Email</td>
 				<td>Mã sản phẩm</td>
@@ -88,16 +88,19 @@
 				<td>Ngày Mua hàng</td>
 				<td>Hành động</td>
 			</tr>
-				<tr th:each="employees : ${listEmployees}">
-					<td th:text="${employees.name}"></td>
-					<td th:text="${employees.address}"></td>
-					<td th:text="${employees.phone}"></td>
-					<td th:text="${employees.email}"></td>
-					<td th:text="${employees.positon}"></td>
-					<td th:text="${employees.dateOfBirth}"></td>
+				<tr th:each="orders : ${listOrders}">
+					<td th:text="${orders.order_id}"></td>
+					<td th:text="${customers.name}"></td>
+					<td th:text="${customers.phone}"></td>
+					<td th:text="${customers.email}"></td>
+					<td th:text="${category.quantity}"></td>
+					<td th:text="${category.price}"></td>
+                    <td th:text="${category.thanhtien}"></td>
+                    <td th:text="${category.ngaymua}"></td>
 
-					<td> <a th:href="@{/edit-employees/{id}(id=${employees.id})}" class="btn btn-primary">Update</a>
-					    <a th:href="@{/deleteEmployees/{id}(id=${employees.id})}" class="btn btn-danger">Delete</a>
+
+                    <td> <a th:href="@{'/edit-orders/'+ ${orders.id}}" class="btn btn-primary">Update</a>
+					    <a th:href="@{'/delete-orders/' + ${orders.id}}" class="btn btn-danger">Delete</a>
 					</td>
 				</tr>
 			</tbody>

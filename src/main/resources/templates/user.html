@@ -66,11 +66,11 @@
                   <td th:text="${user.roles}">Vị trí</td>
                   <td th:text="${user.employee}">Nhân viên</td>
                   <td th:text="${user.status}"> Trạng thái</td>
-<!--                  <td>-->
-<!--                    <a th:href="/@{'/edit/' + ${user.id}}">Sửa</a>-->
-<!--                    &nbsp;&nbsp;&nbsp;-->
-<!--                    <a th:href="/@{'/delete/' + ${user.id}}">Xóa</a>-->
-<!--                  </td>-->
+                  <td>
+                    <a th:href="@{'/edit-user/' + ${user.id}}">Sửa</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/delete-user/' + ${user.id}}">Xóa</a>
+                  </td>
                 </tr>
               </tbody></table>
             </div>

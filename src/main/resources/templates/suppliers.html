@@ -51,26 +51,26 @@
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <tbody><tr>
-                  <th>Tên đăng nhập</th>
+                  <th>Mã nhà cung cấp</th>
+                  <th>Tên nhà cung cấp</th>
+                  <th>Địa chỉ</th>
+                  <th>Số điện thoại</th>
                   <th>Email</th>
-                  <th>Ngày tạo</th>
-                  <th>Mã nhân viên</th>
-                  <th>Vị trí</th>
                   <th>Trạng thái</th>
                   <th>Tùy chọn</th>
                 </tr>
-                <tr th:each="user : ${listUsers}">
-                  <td th:text="${user.username}">Tên Đăng Nhập</td>
-                  <td th:text="${user.email}">Email</td>
-                  <td th:text="${user.dateTao}">Ngày tạo</td>
-                  <td th:text="${user.roles}">Vị trí</td>
-                  <td th:text="${user.employee}">Nhân viên</td>
-                  <td th:text="${user.status}"> Trạng thái</td>
-<!--                  <td>-->
-<!--                    <a th:href="/@{'/edit/' + ${user.id}}">Sửa</a>-->
-<!--                    &nbsp;&nbsp;&nbsp;-->
-<!--                    <a th:href="/@{'/delete/' + ${user.id}}">Xóa</a>-->
-<!--                  </td>-->
+                <tr th:each="suppliers : ${listSuppliers}">
+                  <td th:text="${suppliers.supplier_id}">Mã nhà cung câp</td>
+                  <td th:text="${suppliers.name}">Tên nhà cung cấp</td>
+                  <td th:text="${suppliers.address}">Địa chỉ</td>
+                  <td th:text="${suppliers.phone}">Số điện thoại</td>
+                  <td th:text="${suppliers.email}">Email</td>
+                  <td th:text="${suppliers.status}"> Trạng thái</td>
+                  <td>
+                    <a th:href="@{'/edit-supplier/' + ${supplier.id}}">Sửa</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/delete-suppliers/' + ${supplier.id}}">Xóa</a>
+                  </td>
                 </tr>
               </tbody></table>
             </div>

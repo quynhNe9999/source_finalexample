@@ -13,6 +13,7 @@ public class Suppliers {
     private String address;
     private String phone;
     private String email;
+    private String status;
 
     public Integer getSupplier_id() {
         return supplier_id;
@@ -52,5 +53,12 @@ public class Suppliers {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
