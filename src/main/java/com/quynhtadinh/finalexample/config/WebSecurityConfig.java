@@ -22,6 +22,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @ComponentScan("com.quynhtadinh.finalexample")
 public class WebSecurityConfig {
 
+	@Autowired
+	private AuthenticationConfiguration authConfiguration;
+
 
     @Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -46,8 +49,8 @@ public class WebSecurityConfig {
 //		return http.build();
 //	}
 //
-@Bean
-public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	http.csrf().disable();
 
 	// Define access for each table
