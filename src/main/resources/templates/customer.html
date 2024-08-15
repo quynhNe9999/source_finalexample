@@ -23,7 +23,7 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Quản lý khách hàng trang giao diện
+        Quản lý khách hàng (Danh sách)
       </h1>
       <ol class="breadcrumb">
         <li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -59,18 +59,18 @@
                   <th>Trạng thái</th>
                   <th>Tùy chọn</th>
                 </tr>
-                <tr th:each="user : ${listUsers}">
-                  <td th:text="${user.username}">Tên Đăng Nhập</td>
-                  <td th:text="${user.email}">Email</td>
-                  <td th:text="${user.dateTao}">Ngày tạo</td>
-                  <td th:text="${user.roles}">Vị trí</td>
-                  <td th:text="${user.employee}">Nhân viên</td>
-                  <td th:text="${user.status}"> Trạng thái</td>
-<!--                  <td>-->
-<!--                    <a th:href="/@{'/edit/' + ${user.id}}">Sửa</a>-->
-<!--                    &nbsp;&nbsp;&nbsp;-->
-<!--                    <a th:href="/@{'/delete/' + ${user.id}}">Xóa</a>-->
-<!--                  </td>-->
+                <tr th:each="customers : ${listCustomers}">
+                  <td th:text="${customers.username}">Tên Đăng Nhập</td>
+                  <td th:text="${customers.email}">Email</td>
+                  <td th:text="${customers.dateTao}">Ngày tạo</td>
+                  <td th:text="${customers.roles}">Vị trí</td>
+                  <td th:text="${customers.employee}">Nhân viên</td>
+                  <td th:text="${customers.status}"> Trạng thái</td>
+                  <td>
+                    <a th:href="@{'/edit-customers/' + ${customers.id}}" class="btn btn-primary">Sửa</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/delete-customers/' + ${customers.id}}" class="btn btn-danger">Xóa</a>
+                  </td>
                 </tr>
               </tbody></table>
             </div>

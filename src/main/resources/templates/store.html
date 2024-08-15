@@ -23,7 +23,7 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Quản lý cửa hàng trang giao diện
+        Quản lý cửa hàng (Danh sách)
       </h1>
       <ol class="breadcrumb">
         <li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -65,9 +65,9 @@
                   <td th:text="${store.phone}">Số điện thoại</td>
                   <td th:text="${store.status}"> Trạng thái</td>
                   <td>
-                    <a th:href="@{'/edit-store/' + ${store.id}}">Sửa</a>
+                    <a th:href="@{'/edit-store/' + ${store.id}}" class="btn btn-primary">Sửa</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a th:href="@{'/delete-store/' + ${store.id}}">Xóa</a>
+                    <a th:href="@{'/delete-store/' + ${store.id}}" class="btn btn-danger">Xóa</a>
                   </td>
                 </tr>
               </tbody></table>

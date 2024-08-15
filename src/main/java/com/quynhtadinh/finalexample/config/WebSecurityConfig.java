@@ -47,12 +47,14 @@ public class WebSecurityConfig {
 //		return http.build();
 //	}
 //
+	@Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 	http.csrf().disable();
 
 	// Define access for each table
 	http.authorizeRequests()
+			.antMatchers("/resources/**", "/registration", "/static/**").permitAll()
 			.antMatchers("/store/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') or hasRole('ROLE_VIEWER')")
 			.antMatchers("/store/delete/**").access("hasRole('ROLE_ADMIN')")
 

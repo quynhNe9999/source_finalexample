@@ -23,11 +23,11 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Quản lý người dùng trang giao diện
+        Quản lý nhà cung cấp (Danh sách)
       </h1>
       <ol class="breadcrumb">
         <li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="user">Quản lý người dùng</a></li>
+        <li><a href="user">Quản lý nhà cung cấp</a></li>
       </ol>
     </section>
 
@@ -36,7 +36,7 @@
       <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-           <a href="add-user" class="btn btn-success">+Thêm mới người dùng</a>
+           <a href="add-user" class="btn btn-success">+Thêm mới nhà cung cấp</a>
 
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -60,16 +60,16 @@
                   <th>Tùy chọn</th>
                 </tr>
                 <tr th:each="suppliers : ${listSuppliers}">
-                  <td th:text="${suppliers.supplier_id}">Mã nhà cung câp</td>
+                  <td th:text="${suppliers.supplier_id}">Mã nhà cung cấp</td>
                   <td th:text="${suppliers.name}">Tên nhà cung cấp</td>
                   <td th:text="${suppliers.address}">Địa chỉ</td>
                   <td th:text="${suppliers.phone}">Số điện thoại</td>
                   <td th:text="${suppliers.email}">Email</td>
                   <td th:text="${suppliers.status}"> Trạng thái</td>
                   <td>
-                    <a th:href="@{'/edit-supplier/' + ${supplier.id}}">Sửa</a>
+                    <a th:href="@{'/edit-supplier/' + ${supplier.id}}" class="btn btn-primary">Sửa</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a th:href="@{'/delete-suppliers/' + ${supplier.id}}">Xóa</a>
+                    <a th:href="@{'/delete-suppliers/' + ${supplier.id}}" class="btn btn-danger">Xóa</a>
                   </td>
                 </tr>
               </tbody></table>
