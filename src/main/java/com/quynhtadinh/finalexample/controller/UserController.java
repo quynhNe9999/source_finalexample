@@ -2,17 +2,16 @@ package com.quynhtadinh.finalexample.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import com.quynhtadinh.finalexample.entity.User;
 import com.quynhtadinh.finalexample.security.SecurityService;
@@ -29,6 +28,8 @@ public class UserController {
 
     @Autowired
     private UserValidator userValidator;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -105,6 +106,67 @@ public class UserController {
 //        System.out.println(users);
         model.addAttribute("listUsers",listUsers);
         return "user"; // return file 
+    }
+//    @GetMapping("/{id}")
+//    public String getUserById(@PathVariable Long id, Model model) {
+//        Optional<User> user = userService.getUserById(id);
+//        if (user.isPresent()) {
+//            model.addAttribute("user", user.get());
+//            return "users/detail";
+//        } else {
+//            return "redirect:/user";
+//        }
+//    }
+
+    // Hiển thị form thêm người dùng
+    @GetMapping("/add-user")
+    public String showAddUserForm(Model model) {
+        // Tạo một đối tượng User trống và truyền vào model để binding với form
+        model.addAttribute("user", new User());
+        return "add-user"; // Tên của template Thymeleaf (ví dụ add-user.html)
+    }
+
+    @PostMapping("/add-user")
+    public String addUser(@ModelAttribute("user") User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "add-user";
+        }
+
+        if (user.getPassword() == null || user.getPassword().isEmpty()) {
+            result.rejectValue("password", "error.user", "Password cannot be null or empty");
+            return "add-user";
+        }
+
+        if (!user.getPassword().equals(user.getPasswordConfirm())) {
+            result.rejectValue("passwordConfirm", "error.user", "Passwords do not match");
+            return "add-user";
+        }
+
+        userService.save(user);
+        return "redirect:/users";
+    }
+
+    @GetMapping("/edit-user/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Optional<User> user = userService.getUserById(id);
+        if (user.isPresent()) {
+            model.addAttribute("user", user.get());
+            return "edit-user";
+        } else {
+            return "redirect:/user";
+        }
+    }
+
+    @PostMapping("/edit-user/{id}")
+    public String updateUser(@PathVariable Long id, @ModelAttribute("user") User newUser) {
+        userService.updateUser(id, newUser);
+        return "redirect:/user";
+    }
+
+    @GetMapping("/delete-user/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        userService.deleteUserById(id);
+        return "redirect:/user";
     }
     
 //    //them sv

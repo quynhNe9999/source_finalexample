@@ -29,6 +29,11 @@ public class Employees {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
     public long getEmployee_id() {
         return employee_id;
     }

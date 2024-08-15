@@ -2,6 +2,7 @@ package com.quynhtadinh.finalexample.service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,15 @@ public interface UserService {
 
 	User update(User user);
 
-	User findById(long id);
+//	User findById(long id);
 
-//	Page<User> searchSinhVien(Optional<String> keyword, Pageable pageable);
-//
+	List<User> getAllUsers();
+
+	Optional<User> getUserById(Long id);
+
+	User saveUser(User user);
+
+	void deleteUserById(Long id);
+
+	User updateUser(Long id, User newUser);
 }

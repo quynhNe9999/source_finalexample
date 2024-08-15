@@ -3,27 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Blank Page</title>
-  <!-- Tell the browser to be responsive to screen width -->
+  <title>AdminWine</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/AdminLTE.css">
-  <link rel="stylesheet" href="css/_all-skins.min.css">
-  <link rel="stylesheet" href="css/jquery-ui.css">
-  <link rel="stylesheet" href="css/style.css" />
-  <script src="js/angular.min.js"></script>
-  <script src="js/app.js"></script>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/AdminLTE.css">
+  <link rel="stylesheet" href="/css/_all-skins.min.css">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="/js/angular.min.js"></script>
+  <script src="/js/app.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<!-- Site wrapper -->
 <div class="wrapper">
   <div th:replace="fragments/header :: header"></div>
   <div th:replace="fragments/sidebar :: sidebar"></div>
-  <!-- =============================================== -->
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -53,24 +48,23 @@
             <form role="form">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Tên Menu</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Giới thiệu" value="Học Bổng">
+                  <label for="exampleInputEmail1">Tên đăng nhập</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Tên đăng nhập" value="quynhtd">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn Menu Cha</label>
-                  <select name="" id="input" class="form-control" required="required">
-                    <option value="">Đào tạo</option>
-                    <option value="">Học bổng</option>
-                  </select>
+                  <label for="exampleInputEmail1">Email</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" value="tdquynh09@gmail.com">
                 </div>
-
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn Vị trí</label>
+                  <label for="exampleInputEmail1">Mật khẩu</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Mật khẩu" value="123123">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">CHỨC VỤ</label>
                   <select name="" id="input" class="form-control" required="required">
-                    <option value="">1</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                    <option value="ADMIN">ROLE_ADMIN</option>
+                    <option value="MANAGE">ROLE_MANAGE</option>
+                    <option value="EMPLOYEE">ROLE_EMPLOYEE</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -78,11 +72,11 @@
                   <div class="radio">
                     <label>
                       <input type="radio" name="" id="input" value="" checked="checked">
-                      Hiện
+                      Hoạt động
                     </label>
                     <label>
                       <input type="radio" name="" id="input" value="" >
-                      Ẩn
+                      Không hoạt động
                     </label>
                   </div>
                 </div>
@@ -109,8 +103,6 @@
 
 </div>
 <!-- ./wrapper -->
-
-<!-- jQuery 3 -->
 
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-ui.js"></script>

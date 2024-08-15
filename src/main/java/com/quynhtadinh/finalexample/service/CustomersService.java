@@ -4,6 +4,7 @@ import com.quynhtadinh.finalexample.entity.Customers;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface CustomersService {
@@ -16,4 +17,12 @@ public interface CustomersService {
     List<Customers> getAllCustomers();
 
     Customers saveCustomers(Customers customers);
+
+    Optional<Customers> getUserById(Long id);
+
+    Customers saveUser(Customers customers);
+
+    void deleteUserById(Long id);
+
+    Customers updateCustomers(Long id, Customers newCustomers);
 }

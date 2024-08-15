@@ -19,12 +19,9 @@
 <div th:replace="fragments/header :: header"></div>
   <div th:replace="fragments/sidebar :: sidebar"></div>
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-     <section class="content-header">
-      <h1>
-        Quản lý người dùng
-        <small>(Thêm mới người dùng)</small>
-      </h1>
+    <!-- Content Header -->
+    <section class="content-header">
+      <h1>Quản lý người dùng <small>(Thêm mới người dùng)</small></h1>
       <ol class="breadcrumb">
         <li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="user">Quản lý người dùng</a></li>
@@ -33,71 +30,46 @@
     </section>
     <!-- Main content -->
     <section class="content">
-
-      <!-- Default box -->
-     <div class="col-md-8">
-          <!-- general form elements -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Thêm mới User</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form role="form">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="username">Tên đăng nhập</label>
-                  <input type="text" class="form-control" id="username" placeholder="Tên đăng nhập">
-                </div>
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="email">
-                </div>
-                <div class="form-group">
-                  <label for="password">Mật khẩu</label>
-                  <input type="password" class="form-control" id="password" placeholder="Mật khẩu">
-                </div>                <div class="form-group">
-                  <label for="passwordConfirm">Nhập lại mật khẩu</label>
-                  <input type="password" class="form-control" id="passwordConfirm" placeholder="Nhập lại mật khẩu">
-                </div>
-
-                <div class="form-group">
-                  <label for="role">CHỨC VỤ</label>
-                  <select name="" id="role"  class="form-control" required="required">
-                    <option value="">CHỨC VỤ</option>
-                    <option value="1">ADMIN</option>
-                    <option value="2">USER</option>
-                    <option value="3">EMPLOYEE</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="status">Trạng thái</label>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="" id="status" value="A">
-                      Hoạt động
-                    </label>
-                    <label>
-                      <input type="radio" name="" id="status" value="I" >
-                      Không hoạt động
-                    </label>
-                  </div>
-                </div>
-                
-              </div>
-              <!-- /.box-body -->
-
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Thêm mới user</button>
-              </div>
-            </form>
+      <div class="col-md-8">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Thêm mới người dùng</h3>
           </div>
-       
-          <!-- /.box -->
-
+          <!-- Form start -->
+          <form th:action="@{/add-user}" th:object="${user}" method="post">
+            <div class="box-body">
+              <div class="form-group">
+                <label for="username">Tên đăng nhập</label>
+                <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Tên đăng nhập" required="required">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Email" required="required">
+              </div>
+              <div class="form-group">
+                <label for="password">Mật khẩu</label>
+                <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Mật khẩu" required="required">
+              </div>
+              <div class="form-group">
+                <label for="passwordConfirm">Nhập lại mật khẩu</label>
+                <input type="password" class="form-control" id="passwordConfirm" th:field="*{passwordConfirm}" placeholder="Nhập lại mật khẩu" required="required">
+              </div>
+              <div class="form-group">
+                <label for="role">CHỨC VỤ</label>
+                <select id="role" class="form-control" th:field="*{roles}" required="required">
+                  <option value="">CHỨC VỤ</option>
+                  <option value="ADMIN">ROLE_ADMIN</option>
+                  <option value="MANAGE">ROLE_MANAGE</option>
+                  <option value="EMPLOYEE">ROLE_EMPLOYEE</option>
+                </select>
+              </div>
+            </div>
+            <div class="box-footer">
+              <button type="submit" class="btn btn-primary">Thêm mới người dùng</button>
+            </div>
+          </form>
         </div>
-      <!-- /.box -->
-
+      </div>
     </section>
   </div>
   <div th:replace="fragments/footer :: footer"></div>

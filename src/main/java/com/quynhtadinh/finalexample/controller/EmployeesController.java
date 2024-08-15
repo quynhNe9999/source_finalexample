@@ -22,8 +22,11 @@ public class EmployeesController {
 		this.employeesService = employeesService;
 	}
 
+
 	@GetMapping("/employees")
-	public String getStringEmployees() {
+	public String getStringEmployees(Model model) {
+//		List<Employees> listEmployees = employeesService.getAllEmployees();
+//		model.addAttribute("listEmployees",listEmployees);
 		return "employees";
 	}
 

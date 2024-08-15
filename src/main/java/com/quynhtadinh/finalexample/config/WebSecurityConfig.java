@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -21,10 +22,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @ComponentScan("com.quynhtadinh.finalexample")
 public class WebSecurityConfig {
 
-	@Autowired
-	private AuthenticationConfiguration authConfiguration;
 
-	@Bean
+    @Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
@@ -47,13 +46,13 @@ public class WebSecurityConfig {
 //		return http.build();
 //	}
 //
-	@Bean
+@Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
 	http.csrf().disable();
 
 	// Define access for each table
 	http.authorizeRequests()
+
 			.antMatchers("/resources/**", "/registration", "/static/**").permitAll()
 			.antMatchers("/store/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') or hasRole('ROLE_VIEWER')")
 			.antMatchers("/store/delete/**").access("hasRole('ROLE_ADMIN')")

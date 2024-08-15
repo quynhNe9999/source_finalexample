@@ -19,7 +19,6 @@
 <div th:replace="fragments/header :: header"></div>
   <div th:replace="fragments/sidebar :: sidebar"></div>
  
-  Content Wrapper. Contains page content
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
@@ -54,8 +53,8 @@
                   <th>Tên đăng nhập</th>
                   <th>Email</th>
                   <th>Ngày tạo</th>
-                  <th>Mã nhân viên</th>
                   <th>Vị trí</th>
+                  <th>Tên nhân viên</th>
                   <th>Trạng thái</th>
                   <th>Tùy chọn</th>
                 </tr>
@@ -64,12 +63,64 @@
                   <td th:text="${user.email}">Email</td>
                   <td th:text="${user.dateTao}">Ngày tạo</td>
                   <td th:text="${user.roles}">Vị trí</td>
-                  <td th:text="${user.employee}">Nhân viên</td>
+                  <td th:text="${user.employee}">Tên Nhân viên</td>
                   <td th:text="${user.status}"> Trạng thái</td>
                   <td>
-                    <a th:href="@{'/edit-user/' + ${user.id}}">Sửa</a>
+                    <a th:href="@{'/edit-user/' + ${user.id}}"class="btn btn-primary">Sửa</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a th:href="@{'/delete-user/' + ${user.id}}">Xóa</a>
+                    <a th:href="@{'/delete-user/' + ${user.id}}" class="btn btn-danger">Xóa</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>hoa98</td>
+                  <td>user123@gmail.com</td>
+                  <td>10-11-2024</td>
+                  <td>[ROLE_MANAGE]</td>
+                  <td>Nguyen Van A</td>
+                  <td>Hoạt động</td>
+                  <td>
+                    <a href="" class="btn btn-primary">Sửa</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="" class="btn btn-danger">Xóa</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>nam02</td>
+                  <td>user@gmail.com</td>
+                  <td>10-10-2018</td>
+                  <td>[ROLE_ADMIN]</td>
+                  <td>Nguyen Van Nam</td>
+                  <td>Hoạt động</td>
+                  <td>
+                    <a href="" class="btn btn-primary">Sửa</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="" class="btn btn-danger">Xóa</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>quynhne</td>
+                  <td>user1231@gmail.com</td>
+                  <td>10-12-2024</td>
+                  <td>[ROLE_MANAGE]</td>
+                  <td>Nguyen Van C</td>
+                  <td>Hoạt động</td>
+                  <td>
+                    <a href="" class="btn btn-primary">Sửa</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="" class="btn btn-danger">Xóa</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>thanhthanh</td>
+                  <td>user123123@gmail.com</td>
+                  <td>09-09-2024</td>
+                  <td>[ROLE_MANAGE]</td>
+                  <td>Nguyen Thi Thanh</td>
+                  <td>Hoạt động</td>
+                  <td>
+                    <a href="" class="btn btn-primary">Sửa</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="" class="btn btn-danger">Xóa</a>
                   </td>
                 </tr>
               </tbody></table>

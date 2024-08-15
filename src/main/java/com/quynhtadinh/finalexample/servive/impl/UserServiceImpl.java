@@ -13,6 +13,8 @@ import com.quynhtadinh.finalexample.repository.RoleRepository;
 import com.quynhtadinh.finalexample.repository.UserRepository;
 import com.quynhtadinh.finalexample.service.UserService;
 
+import javax.transaction.Transactional;
+
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
@@ -36,15 +38,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> findAll() {
-		// TODO Auto-generated method stub
 		return userRepository.findAll();
 	}
 
 	@Override
 	public User insert(User user) {
-		// TODO Auto-generated method stub
+		if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		}
 		return userRepository.save(user);
-	}
+
+    }
 
 	@Override
 	public boolean delete(long id) {
@@ -70,15 +74,43 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(user);
 	}
 
+
 	@Override
-	public User findById(long id) {
-		// TODO Auto-generated method stub
-		return userRepository.getById(id);
+	public List<User> getAllUsers() {
+		return userRepository.findAll();
 	}
 
-//	@Override
-//	public Page<User> searchSinhVien(Optional<String> keyword, Pageable pageable) {
-//		// TODO Auto-generated method stub
-//		return userRepository.FindAllByUserName(keyword, pageable);
-//	}
+	@Override
+	public Optional<User> getUserById(Long id) {
+		return userRepository.findById(id);
+	}
+
+	@Override
+	public User saveUser(User user) {
+		return userRepository.save(user);
+	}
+
+	@Override
+	public void deleteUserById(Long id) {
+		userRepository.deleteById(id);
+	}
+
+	@Override
+	@Transactional
+	public User updateUser(Long id, User newUser) {
+		return userRepository.findById(id)
+				.map(user -> {
+					user.setUsername(newUser.getUsername());
+					user.setEmail(newUser.getEmail());
+					user.setPassword(newUser.getPassword());
+					user.setStatus(newUser.getStatus());
+					user.setDateTao(newUser.getDateTao());
+					user.setRoles(newUser.getRoles());
+					return userRepository.save(user);
+				})
+				.orElseGet(() -> {
+					newUser.setId(id);
+					return userRepository.save(newUser);
+				});
+	}
 }
