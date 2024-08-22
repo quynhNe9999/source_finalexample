@@ -7,6 +7,7 @@ import java.util.*;
 import com.quynhtadinh.finalexample.entity.Role;
 import com.quynhtadinh.finalexample.repository.RoleRepository;
 import com.quynhtadinh.finalexample.repository.UserRepository;
+import com.quynhtadinh.finalexample.util.RoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -117,32 +118,23 @@ public class UserController {
         modelMap.put("listUsers", listUsers);
         return new ModelAndView("user", modelMap);
 		}
-	
-//    @GetMapping("/user")
-//    public String home(Model model){
-//        List<User> listUsers = userService.findAll(Pageable pageable);
-////        System.out.println(users);
-//        model.addAttribute("listUsers",listUsers);
-//        return "user";
-//    }
 
-    @GetMapping("/add-user")
-    public String showAddUserForm(Model model) {
-        // Tạo một đối tượng User trống và truyền vào model để binding với form
+    @RequestMapping(value = "/add-user", method = RequestMethod.GET)
+    public String ssssss(Model model) {
         model.addAttribute("user", new User());
+
         return "add-user";
     }
 
-    @PostMapping("/add-user")
-    public String addUser(@ModelAttribute("user") User user, @RequestParam("roles") Long roleId, BindingResult result, Model model) {
-        Role selectedRole = roleRepository.findById(roleId)
-                .orElseThrow(() -> new IllegalArgumentException("Quyền không hợp lệ: " + roleId));
-        // Gán quyền duy nhất cho người dùng
-        user.setRoles(Collections.singleton(selectedRole));
-        // Tiếp tục với logic xử lý người dùng
-        model.addAttribute("message", "User added successfully with role: " + selectedRole.getRole_name());
-        userService.save(user);
-        return "redirect:/users";
+    @RequestMapping(value = "/add-user", method = RequestMethod.POST)
+    public String registrations(@ModelAttribute("user") User userForm, BindingResult bindingResult, Model model) {
+        userValidator.validate(userForm, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "add-user";
+        }
+        userService.save(userForm);
+        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
+        return "redirect:/user";
     }
 
     @GetMapping("/edit-user/{id}")
@@ -155,31 +147,68 @@ public class UserController {
             return "redirect:/user";
         }
     }
-
     @PostMapping("/edit-user/{id}")
-    public String updateUser(@PathVariable Long id, @ModelAttribute("user") User newUser) {
-        Role selectedRole = roleRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Quyền không hợp lệ: " + id));
-        // Gán quyền duy nhất cho người dùng
-        newUser.setRoles(Collections.singleton(selectedRole));
+    public String updateUser(@PathVariable Long id, @ModelAttribute("user") User newUser, @RequestParam("roleId") Long roleId, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("message", "Có lỗi xảy ra khi cập nhật người dùng");
+            return "user-form"; // Hoặc trang lỗi tương ứng
+        }
 
-        User existingUser = userService.getUserById(id).get();
-        // Cập nhật thông tin người dùng
-        existingUser.setUsername(newUser.getUsername());
-        existingUser.setEmail(newUser.getEmail());
-        existingUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
-        existingUser.setRoles(newUser.getRoles());
-        existingUser.setStatus(newUser.getStatus());
+        try {
+            Role selectedRole = roleRepository.findById(roleId)
+                    .orElseThrow(() -> new IllegalArgumentException("Quyền không hợp lệ: " + roleId));
 
-        userService.updateUser(id, newUser);
-        return "redirect:/user";
+            User existingUser = userService.getUserById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Người dùng không tồn tại: " + id));
+
+            existingUser.setUsername(newUser.getUsername());
+            existingUser.setEmail(newUser.getEmail());
+            existingUser.setDateTao(newUser.getDateTao());
+            existingUser.setEmployee(newUser.getEmployee());
+
+            if (newUser.getPassword() != null && !newUser.getPassword().isEmpty()) {
+                existingUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+            }
+
+            existingUser.setRoles(Collections.singleton(selectedRole));
+            existingUser.setStatus(newUser.getStatus());
+
+            userService.updateUser(existingUser);
+            return "redirect:/user";
+        } catch (Exception e) {
+            model.addAttribute("message", "Có lỗi xảy ra khi cập nhật người dùng: " + e.getMessage());
+            return "user-form"; // Hoặc trang lỗi tương ứng
+        }
     }
+
+
+//    @PostMapping("/edit-user/{id}")
+//    public String updateUser(@PathVariable Long id, @ModelAttribute("user") User newUser, @RequestParam Long roleId) {
+//        Role selectedRole = roleRepository.findById(roleId)
+//                .orElseThrow(() -> new IllegalArgumentException("Quyền không hợp lệ: " + roleId));
+//
+//        // Gán quyền duy nhất cho người dùng
+//        newUser.setRoles(Collections.singleton(selectedRole));
+//
+//        User existingUser = userService.getUserById(id).orElseThrow(() -> new IllegalArgumentException("User không tồn tại: " + id));
+//
+//        // Cập nhật thông tin người dùng
+//        existingUser.setUsername(newUser.getUsername());
+//        existingUser.setEmail(newUser.getEmail());
+//        existingUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+//        existingUser.setRoles(newUser.getRoles());
+//        existingUser.setStatus(newUser.getStatus());
+//
+//        userService.updateUser(id, existingUser);
+//        return "redirect:/user";
+//    }
+
 
     @GetMapping("/delete-user/{id}")
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUserById(id);
         return "redirect:/user";
     }
-    
+
 }
-    
+

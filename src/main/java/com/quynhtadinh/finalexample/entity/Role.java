@@ -1,6 +1,6 @@
 package com.quynhtadinh.finalexample.entity;
 
-import lombok.Data;
+import com.quynhtadinh.finalexample.util.RoleType;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -13,18 +13,19 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long role_id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role_name")
-    private String role_name;
+    private RoleType role_name;
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users; // Đảm bảo rằng tên thuộc tính khớp với tên trong lớp User
 
     @Override
     public String toString() {
-        return this.role_name; // Returns the role name, e.g., "ROLE_ADMIN"
+        return role_name.toString();
     }
 
-public Long getRole_id() {
+    public Long getRole_id() {
         return role_id;
     }
 
@@ -32,11 +33,11 @@ public Long getRole_id() {
         this.role_id = role_id;
     }
 
-    public String getRole_name() {
+    public RoleType getRole_name() {
         return role_name;
     }
 
-    public void setRole_name(String role_name) {
+    public void setRole_name(RoleType role_name) {
         this.role_name = role_name;
     }
 

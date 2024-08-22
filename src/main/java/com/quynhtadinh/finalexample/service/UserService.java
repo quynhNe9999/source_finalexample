@@ -85,24 +85,37 @@ public class UserService {  // Chuyển từ interface thành class
 	public void deleteUserById(Long id) {
 		userRepository.deleteById(id);
 	}
-
 	@Transactional
-	public User updateUser(Long id, User newUser) {
-		return userRepository.findById(id)
-				.map(user -> {
-					user.setUsername(newUser.getUsername());
-					user.setEmail(newUser.getEmail());
-					user.setPassword(newUser.getPassword());
-					user.setStatus(newUser.getStatus());
-					user.setDateTao(newUser.getDateTao());
-					user.setRoles(newUser.getRoles());
-					return userRepository.save(user);
-				})
-				.orElseGet(() -> {
-					newUser.setId(id);
-					return userRepository.save(newUser);
-				});
+	public User updateUser(User newUser) {
+		try {
+			return userRepository.findById(newUser.getId())
+					.map(existingUser -> {
+						existingUser.setUsername(newUser.getUsername());
+						existingUser.setEmail(newUser.getEmail());
+
+						if (newUser.getPassword() != null && !newUser.getPassword().isEmpty()) {
+							existingUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+						}
+
+						existingUser.setStatus(newUser.getStatus());
+						existingUser.setDateTao(newUser.getDateTao());
+						existingUser.setRoles(newUser.getRoles());
+
+						return userRepository.save(existingUser);
+					})
+					.orElseGet(() -> {
+						newUser.setId(newUser.getId());
+						return userRepository.save(newUser);
+					});
+		} catch (Exception e) {
+			// Ghi log lỗi để kiểm tra
+			System.err.println("Lỗi khi cập nhật người dùng: " + e.getMessage());
+			// Hoặc dùng logger
+			// logger.error("Lỗi khi cập nhật người dùng", e);
+			throw new RuntimeException("Có lỗi xảy ra khi cập nhật người dùng", e);
+		}
 	}
+
 
 	public Page<User> searchUser(Optional<String> keyword, Pageable pageable) {
 		String searchKeyword = keyword.orElse("");

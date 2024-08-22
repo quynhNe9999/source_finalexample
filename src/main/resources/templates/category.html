@@ -39,10 +39,10 @@
           <div class="box">
             <form action="#" th:action="@{/category}" method="get">
             <div class="box-header">
-              <a href="category/add" class="btn btn-success">+Thêm mới sản phẩm</a>
+              <a href="add-category" class="btn btn-success">+Thêm mới sản phẩm</a>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="category" class="form-control pull-right" placeholder="Tìm kiếm">
+                  <input type="text" name="keyword" class="form-control pull-right" placeholder="Tìm kiếm">
                   <div class="input-group-btn">
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                   </div>
@@ -59,7 +59,7 @@
                   <th>Nam sản xuất</th>
                   <th>Hạn sử dụng</th>
                   <th>Phân loại</th>
-                  <th>Ảnh sản phẩm</th>
+<!--                  <th>Ảnh sản phẩm</th>-->
                   <th>Tùy chọn</th>
                 </tr>
                 <tr th:each="category : ${listCategories.getContent()}">
@@ -69,40 +69,30 @@
                   <td th:text="${category.price}">Giá</td>
                   <td th:text="${category.stock}">Cổ phần</td>
                   <td>
-                    <a th:href="@{/category/edit{category_id}(category_id=${category.category_id})}">Sửa</a>
+                    <a th:href="@{'/edit-category/' + ${category.category_id}}"class="btn btn-primary">Sửa</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a th:href="@{/category/delete{category_id}(category_id=${category.category_id})}"  onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">Xóa</a>
+                    <a th:href="@{'/delete-category/' + ${category.category_id}}" class="btn btn-danger" onclick="confirmDelete(event)" >Xóa</a>
                   </td>
                 </tr>
                 </tbody></table>
+              <!-- Liên kết phân trang -->
               <div>
-                <span>Trang hiện tại: <span th:text="${listCategories.number + 1}"></span> / <span th:text="${listCategories.totalPages}"></span></span>
-                <a th:href="@{/category(page=${listCategories.number - 1})}" th:if="${listCategories.hasPrevious()}">Trước</a>
-                <a th:href="@{/category(page=${listCategories.number + 1})}" th:if="${listCategories.hasNext()}">Sau</a>
-              </div>
-<!--              <div th:if = "${totalPages > 1}">-->
-<!--                <div class = "row col-sm-10">-->
-<!--                  <div class = "col-sm-2">-->
-<!--                    Total Rows: [[${totalItems}]]-->
-<!--                  </div>-->
-<!--                  <div class = "col-sm-1">-->
-<!--					<span th:each="i: ${#numbers.sequence(1, totalPages)}">-->
-<!--						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>-->
-<!--						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;-->
-<!--					</span>-->
-<!--                  </div>-->
-<!--                  <div class = "col-sm-1">-->
-<!--                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>-->
-<!--                    <span th:unless="${currentPage < totalPages}">Next</span>-->
-<!--                  </div>-->
+                <p th:if="${page.hasContent()}">
+                  Page <span th:text="${page.number + 1}"></span> of <span th:text="${page.totalPages}"></span>
+                </p>
 
-<!--                  <div class="col-sm-1">-->
-<!--                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>-->
-<!--                    <span th:unless="${currentPage < totalPages}">Last</span>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
+                <div>
+                  <a th:href="@{/category(page=${page.number - 1}, size=${page.size}, keyword=${keyword})}"
+                     th:if="${page.hasPrevious()}"
+                     aria-label="Previous page">Trước</a>
+
+                  <a th:href="@{/category(page=${page.number + 1}, size=${page.size}, keyword=${keyword})}"
+                     th:if="${page.hasNext()}"
+                     aria-label="Next page">Tiếp</a>
+                </div>
+                <p>Tổng số bản ghi: <span th:text="${totalRecords}">(bản ghi)</span></p>
+              </div>
+            </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
