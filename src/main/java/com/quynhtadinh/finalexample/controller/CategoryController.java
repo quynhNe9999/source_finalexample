@@ -30,8 +30,6 @@ public class CategoryController {
 	private CategoryService categoryService;
     @Autowired
     private CategoryRepository categoryRepository;
-    @Autowired
-    private UserValidator userValidator;
 
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
 	public ModelAndView home(@RequestParam(required = false, name = "keyword" )String keyword,
@@ -86,7 +84,7 @@ public class CategoryController {
 		}
 	}
 	@PostMapping("/edit-category/{id}")
-	public String updateUser(@PathVariable Long id, @ModelAttribute("category") Category newCategory, BindingResult result, Model model) {
+	public String updateCategorys(@PathVariable Long id, @ModelAttribute("category") Category newCategory, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("message", "Có lỗi xảy ra khi cập nhật người dùng");
 			return "edit-category"; // Hoặc trang lỗi tương ứng
