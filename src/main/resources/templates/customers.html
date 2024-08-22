@@ -18,7 +18,7 @@
 <div class="wrapper">
 <div th:replace="fragments/header :: header"></div>
   <div th:replace="fragments/sidebar :: sidebar"></div>
- 
+
   Content Wrapper. Contains page content
   <div class="content-wrapper">
     <section class="content-header">
@@ -37,53 +37,72 @@
           <div class="box">
             <form action="#" th:action="@{/customers}" method="get">
             <div class="box-header">
-              <a href="add-user" class="btn btn-success">+Thêm mới Khách hàng</a>
+              <a href="add-customers" class="btn btn-success">+Thêm mới Khách hàng</a>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Tìm kiếm">
+                  <input type="text" name="keyword" class="form-control pull-right" placeholder="Tìm kiếm">
 
                   <div class="input-group-btn">
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                   </div>
                 </div>
               </div>
-          </div>
+            </div>
             </form>
 
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <tbody><tr>
-                  <th>Tên đăng nhập</th>
+                  <th>Tên khách hàng</th>
+                  <th>Địa chỉ</th>
+                  <th>Số điện thoại</th>
                   <th>Email</th>
-                  <th>Ngày tạo</th>
-                  <th>Mã nhân viên</th>
-                  <th>Vị trí</th>
-                  <th>Trạng thái</th>
                   <th>Tùy chọn</th>
                 </tr>
                 <tr th:each="customers : ${listCustomers}">
-                  <td th:text="${customers.username}">Tên Đăng Nhập</td>
-                  <td th:text="${customers.email}">Email</td>
-                  <td th:text="${customers.dateTao}">Ngày tạo</td>
-                  <td th:text="${customers.roles}">Vị trí</td>
-                  <td th:text="${customers.employee}">Nhân viên</td>
-                  <td th:text="${customers.status}"> Trạng thái</td>
+                  <td th:text="${customers.name}">Tên Đăng Nhập</td>
+                  <td th:text="${customers.address}">Email</td>
+                  <td th:text="${customers.phone}">Ngày tạo</td>
+                  <td th:text="${customers.email}">Vị trí</td>
                   <td>
-                    <a th:href="@{'/edit-customers/' + ${customers.id}}" class="btn btn-primary">Sửa</a>
+                    <a th:href="@{'/edit-customers/' + ${customers.customer_id}}" class="btn btn-primary">Sửa</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a th:href="@{'/delete-customers/' + ${customers.id}}" class="btn btn-danger">Xóa</a>
+                    <a th:href="@{'/delete-customers/' + ${customers.customer_id}}" class="btn btn-danger" onclick="confirmDelete(event)" >Xóa</a>
                   </td>
                 </tr>
               </tbody></table>
+              <!-- Liên kết phân trang -->
+              <div>
+                <p th:if="${page.hasContent()}">
+                  Page <span th:text="${page.number + 1}"></span> of <span th:text="${page.totalPages}"></span>
+                </p>
+
+                <div>
+                  <a th:href="@{/customers(page=${page.number - 1}, size=${page.size}, keyword=${keyword})}"
+                     th:if="${page.hasPrevious()}"
+                     aria-label="Previous page">Trước</a>
+
+                  <a th:href="@{/customers(page=${page.number + 1}, size=${page.size}, keyword=${keyword})}"
+                     th:if="${page.hasNext()}"
+                     aria-label="Next page">Tiếp</a>
+                </div>
+                <p>Tổng số bản ghi: <span th:text="${totalRecords}">(bản ghi)</span></p>
+              </div>
+            </div>
             </div>
           </div>
-        </div>
-
+      </div>
     </section>
   </div>
   <div th:replace="fragments/footer :: footer"></div>
 </div>
-
+<script>
+  function confirmDelete(event) {
+    if (!confirm('Bạn có muốn xóa bản ghi đã chọn không?')) {
+      event.preventDefault(); // Ngăn chặn hành động xóa nếu người dùng không xác nhận
+    }
+  }
+</script>
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/bootstrap.min.js"></script>

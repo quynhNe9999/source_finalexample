@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
 
@@ -23,7 +25,6 @@ public class Customers {
     private String phone;
     @Column(name = "email")
     private String email;
-
 
     public long getCustomer_id() {
         return customer_id;

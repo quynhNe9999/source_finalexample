@@ -29,11 +29,11 @@
     <section class="content-header">
       <h1>
         Sửa khách hàng
-       
+
       </h1>
       <ol class="breadcrumb">
         <li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="customers">quản lý khách hàng</a></li>
+        <li><a href="customers">Quản lý khách hàng</a></li>
         <li class="active">Sửa khách hàng</li>
       </ol>
     </section>
@@ -50,52 +50,33 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form action="#" th:action="@{/edit-customers/{id}(id=${customers.customers_id})}" th:object="${customers}" method="post">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Tên Menu</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Giới thiệu" value="Học Bổng">
+                  <label for="name">Tên khách hàng</label>
+                  <input type="text" class="form-control" id="name" placeholder="Tên khách hàng" value="">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn Menu Cha</label>
-                  <select name="" id="input" class="form-control" required="required">
-                    <option value="">Đào tạo</option>
-                    <option value="">Học bổng</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn Vị trí</label>
-                  <select name="" id="input" class="form-control" required="required">
-                    <option value="">1</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
+                  <label for="address">Địa chỉ khách hàng</label>
+                  <input type="text" class="form-control" id="address" placeholder="Địa chỉ khách hàng" value="">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn trạng thái</label>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="" id="input" value="" checked="checked">
-                      Hiện
-                    </label>
-                    <label>
-                      <input type="radio" name="" id="input" value="" >
-                      Ẩn
-                    </label>
-                  </div>
+                  <label for="phone">Số điện thoại</label>
+                  <input type="number" class="form-control" id="phone" placeholder="Số điện thoại" value="">
                 </div>
-                
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Email" value="">
+                </div>
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Cập nhật khách hàng</button>
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
               </div>
             </form>
           </div>
-       
+
           <!-- /.box -->
 
         </div>
