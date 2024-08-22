@@ -1,24 +1,42 @@
 package com.quynhtadinh.finalexample.service;
 
 import com.quynhtadinh.finalexample.entity.Category;
+import com.quynhtadinh.finalexample.entity.Product;
+import com.quynhtadinh.finalexample.repository.CategoryRepository;
+import com.quynhtadinh.finalexample.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public interface CategoryService {
-    Category getCategoryById(Long id);
+public class CategoryService {
 
-    Category updateCategory(Category category);
+    @Autowired
+    private CategoryRepository categoryRepository;
 
-    void deleteCategoryById(Long id);
+    public Category saveCategory(Category category) {
+        return categoryRepository.save(category);
+    }
 
-    List<Category> getAllCategory();
+    public Category updateCategory(Category category) {
+        return categoryRepository.save(category);
+    }
 
-    Category saveCategory(Category category);
+    public void deleteCategory(Long category_id) {
+        categoryRepository.deleteById(category_id);
+    }
 
-    Page<Category> searchCategories(String searchTerm, Pageable pageable);
+    public Optional<Category> getCategoryById(Long category_id) {
+        return categoryRepository.findById(category_id);
+    }
 
+    public Page<Category> searchCategory(String keyword, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return categoryRepository.findByNameContaining(keyword, pageable);
+    }
 }

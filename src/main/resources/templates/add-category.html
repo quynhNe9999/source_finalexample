@@ -43,9 +43,17 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="#" th:action="@{/add-category}" th:object="${category}"
+            <form role="form" action="#" th:action="@{/category/save}" th:object="${category}"
                   method="post">
               <div class="box-body">
+                <div class="form-group">
+                  <label for="id">ID</label>
+                  <input type="hidden" class="form-control" id="id" placeholder="ID">
+                </div>
+                <div class="form-group">
+                  <label for="category_id">Mã sản phẩm</label>
+                  <input type="text" class="form-control" id="category_id" placeholder="Mã sản phẩm">
+                </div>
                 <div class="form-group">
                   <label for="name">Tên sản phẩm</label>
                   <input type="text" class="form-control" id="name" placeholder="Tên sản phẩm">
@@ -62,38 +70,10 @@
                   <label for="price">Giá sản phẩm</label>
                   <input type="text" class="form-control" id="price" placeholder="Giá sản phẩm">
                 </div>
-<!--                <div class="form-group">-->
-<!--                  <label for="exampleInputEmail1">Chọn banner</label>-->
-<!--                  <div class="radio">-->
-<!--                    <label>-->
-<!--                      <input type="file" name=" " id="input " value="" checked="checked">-->
-<!--                    </label>-->
-<!--                  </div>-->
-<!--                </div>-->
-
-<!--                <div class="form-group">-->
-<!--                  <label for="exampleInputEmail1">Chọn Vị trí</label>-->
-<!--                  <select name="" id="input" class="form-control" required="required">-->
-<!--                    <option value="">Chọn vị trí</option>-->
-<!--                    <option value="">1</option>-->
-<!--                    <option value="">2</option>-->
-<!--                    <option value="">3</option>-->
-<!--                  </select>-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                  <label for="exampleInputEmail1">Chọn trạng thái</label>-->
-<!--                  <div class="radio">-->
-<!--                    <label>-->
-<!--                      <input type="radio" name="" id="input" value="" checked="checked">-->
-<!--                      Hoạt động-->
-<!--                    </label>-->
-<!--                    <label>-->
-<!--                      <input type="radio" name="" id="input" value="" >-->
-<!--                      Không hoạt động-->
-<!--                    </label>-->
-<!--                  </div>-->
-<!--                </div>-->
-                
+                <div class="form-group">
+                  <label for="stock">Cổ phần</label>
+                  <input type="text" class="form-control" id="stock" placeholder="Cổ phần">
+                </div>
               </div>
               <!-- /.box-body -->
 

@@ -1,20 +1,32 @@
 package com.quynhtadinh.finalexample.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+
+@Data
 @Table(name = "employees")
 public class Employees {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employee_id;
-
+    @Column(name = "employee_id")
+    private long employee_id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "address")
     private String address;
+    @Column(name = "phone")
     private String phone;
+    @Column(name = "email")
     private String email;
+    @Column(name = "position")
     private String position;
+    @Column(name = "dateOfBirth")
     private Date dateOfBirth;
 
     @ManyToOne

@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     @Autowired
     private UserRepository userRepository;
 
-    public UserDetailsServiceImpl(UserRepository userRepository2) {
+    public UserDetailsServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
 	}
 
@@ -34,7 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : user.getRoles()){
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole_name()));
-            
+
         }
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities(user.getRoles()));
@@ -45,10 +45,10 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		  Set<GrantedAuthority> authorities = new HashSet<>();
 	        for (Role role : roles) {
 	            authorities.add(new SimpleGrantedAuthority(role.getRole_name()));
-//	            for (User user : role.getUsers()) {
-//	                authorities.add(new SimpleGrantedAuthority(user.getUsername()));
-//	            }
+	            for (User user : role.getUsers()) {
+	                authorities.add(new SimpleGrantedAuthority(user.getUsername()));
+	            }
 	        }
 	        return authorities;
-	    }	
+	    }
 }

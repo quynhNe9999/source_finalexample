@@ -1,28 +1,42 @@
 package com.quynhtadinh.finalexample.service;
 
+import com.quynhtadinh.finalexample.entity.Category;
 import com.quynhtadinh.finalexample.entity.Customers;
+import com.quynhtadinh.finalexample.repository.CategoryRepository;
+import com.quynhtadinh.finalexample.repository.CustomersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public interface CustomersService {
-    Customers getCustomersById(Long id);
+public class CustomersService {
 
-    Customers updateCustomers(Customers customers);
+    @Autowired
+    private CustomersRepository customersRepository;
 
-    void deleteCustomersById(Long id);
+    public Customers saveCustomers(Customers category) {
+        return customersRepository.save(category);
+    }
 
-    List<Customers> getAllCustomers();
+    public Customers updateCustomers(Customers category) {
+        return customersRepository.save(category);
+    }
 
-    Customers saveCustomers(Customers customers);
+    public void deleteCustomers(Long id) {
+        customersRepository.deleteById(id);
+    }
 
-    Optional<Customers> getUserById(Long id);
+    public Optional<Customers> getCustomersById(Long id) {
+        return customersRepository.findById(id);
+    }
 
-    Customers saveUser(Customers customers);
-
-    void deleteUserById(Long id);
-
-    Customers updateCustomers(Long id, Customers newCustomers);
+    public Page<Customers> searchCustomers(String keyword, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return customersRepository.findByNameContaining(keyword, pageable);
+    }
 }

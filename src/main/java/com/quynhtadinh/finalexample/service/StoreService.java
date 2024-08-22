@@ -1,20 +1,48 @@
 package com.quynhtadinh.finalexample.service;
 
+import com.quynhtadinh.finalexample.entity.Product;
 import com.quynhtadinh.finalexample.entity.Store;
+import com.quynhtadinh.finalexample.repository.ProductRepository;
+import com.quynhtadinh.finalexample.repository.StoreRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public interface StoreService {
+public class StoreService {
+    @Autowired
+    private StoreRepository storeRepository;
 
-    Store getStoreById(Long id);
+    public void saveStore(Store store) {
+        storeRepository.save(store);
+    }
 
-    Store updateStore(Store store);
+    public Store updateStore(Store store) {
+        return storeRepository.save(store);
+    }
 
-    void deleteCustomersById(Long id);
+    public void deleteStore(Long id) {
+        storeRepository.deleteById(id);
+    }
 
-    List<Store> getAllStore();
+    public Optional<Store> getStoreById(Long id) {
+        return storeRepository.findById(id);
+    }
 
-    Store saveStore(Store store);
+    public Page<Store> searchStores(String keyword, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return storeRepository.findByNameContaining(keyword, pageable);
+    }
+
+    public List<Store> getAllStores() {
+        return storeRepository.findAll();
+    }
+
+
 }

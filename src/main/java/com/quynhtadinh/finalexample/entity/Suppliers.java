@@ -1,25 +1,36 @@
 package com.quynhtadinh.finalexample.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+
 @Table(name = "suppliers")
 public class Suppliers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer supplier_id;
-
+    @JoinColumn(name = "supplier_id")
+    private long supplier_id;
+    @JoinColumn(name = "name")
     private String name;
+    @JoinColumn(name = "address")
     private String address;
+    @JoinColumn(name = "phone")
     private String phone;
+    @JoinColumn(name = "email")
     private String email;
+    @JoinColumn(name = "status")
     private String status;
 
-    public Integer getSupplier_id() {
+    public long getSupplier_id() {
         return supplier_id;
     }
 
-    public void setSupplier_id(Integer supplier_id) {
+    public void setSupplier_id(long supplier_id) {
         this.supplier_id = supplier_id;
     }
 
@@ -54,6 +65,7 @@ public class Suppliers {
     public void setEmail(String email) {
         this.email = email;
     }
+
     public String getStatus() {
         return status;
     }

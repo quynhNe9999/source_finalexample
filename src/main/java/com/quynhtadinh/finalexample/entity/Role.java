@@ -1,23 +1,30 @@
 package com.quynhtadinh.finalexample.entity;
 
+import lombok.Data;
+
+import javax.persistence.*;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-
 @Entity
+//@Data
 @Table(name = "role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long role_id;
+
+    @Column(name = "role_name")
     private String role_name;
 
-    public Long getRole_id() {
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users; // Đảm bảo rằng tên thuộc tính khớp với tên trong lớp User
+
+    @Override
+    public String toString() {
+        return this.role_name; // Returns the role name, e.g., "ROLE_ADMIN"
+    }
+
+public Long getRole_id() {
         return role_id;
     }
 
@@ -33,8 +40,11 @@ public class Role {
         this.role_name = role_name;
     }
 
-    @Override
-    public String toString() {
-        return this.role_name; // Returns the role name, e.g., "ROLE_ADMIN"
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

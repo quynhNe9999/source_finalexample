@@ -1,19 +1,27 @@
 package com.quynhtadinh.finalexample.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 @Entity
+@Data
 @Table(name = "orders")
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JoinColumn(name = "order_id")
     private long order_id;
-
+    @JoinColumn(name = "orderDate")
     private Date orderDate;
+    @JoinColumn(name = "totalAmount")
     private Float totalAmount;
+    @JoinColumn(name = "status")
     private String status;
 
     @ManyToOne

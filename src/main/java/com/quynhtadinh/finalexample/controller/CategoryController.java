@@ -2,55 +2,60 @@ package com.quynhtadinh.finalexample.controller;
 
 import com.quynhtadinh.finalexample.entity.Category;
 import com.quynhtadinh.finalexample.service.CategoryService;
+import com.quynhtadinh.finalexample.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.thymeleaf.model.IModel;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/category")
 public class CategoryController {
+
 	@Autowired
-	private final CategoryService categoryService;
+	private CategoryService categoryService;
 
-	public CategoryController(CategoryService categoryService) {
-		this.categoryService = categoryService;
-	}
-
-	@GetMapping("/category")
-	public String getStringCategory(Model model) {
-		List<Category> listCategories = categoryService.getAllCategory();
+	@GetMapping
+	public String listProducts(@RequestParam(name = "keyword", required = false) String keyword,
+							   @RequestParam(name = "page", defaultValue = "0") int page,
+							   Model model) {
+		Page<Category> listCategories = categoryService.searchCategory(keyword, page, 10);
+		if (listCategories == null || listCategories.getContent().isEmpty()) {
+			model.addAttribute("errorMessage", "No categories found.");
+		}
 		model.addAttribute("listCategories", listCategories);
 		return "category";
 	}
-	@GetMapping("/add-category")
-	public String showNewCategoryPage(Model model) {
-		Category category = new Category();
-		model.addAttribute("category", category);
+
+	@GetMapping("/add")
+	public String showAddCategoryForm(Model model) {
+		model.addAttribute("category", new Category());
 		return "add-category";
 	}
-	@PostMapping("/add-category")
-	public String saveProduct(@ModelAttribute("category") Category category) {
+
+	@PostMapping("/save")
+	public String saveCategory(@ModelAttribute("category") Category category) {
 		categoryService.saveCategory(category);
 		return "redirect:/category";
 	}
-	@GetMapping("/edit-category/{id}")
-	public ModelAndView showEditProductPage(@PathVariable(name = "category_id") Long category_id, Model model) {
-		ModelAndView mav = new ModelAndView("edit_category");
-		Category category = categoryService.getCategoryById(category_id);
-		mav.addObject("category", category);
-		return mav;
+
+	@GetMapping("/edit/{id}")
+	public String showEditCategoryForm(@PathVariable("id") Long id, Model model) {
+		Category category = categoryService.getCategoryById(id).orElseThrow(() -> new IllegalArgumentException("Invalid category Id:" + id));
+		model.addAttribute("category", category);
+		return "edit-category";
+	}
+
+	@PostMapping("/update/{id}")
+	public String updateCategory(@PathVariable("id") Long id, @ModelAttribute("category") Category category) {
+		categoryService.updateCategory(category);
+		return "redirect:/category";
 	}
 
 	@GetMapping("/delete/{id}")
-	public String deleteProduct(@PathVariable(name = "category_id") Long category_id) {
-		categoryService.deleteCategoryById(category_id);;
+	public String deleteCategory(@PathVariable("id") Long id) {
+		categoryService.deleteCategory(id);
 		return "redirect:/category";
 	}
 }

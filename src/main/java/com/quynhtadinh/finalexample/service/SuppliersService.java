@@ -1,20 +1,39 @@
 package com.quynhtadinh.finalexample.service;
 
 import com.quynhtadinh.finalexample.entity.Suppliers;
+import com.quynhtadinh.finalexample.repository.SuppliersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
-public interface SuppliersService {
+public class SuppliersService {
 
-    Suppliers getSuppliersById(Long id);
+    @Autowired
+    private SuppliersRepository suppliersRepository;
 
-    Suppliers updateSuppliers(Suppliers suppliers);
+    public Suppliers saveSuppliers(Suppliers Suppliers) {
+        return suppliersRepository.save(Suppliers);
+    }
 
-    void deleteSuppliersById(Long id);
+    public Suppliers updateSuppliers(Suppliers Suppliers) {
+        return suppliersRepository.save(Suppliers);
+    }
 
-    List<Suppliers> getAllSuppliers();
+    public void deleteSuppliers(Long id) {
+        suppliersRepository.deleteById(id);
+    }
 
-    Suppliers saveSuppliers(Suppliers suppliers);
+    public Optional<Suppliers> getSuppliersById(Long id) {
+        return suppliersRepository.findById(id);
+    }
+
+    public Page<Suppliers> searchSuppliers(String keyword, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return suppliersRepository.findByNameContaining(keyword, pageable);
+    }
 }

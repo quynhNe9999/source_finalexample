@@ -1,16 +1,24 @@
 package com.quynhtadinh.finalexample.entity;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+
+@Data
 @Table(name = "order_details")
 public class OrderDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JoinColumn(name = "order_detail_id")
     private long order_detail_id;
-
+    @JoinColumn(name = "quantity")
     private long quantity;
+    @JoinColumn(name = "price")
     private Float price;
 
     @ManyToOne
@@ -20,6 +28,7 @@ public class OrderDetails {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Category product;
+
 
     public long getOrder_detail_id() {
         return order_detail_id;

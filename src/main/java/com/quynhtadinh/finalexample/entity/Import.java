@@ -1,36 +1,35 @@
 package com.quynhtadinh.finalexample.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Data
 @Table(name = "import")
 public class Import {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer importID;
-
+    @JoinColumn(name = "import_id")
+    private long import_id;
+    @JoinColumn(name = "importDate")
     private Date importDate;
+    @JoinColumn(name = "totalCost")
     private Float totalCost;
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")
     private Suppliers supplier;
 
-    public Integer getImportID() {
-        return importID;
+    public Suppliers getSupplier() {
+        return supplier;
     }
 
-    public void setImportID(Integer importID) {
-        this.importID = importID;
-    }
-
-    public Date getImportDate() {
-        return importDate;
-    }
-
-    public void setImportDate(Date importDate) {
-        this.importDate = importDate;
+    public void setSupplier(Suppliers supplier) {
+        this.supplier = supplier;
     }
 
     public Float getTotalCost() {
@@ -41,12 +40,21 @@ public class Import {
         this.totalCost = totalCost;
     }
 
-    public Suppliers getSupplier() {
-        return supplier;
+    public Date getImportDate() {
+        return importDate;
     }
 
-    public void setSupplier(Suppliers supplier) {
-        this.supplier = supplier;
+    public void setImportDate(Date importDate) {
+        this.importDate = importDate;
     }
+
+    public long getImport_id() {
+        return import_id;
+    }
+
+    public void setImport_id(long import_id) {
+        this.import_id = import_id;
+    }
+
 }
 

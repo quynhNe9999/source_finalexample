@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách sản phẩm</title>
+</head>
+<body>
+<form action="#" th:action="@{/products}" method="get">
+    <input type="text" name="keyword" placeholder="Tìm kiếm sản phẩm" />
+    <button type="submit">Tìm kiếm</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Tên</th>
+        <th>Mô tả</th>
+        <th>Giá</th>
+        <th>Số lượng</th>
+        <th>Thao tác</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${productPage.getContent()}">
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.stock}"></td>
+        <td>
+            <a th:href="@{/products/edit/{id}(id=${product.id})}">Sửa</a>
+            <a th:href="@{/products/delete/{id}(id=${product.id})}" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <span>Trang hiện tại: <span th:text="${productPage.number + 1}"></span> / <span th:text="${productPage.totalPages}"></span></span>
+    <a th:href="@{/products(page=${productPage.number - 1})}" th:if="${productPage.hasPrevious()}">Trước</a>
+    <a th:href="@{/products(page=${productPage.number + 1})}" th:if="${productPage.hasNext()}">Sau</a>
+</div>
+</body>
+</html>

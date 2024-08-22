@@ -37,12 +37,12 @@
 			<!-- Default box -->
 			<div class="col-xs-12">
 				<div class="box">
+					<form action="#" th:action="@{/employees}" method="get">
 					<div class="box-header">
-						<a href="add-employees" class="btn btn-success">+Thêm mới Nhân viên</a>
-
+						<a href="employees/add" class="btn btn-success">+Thêm mới Nhân viên</a>
 						<div class="box-tools">
 							<div class="input-group input-group-sm" style="width: 150px;">
-								<input type="text" name="table_search" class="form-control pull-right" placeholder="Tìm kiếm">
+								<input type="text" name="keyword" class="form-control pull-right" placeholder="Tìm kiếm">
 
 								<div class="input-group-btn">
 									<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
@@ -50,133 +50,97 @@
 							</div>
 						</div>
 					</div>
+					</form>
 					<!-- /.box-header -->
 					<div class="box-body table-responsive no-padding">
 		<table  class="table table-hover">
-<!--			<thead>-->
-<!--				<tr>-->
-<!--					<th>-->
-<!--						<a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">-->
-<!--							Employee First Name</a>-->
-<!--					</th>-->
-<!--					<th>-->
-<!--					<a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">-->
-<!--							Employee Last Name</a>-->
-<!--					</th>-->
-<!--					<th>-->
-<!--					<a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">-->
-<!--							Employee Email</a>-->
-<!--					</th>-->
-<!--					<th> Actions </th>-->
-<!--				</tr>-->
-<!--			</thead>-->
 			<tbody>
-			<tr>
-<!--				<td>Mã nhân viên </td>-->
-				<td>Tên Nhân viên</td>
-				<td>Địa chỉ</td>
-				<td>Số điện thoại</td>
-				<td>Email</td>
-				<td>Vị trí</td>
-				<td>Ngày Sinh</td>
-				<td>Mã cửa hàng</td>
-				<td>Chức năng</td>
-			</tr>
-			<tr>
-				<!--				<td>Mã nhân viên </td>-->
-				<td>Tạ Đình Quỳnh</td>
-				<td>Thanh oai, Hà Nội</td>
-				<td>0984368800</td>
-				<td>tdquynh09@gmail.com</td>
-				<td>Nhân Viên bán hàng</td>
-				<td>09-03-2002</td>
-				<td>W1</td>
-				<td>
-					<a href="" class="btn btn-primary">Sửa</a>
-					&nbsp;&nbsp;&nbsp;
-					<a href="" class="btn btn-danger">Xóa</a>
-				</td>
-			<tr>
-				<!--				<td>Mã nhân viên </td>-->
-				<td>Nguyen Van A</td>
-				<td>Hà đông, Hà Nội</td>
-				<td>012369825</td>
-				<td>nam02@gmail.com</td>
-				<td>Nhân Viên</td>
-				<td>15-08-2002</td>
-				<td>W2</td>
-				<td>
-					<a href="" class="btn btn-primary">Sửa</a>
-					&nbsp;&nbsp;&nbsp;
-					<a href="" class="btn btn-danger">Xóa</a>
-				</td>
-			<tr>
-				<!--				<td>Mã nhân viên </td>-->
-				<td>Nguyễn Văn B</td>
-				<td>Hà Nội</td>
-				<td>0980544500</td>
-				<td>Buad123@gmail.com</td>
-				<td>Quản lý</td>
-				<td>02-03-1998</td>
-				<td>W1</td>
-				<td>
-					<a href="" class="btn btn-primary">Sửa</a>
-					&nbsp;&nbsp;&nbsp;
-					<a href="" class="btn btn-danger">Xóa</a>
-				</td>
-			<tr>
-				<!--				<td>Mã nhân viên </td>-->
-				<td>Đỗ Văn A</td>
-				<td>Thanh oai</td>
-				<td>0369545243</td>
-				<td>dovana@gmail.com</td>
-				<td>Nhân Viên bán hàng</td>
-				<td>02-05-2000</td>
-				<td>W1</td>
-				<td>
-					<a href="" class="btn btn-primary">Sửa</a>
-					&nbsp;&nbsp;&nbsp;
-					<a href="" class="btn btn-danger">Xóa</a>
-				</td>
-			</tr>
-<!--				<tr th:each="employees : ${listEmployees}">-->
-<!--					<td th:text="${employees.name}"></td>-->
-<!--					<td th:text="${employees.address}"></td>-->
-<!--					<td th:text="${employees.phone}"></td>-->
-<!--					<td th:text="${employees.email}"></td>-->
-<!--					<td th:text="${employees.position}"></td>-->
-<!--					<td th:text="${employees.dateOfBirth}"></td>-->
+<!--			<tr>-->
+<!--&lt;!&ndash;				<td>Mã nhân viên </td>&ndash;&gt;-->
+<!--				<td>Tên Nhân viên</td>-->
+<!--				<td>Địa chỉ</td>-->
+<!--				<td>Số điện thoại</td>-->
+<!--				<td>Email</td>-->
+<!--				<td>Vị trí</td>-->
+<!--				<td>Ngày Sinh</td>-->
+<!--				<td>Mã cửa hàng</td>-->
+<!--				<td>Chức năng</td>-->
+<!--			</tr>-->
+<!--			<tr>-->
+<!--				&lt;!&ndash;				<td>Mã nhân viên </td>&ndash;&gt;-->
+<!--				<td>Tạ Đình Quỳnh</td>-->
+<!--				<td>Thanh oai, Hà Nội</td>-->
+<!--				<td>0984368800</td>-->
+<!--				<td>tdquynh09@gmail.com</td>-->
+<!--				<td>Nhân Viên bán hàng</td>-->
+<!--				<td>09-03-2002</td>-->
+<!--				<td>W1</td>-->
+<!--				<td>-->
+<!--					<a href="" class="btn btn-primary">Sửa</a>-->
+<!--					&nbsp;&nbsp;&nbsp;-->
+<!--					<a href="" class="btn btn-danger">Xóa</a>-->
+<!--				</td>-->
+<!--			<tr>-->
+<!--				&lt;!&ndash;				<td>Mã nhân viên </td>&ndash;&gt;-->
+<!--				<td>Nguyen Van A</td>-->
+<!--				<td>Hà đông, Hà Nội</td>-->
+<!--				<td>012369825</td>-->
+<!--				<td>nam02@gmail.com</td>-->
+<!--				<td>Nhân Viên</td>-->
+<!--				<td>15-08-2002</td>-->
+<!--				<td>W2</td>-->
+<!--				<td>-->
+<!--					<a href="" class="btn btn-primary">Sửa</a>-->
+<!--					&nbsp;&nbsp;&nbsp;-->
+<!--					<a href="" class="btn btn-danger">Xóa</a>-->
+<!--				</td>-->
+<!--			<tr>-->
+<!--				&lt;!&ndash;				<td>Mã nhân viên </td>&ndash;&gt;-->
+<!--				<td>Nguyễn Văn B</td>-->
+<!--				<td>Hà Nội</td>-->
+<!--				<td>0980544500</td>-->
+<!--				<td>Buad123@gmail.com</td>-->
+<!--				<td>Quản lý</td>-->
+<!--				<td>02-03-1998</td>-->
+<!--				<td>W1</td>-->
+<!--				<td>-->
+<!--					<a href="" class="btn btn-primary">Sửa</a>-->
+<!--					&nbsp;&nbsp;&nbsp;-->
+<!--					<a href="" class="btn btn-danger">Xóa</a>-->
+<!--				</td>-->
+<!--			<tr>-->
+<!--				&lt;!&ndash;				<td>Mã nhân viên </td>&ndash;&gt;-->
+<!--				<td>Đỗ Văn A</td>-->
+<!--				<td>Thanh oai</td>-->
+<!--				<td>0369545243</td>-->
+<!--				<td>dovana@gmail.com</td>-->
+<!--				<td>Nhân Viên bán hàng</td>-->
+<!--				<td>02-05-2000</td>-->
+<!--				<td>W1</td>-->
+<!--				<td>-->
+<!--					<a href="" class="btn btn-primary">Sửa</a>-->
+<!--					&nbsp;&nbsp;&nbsp;-->
+<!--					<a href="" class="btn btn-danger">Xóa</a>-->
+<!--				</td>-->
+<!--			</tr>-->
+				<tr th:each="employees : ${listEmployees.getContent()}">
+					<td th:text="${employees.name}"></td>
+					<td th:text="${employees.address}"></td>
+					<td th:text="${employees.phone}"></td>
+					<td th:text="${employees.email}"></td>
+					<td th:text="${employees.position}"></td>
+					<td th:text="${employees.dateOfBirth}"></td>
 
-<!--					<td> <a th:href="@{/edit-employees/{id}(id=${employees.id})}" class="btn btn-primary">Update</a>-->
-<!--						&nbsp;&nbsp;&nbsp;-->
-<!--						<a th:href="@{/deleteEmployees/{id}(id=${employees.id})}" class="btn btn-danger">Delete</a>-->
-<!--					</td>-->
-<!--				</tr>-->
-			</tbody>
-		</table>
-		
-<!--		<div th:if = "${totalPages > 1}">-->
-<!--			<div class = "row col-sm-10">-->
-<!--				<div class = "col-sm-2">-->
-<!--					Total Rows: [[${totalItems}]] -->
-<!--				</div>-->
-<!--				<div class = "col-sm-1">-->
-<!--					<span th:each="i: ${#numbers.sequence(1, totalPages)}">-->
-<!--						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>-->
-<!--						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;-->
-<!--					</span>-->
-<!--				</div>-->
-<!--				<div class = "col-sm-1">-->
-<!--					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>-->
-<!--					<span th:unless="${currentPage < totalPages}">Next</span>-->
-<!--				</div>-->
-<!--				-->
-<!--				 <div class="col-sm-1">-->
-<!--    				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>-->
-<!--					<span th:unless="${currentPage < totalPages}">Last</span>-->
-<!--   				 </div>-->
-<!--			</div>-->
-<!--		</div>-->
+					<td> <a th:href="@{/employees/edit{id}(id=${employees.id})}" class="btn btn-primary">Sửa</a>
+						<a th:href="@{/employees/delete{id}(id=${employees.id})}" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">Xóa</a>
+					</td>
+				</tr>
+			</tbody></table>
+			<div>
+				<span>Trang hiện tại: <span th:text="${listEmployees.number + 1}"></span> / <span th:text="${listEmployees.totalPages}"></span></span>
+				<a th:href="@{/employees(page=${listEmployees.number - 1})}" th:if="${listEmployees.hasPrevious()}">Trước</a>
+				<a th:href="@{/employees(page=${listEmployees.number + 1})}" th:if="${listEmployees.hasNext()}">Sau</a>
+			</div>
 	</div>
 	<!-- /.box-body -->
 	</div>

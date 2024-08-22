@@ -34,19 +34,21 @@
 
       <div class="col-xs-12">
           <div class="box">
+            <form action="#" th:action="@{/store}" method="get">
             <div class="box-header">
-           <a href="add-user" class="btn btn-success">+Thêm mới cửa hàng</a>
+                <a href="store/add" class="btn btn-success">+Thêm mới cửa hàng</a>
+                <div class="box-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Tìm kiếm">
 
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Tìm kiếm">
-
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    <div class="input-group-btn">
+                      <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    </div>
                   </div>
                 </div>
-              </div>
             </div>
+            </form>
+
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <tbody><tr>
@@ -57,19 +59,25 @@
                   <th>Trạng thái</th>
                   <th>Tùy chọn</th>
                 </tr>
-                <tr th:each="store : ${listStores}">
+                <tr th:each="store : ${listStores.getContent()}">
                   <td th:text="${store.store_id}">Mã cửa hàng</td>
                   <td th:text="${store.name}">Tên cửa hàng</td>
                   <td th:text="${store.address}">Địa chỉ</td>
                   <td th:text="${store.phone}">Số điện thoại</td>
                   <td th:text="${store.status}"> Trạng thái</td>
                   <td>
-                    <a th:href="@{'/edit-store/' + ${store.id}}" class="btn btn-primary">Sửa</a>
-                    &nbsp;&nbsp;&nbsp;
-                    <a th:href="@{'/delete-store/' + ${store.id}}" class="btn btn-danger">Xóa</a>
+                    <a th:href="@{/store/edit/{id}(id=${store.id})}" class="btn btn-primary">Sửa</a>
+                    &nbsp;&nbsp;&nbsp
+                    <a th:href="@{/store/delete/{id}(id=${store.id})}" class="btn btn-danger"onclick=" return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">Xóa</a>
                   </td>
                 </tr>
               </tbody></table>
+
+              <div>
+                <span>Trang hiện tại: <span th:text="${listStores.number + 1}"></span> / <span th:text="${listStores.totalPages}"></span></span>
+                <a th:href="@{/store(page=${listStores.number - 1})}" th:if="${listStores.hasPrevious()}">Trước</a>
+                <a th:href="@{/store(page=${listStores.number + 1})}" th:if="${listStores.hasNext()}">Sau</a>
+              </div>
             </div>
           </div>
         </div>

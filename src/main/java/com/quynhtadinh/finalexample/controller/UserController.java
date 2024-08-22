@@ -1,10 +1,16 @@
 package com.quynhtadinh.finalexample.controller;
 
+import java.io.IOException;
 import java.security.Principal;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import com.quynhtadinh.finalexample.entity.Role;
+import com.quynhtadinh.finalexample.repository.RoleRepository;
+import com.quynhtadinh.finalexample.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,11 +23,15 @@ import com.quynhtadinh.finalexample.entity.User;
 import com.quynhtadinh.finalexample.security.SecurityService;
 import com.quynhtadinh.finalexample.service.UserService;
 import com.quynhtadinh.finalexample.validator.UserValidator;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Autowired
     private SecurityService securityService;
@@ -30,6 +40,12 @@ public class UserController {
     private UserValidator userValidator;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private UserRepository userRepository;
+
+    public UserController(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -71,77 +87,60 @@ public class UserController {
 
         return "index";
     }
-//
-//    @RequestMapping(value = "/user", method = RequestMethod.GET)
-//    public String UserList(Model model) {
-//        model.addAttribute("userForm", new User());
-//
+
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+	public ModelAndView home(@RequestParam(required = false, name = "keyword" )String keyword,
+//                             @RequestParam(name = "keyword") Optional<String> keyword,
+//                             @RequestParam(required = false) String keyword,
+                             @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, Model model
+			, Pageable pageable) throws IOException {
+        pageable = PageRequest.of(page, size);
+
+        Page<User> listUsers;
+        // = userService.getAllUser(page,size);
+        // tìm kiếm
+//        if (keyword.isPresent()) {
+            if (keyword != null && !keyword.isEmpty()) {
+                listUsers =  userService.searchUser(Optional.of(keyword), pageable);
+        } else {
+            listUsers = userService.findAll(pageable);
+        }
+//        Page<User> result = searchUser(Optional.of("john"), PageRequest.of(0, 10));
+
+        Page<User> userPage = userService.findAll(pageable);
+        long countAllUsers = userRepository.count();
+        model.addAttribute("totalRecords", countAllUsers);
+        model.addAttribute("users", userPage.getContent());
+        model.addAttribute("page", userPage);
+        model.addAttribute("keyword", keyword);
+        Map<String, Object> modelMap = new HashMap<>();
+        modelMap.put("listUsers", listUsers);
+        return new ModelAndView("user", modelMap);
+		}
+	
+//    @GetMapping("/user")
+//    public String home(Model model){
+//        List<User> listUsers = userService.findAll(Pageable pageable);
+////        System.out.println(users);
+//        model.addAttribute("listUsers",listUsers);
 //        return "user";
 //    }
-//    @RequestMapping(value = "/user", method = RequestMethod.GET)
-//	public ModelAndView home(@RequestParam(name = "keyword") Optional<String> keyword,
-//			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, Model model
-//			,Pageable pageable) throws IOException {
-//
-//			 pageable = PageRequest.of(page, size);
-//			Page<User> listUsers;
-//			// = userService.getAllUser(page,size);
-//			// tìm kiếm
-//			if (keyword.isPresent()) {
-//				listUsers =  userService.searchSinhVien(keyword, pageable);
-//
-//				// listUsers = userService.findAllByFirstNameContaining(firstName.get(),
-//				// pageable);
-//			} else {
-//				listUsers = userService.findAll(pageable);
-//			}
-//			Map<String, Object> modelMap = new HashMap<>();
-//			modelMap.put("users", listUsers);
-//			return new ModelAndView("user", modelMap);
-//		}
-	
-    @GetMapping("/user")
-    public String home(Model model){
-        List<User> listUsers = userService.findAll();
-//        System.out.println(users);
-        model.addAttribute("listUsers",listUsers);
-        return "user"; // return file 
-    }
-//    @GetMapping("/{id}")
-//    public String getUserById(@PathVariable Long id, Model model) {
-//        Optional<User> user = userService.getUserById(id);
-//        if (user.isPresent()) {
-//            model.addAttribute("user", user.get());
-//            return "users/detail";
-//        } else {
-//            return "redirect:/user";
-//        }
-//    }
 
-    // Hiển thị form thêm người dùng
     @GetMapping("/add-user")
     public String showAddUserForm(Model model) {
         // Tạo một đối tượng User trống và truyền vào model để binding với form
         model.addAttribute("user", new User());
-        return "add-user"; // Tên của template Thymeleaf (ví dụ add-user.html)
+        return "add-user";
     }
 
     @PostMapping("/add-user")
-    public String addUser(@ModelAttribute("user") User user, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "add-user";
-        }
-
-        if (user.getPassword() == null || user.getPassword().isEmpty()) {
-            result.rejectValue("password", "error.user", "Password cannot be null or empty");
-            return "add-user";
-        }
-
-        if (!user.getPassword().equals(user.getPasswordConfirm())) {
-            result.rejectValue("passwordConfirm", "error.user", "Passwords do not match");
-            return "add-user";
-        }
-
+    public String addUser(@ModelAttribute("user") User user, @RequestParam("roles") Long roleId, BindingResult result, Model model) {
+        Role selectedRole = roleRepository.findById(roleId)
+                .orElseThrow(() -> new IllegalArgumentException("Quyền không hợp lệ: " + roleId));
+        // Gán quyền duy nhất cho người dùng
+        user.setRoles(Collections.singleton(selectedRole));
+        // Tiếp tục với logic xử lý người dùng
+        model.addAttribute("message", "User added successfully with role: " + selectedRole.getRole_name());
         userService.save(user);
         return "redirect:/users";
     }
@@ -159,6 +158,19 @@ public class UserController {
 
     @PostMapping("/edit-user/{id}")
     public String updateUser(@PathVariable Long id, @ModelAttribute("user") User newUser) {
+        Role selectedRole = roleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Quyền không hợp lệ: " + id));
+        // Gán quyền duy nhất cho người dùng
+        newUser.setRoles(Collections.singleton(selectedRole));
+
+        User existingUser = userService.getUserById(id).get();
+        // Cập nhật thông tin người dùng
+        existingUser.setUsername(newUser.getUsername());
+        existingUser.setEmail(newUser.getEmail());
+        existingUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+        existingUser.setRoles(newUser.getRoles());
+        existingUser.setStatus(newUser.getStatus());
+
         userService.updateUser(id, newUser);
         return "redirect:/user";
     }
@@ -168,48 +180,6 @@ public class UserController {
         userService.deleteUserById(id);
         return "redirect:/user";
     }
-    
-//    //them sv
-//    @RequestMapping(value = "/addUser", method = RequestMethod.GET)
-//    public String  viewAddUser()
-//    {
-//        return "addUser";
-//    }
-//
-//    @RequestMapping(value = "/insertUser", method = RequestMethod.POST)
-//    public String insertUser(@ModelAttribute("insertUser") User user){
-//    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//	    String encodedPassword = passwordEncoder.encode(user.getPassword());
-//	    user.setPassword(encodedPassword);
-//        userService.insert(user);
-//        return "redirect:/user";
-//    }
-//
-//    //update sv
-////    @PostMapping("/editUser/updateUser")
-//    @RequestMapping(value = "/editUser/updateUser", method = RequestMethod.POST)
-//
-//    public String updateUser( @ModelAttribute("user") User user){
-//        userService.update( user);
-//        return "redirect:/user";
-//    }
-////    @GetMapping("/editUser/{id}")
-//    @RequestMapping(value = "/editUser/{id}", method = RequestMethod.GET)
-//    public String  viewUpdateUser(@PathVariable("id") Long id,User user, Model model)
-//    {
-//
-//        model.addAttribute("user", userService.findById(id));
-//        return "updateUser";
-//
-//    }
-//
-//    //xoa sv
-////    @GetMapping("/deleteUser/{id}")
-//    @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.GET)
-//    public String deleteUser(@PathVariable("id") Long id){
-//        userService.delete(id);
-//        return "redirect:/user";
-//    }
     
 }
     

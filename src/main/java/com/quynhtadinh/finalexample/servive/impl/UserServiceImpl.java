@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +39,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> findAll() {
-		return userRepository.findAll();
+	public Page<User> findAll(Pageable pageable) {
+		return userRepository.findAll(pageable);
 	}
 
 	@Override
@@ -47,12 +49,10 @@ public class UserServiceImpl implements UserService {
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		}
 		return userRepository.save(user);
-
-    }
+	}
 
 	@Override
 	public boolean delete(long id) {
-		// TODO Auto-generated method stub
 		Optional<User> user = userRepository.findById(id);
 		if (user.isPresent()) {
 			userRepository.deleteById(id);
@@ -63,17 +63,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User update(User user) {
-		// TODO Auto-generated method stub
 		User updateUser = userRepository.findById(user.getId()).orElse(null);
-		user.setUsername(user.getUsername());
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(user.getPassword());
-		user.setPassword(encodedPassword);
-//	    updateUser.setPasswordConfirm(user.getPasswordConfirm());
-//	    updateUser.setRoles(user.getRoles());
-		return userRepository.save(user);
+		if (updateUser != null) {
+			updateUser.setUsername(user.getUsername());
+			updateUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+			// updateUser.setPasswordConfirm(user.getPasswordConfirm());
+			// updateUser.setRoles(user.getRoles());
+			return userRepository.save(updateUser);
+		}
+		return null;
 	}
-
 
 	@Override
 	public List<User> getAllUsers() {
@@ -102,7 +101,7 @@ public class UserServiceImpl implements UserService {
 				.map(user -> {
 					user.setUsername(newUser.getUsername());
 					user.setEmail(newUser.getEmail());
-					user.setPassword(newUser.getPassword());
+					user.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
 					user.setStatus(newUser.getStatus());
 					user.setDateTao(newUser.getDateTao());
 					user.setRoles(newUser.getRoles());
@@ -112,5 +111,11 @@ public class UserServiceImpl implements UserService {
 					newUser.setId(id);
 					return userRepository.save(newUser);
 				});
+	}
+
+	@Override
+	public Page<User> searchUser(Optional<String> keyword, Pageable pageable) {
+		String searchKeyword = keyword.orElse(""); // Nếu không có từ khóa, tìm kiếm với chuỗi rỗng
+		return userRepository.findByUsernameContainingOrEmailContaining(searchKeyword, searchKeyword, pageable);
 	}
 }

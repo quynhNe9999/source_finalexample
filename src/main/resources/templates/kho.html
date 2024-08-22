@@ -41,12 +41,12 @@
       <!-- Default box -->
       <div class="col-xs-12">
           <div class="box">
-            <div class="box-header">
-           <a href="add-kho" class="btn btn-success">+Thêm mới Nhập xuất</a>
-
+              <form action="#" th:action="@{/kho}" method="get">
+              <div class="box-header">
+                <a href="add-kho" class="btn btn-success">+Thêm mới Nhập xuất</a>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                  <input type="text" name="keyword" th:value="${keyword}" class="form-control pull-right" placeholder="Search">
 
                   <div class="input-group-btn">
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
@@ -54,7 +54,9 @@
                 </div>
               </div>
             </div>
-            <!-- /.box-header -->
+              </form>
+
+              <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
 		<table  class="table table-hover">
 <!--			<thead>-->
@@ -102,6 +104,22 @@
             </tr>
 			</tbody>
 		</table>
+                <!-- Liên kết phân trang -->
+                <div>
+                    <p th:if="${page.hasContent()}">
+                        Page <span th:text="${page.number + 1}"></span> of <span th:text="${page.totalPages}"></span>
+                    </p>
+
+                    <div>
+                        <a th:href="@{/kho(page=${page.number - 1}, size=${page.size}, keyword=${keyword})}"
+                           th:if="${page.hasPrevious()}"
+                           aria-label="Previous page">Previous</a>
+
+                        <a th:href="@{/kho(page=${page.number + 1}, size=${page.size}, keyword=${keyword})}"
+                           th:if="${page.hasNext()}"
+                           aria-label="Next page">Next</a>
+                    </div>
+                </div>
 
 	</div>
           </div>

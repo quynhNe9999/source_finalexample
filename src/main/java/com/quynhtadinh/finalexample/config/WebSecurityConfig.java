@@ -30,25 +30,7 @@ public class WebSecurityConfig {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-//
-//	@Bean
-//	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//		http.csrf().disable().authorizeRequests().antMatchers("/resources/**", "/registration")
-//		.permitAll()
-////		.antMatchers("/view/**").hasAnyRole("USER", "ADMIN")
-////				.antMatchers("/view/**", "/user/**").hasRole("ADMIN")
-//				.anyRequest().authenticated()
-//				.and().formLogin()
-//				.loginPage("/login")
-//				.defaultSuccessUrl("/")
-//				.permitAll()
-//				.and()
-//				.logout()
-//				.permitAll();
-//
-//		return http.build();
-//	}
-//
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	http.csrf().disable();

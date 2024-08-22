@@ -1,32 +1,39 @@
 package com.quynhtadinh.finalexample.entity;
 
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
+
 @Entity
+//@Data
 @Table(name = "user")
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
+	@Column(name = "username")
 	private String username;
+
+	@Column(name = "email")
 	private String email;
+
+	@Column(name = "password")
 	private String password;
+
+	@Transient
 	private String passwordConfirm;
+
+	@Column(name = "status")
 	private String status;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateTao;
+
 	@OneToOne(mappedBy = "user")
 	private Employees employee;
 
@@ -38,11 +45,11 @@ public class User {
 	)
 	private Set<Role> roles;
 
-	public Long getId() {
+public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -70,7 +77,6 @@ public class User {
 		this.password = password;
 	}
 
-	@Transient
 	public String getPasswordConfirm() {
 		return passwordConfirm;
 	}
@@ -87,29 +93,20 @@ public class User {
 		this.status = status;
 	}
 
-	public Employees getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employees employee) {
-		this.employee = employee;
-	}
-
-	
-//	public Employees getEmployees() {
-//		return employees;
-//	}
-//
-//	public void setEmployees(Employees employees) {
-//		this.employees = employees;
-//	}
-
 	public Date getDateTao() {
 		return dateTao;
 	}
 
 	public void setDateTao(Date dateTao) {
 		this.dateTao = dateTao;
+	}
+
+	public Employees getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employees employee) {
+		this.employee = employee;
 	}
 
 	public Set<Role> getRoles() {

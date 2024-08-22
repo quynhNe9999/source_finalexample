@@ -37,39 +37,22 @@
         <!-- Default box -->
         <div class="col-xs-12">
           <div class="box">
+            <form action="#" th:action="@{/category}" method="get">
             <div class="box-header">
-              <a href="add-category" class="btn btn-success">+Thêm mới sẩn phẩm</a>
-
+              <a href="category/add" class="btn btn-success">+Thêm mới sản phẩm</a>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
+                  <input type="text" name="category" class="form-control pull-right" placeholder="Tìm kiếm">
                   <div class="input-group-btn">
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                   </div>
                 </div>
               </div>
             </div>
+            </form>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
-                <thead>
-                <tr>
-                  <th>
-                    <a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
-                      Employee First Name</a>
-                  </th>
-                  <th>
-                    <a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
-                      Employee Last Name</a>
-                  </th>
-                  <th>
-                    <a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
-                      Employee Email</a>
-                  </th>
-                  <th> Actions </th>
-                </tr>
-                </thead>
                 <tbody><tr>
                   <th>Mã sản phẩm</th>
                   <th>Tên sản phẩm</th>
@@ -79,64 +62,47 @@
                   <th>Ảnh sản phẩm</th>
                   <th>Tùy chọn</th>
                 </tr>
-                <tr th:each="category : ${listCategories}">
+                <tr th:each="category : ${listCategories.getContent()}">
                   <td th:text="${category.category_id}">ID</td>
                   <td th:text="${category.name}">Tên sản phẩm</td>
                   <td th:text="${category.description}">Mô tả</td>
                   <td th:text="${category.price}">Giá</td>
                   <td th:text="${category.stock}">Cổ phần</td>
                   <td>
-                    <a th:href="/@{'/edit/' + ${category.id}}">Sửa</a>
+                    <a th:href="@{/category/edit{category_id}(category_id=${category.category_id})}">Sửa</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a th:href="/@{'/delete/' + ${category.id}}">Xóa</a>
+                    <a th:href="@{/category/delete{category_id}(category_id=${category.category_id})}"  onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">Xóa</a>
                   </td>
                 </tr>
-<!--                <tr>-->
-<!--                  <td>Trang chủ</td>-->
-<!--                  <td>____</td>-->
-<!--                  <td>10-10-2018</td>-->
-<!--                  <td><span class="label label-success">Hiển thị</span></td>-->
-<!--                  <td>-->
-<!--                    <a href="edit-menu.html" class="btn btn-success">Sửa</a>-->
-<!--                    <a href="" class="btn btn-danger">Xóa</a>-->
-
-<!--                  </td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                  <td>Thi đua khen thưởng</td>-->
-<!--                  <td>Đào tạo</td>-->
-<!--                  <td>10-10-2018</td>-->
-<!--                  <td><span class="label label-danger">Đang ẩn</span></td>-->
-<!--                  <td>-->
-<!--                    <a href="" class="btn btn-success">Sửa</a>-->
-<!--                    <a href="" class="btn btn-danger">Xóa</a>-->
-
-<!--                  </td>-->
-<!--                </tr>-->
                 </tbody></table>
-              <div th:if = "${totalPages > 1}">
-                <div class = "row col-sm-10">
-                  <div class = "col-sm-2">
-                    Total Rows: [[${totalItems}]]
-                  </div>
-                  <div class = "col-sm-1">
-					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
-						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
-					</span>
-                  </div>
-                  <div class = "col-sm-1">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
-                    <span th:unless="${currentPage < totalPages}">Next</span>
-                  </div>
-
-                  <div class="col-sm-1">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
-                    <span th:unless="${currentPage < totalPages}">Last</span>
-                  </div>
-                </div>
+              <div>
+                <span>Trang hiện tại: <span th:text="${listCategories.number + 1}"></span> / <span th:text="${listCategories.totalPages}"></span></span>
+                <a th:href="@{/category(page=${listCategories.number - 1})}" th:if="${listCategories.hasPrevious()}">Trước</a>
+                <a th:href="@{/category(page=${listCategories.number + 1})}" th:if="${listCategories.hasNext()}">Sau</a>
               </div>
-            </div>
+<!--              <div th:if = "${totalPages > 1}">-->
+<!--                <div class = "row col-sm-10">-->
+<!--                  <div class = "col-sm-2">-->
+<!--                    Total Rows: [[${totalItems}]]-->
+<!--                  </div>-->
+<!--                  <div class = "col-sm-1">-->
+<!--					<span th:each="i: ${#numbers.sequence(1, totalPages)}">-->
+<!--						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>-->
+<!--						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;-->
+<!--					</span>-->
+<!--                  </div>-->
+<!--                  <div class = "col-sm-1">-->
+<!--                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>-->
+<!--                    <span th:unless="${currentPage < totalPages}">Next</span>-->
+<!--                  </div>-->
+
+<!--                  <div class="col-sm-1">-->
+<!--                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>-->
+<!--                    <span th:unless="${currentPage < totalPages}">Last</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
@@ -148,6 +114,13 @@
     </div>
   <div th:replace="fragments/footer :: footer"></div>
 </div>
+<script>
+  function confirmDelete(event) {
+    if (!confirm('Bạn có muốn xóa bản ghi đã chọn không?')) {
+      event.preventDefault(); // Ngăn chặn hành động xóa nếu người dùng không xác nhận
+    }
+  }
+</script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery-ui.js"></script>
 <script src="/js/bootstrap.min.js"></script>

@@ -41,19 +41,20 @@
       <!-- Default box -->
       <div class="col-xs-12">
           <div class="box">
-            <div class="box-header">
-           <a href="add-menu.html" class="btn btn-success">+Thêm mới đơn hàng</a>
+              <form action="#" th:action="@{orders}" method="get">
+                  <div class="box-header">
+                      <a href="orders/add" class="btn btn-success">+Thêm mới đơn hàng</a>
+                      <div class="box-tools">
+                          <div class="input-group input-group-sm" style="width: 150px;">
+                              <input type="text" name="orders" class="form-control pull-right" placeholder="Tìm kiếm">
 
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                              <div class="input-group-btn">
+                                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                              </div>
+                          </div>
+                      </div>
                   </div>
-                </div>
-              </div>
-            </div>
+              </form>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
 		<table  class="table table-hover">
@@ -104,7 +105,7 @@
 				</tr>
 			</tbody>
 		</table>
-		
+
 <!--		<div th:if = "${totalPages > 1}">-->
 <!--			<div class = "row col-sm-10">-->
 <!--				<div class = "col-sm-2">-->

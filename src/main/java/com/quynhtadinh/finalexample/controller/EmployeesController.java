@@ -13,84 +13,51 @@ import java.util.List;
 
 
 @Controller
+@RequestMapping("/employees")
 public class EmployeesController {
 
 	@Autowired
-	private final EmployeesService employeesService;
-
-	public EmployeesController(EmployeesService employeesService) {
-		this.employeesService = employeesService;
-	}
+	private EmployeesService employeesService;
 
 
-	@GetMapping("/employees")
-	public String getStringEmployees(Model model) {
-//		List<Employees> listEmployees = employeesService.getAllEmployees();
-//		model.addAttribute("listEmployees",listEmployees);
+	@GetMapping
+	public String listProducts(@RequestParam(name = "keyword", required = false) String keyword,
+							   @RequestParam(name = "page", defaultValue = "0") int page,
+							   Model model) {
+		Page<Employees> employeesPage = employeesService.searchEmployees(keyword, page, 10);
+		model.addAttribute("listEmployees", employeesPage);
 		return "employees";
 	}
 
-	@GetMapping("/add-employees")
-	public String showNewEmployeeForm(Model model) {
-		// create model attribute to bind form data
-		Employees employees = new Employees();
-		model.addAttribute("employees", employees);
+	@GetMapping("/add")
+	public String showAddEmployeesForm(Model model) {
+		model.addAttribute("employees", new Employees());
 		return "add_employees";
 	}
 
-	@PostMapping("/add-employees")
+	@PostMapping("/save")
 	public String saveEmployees(@ModelAttribute("employees") Employees employees) {
 		employeesService.saveEmployees(employees);
 		return "redirect:/employees";
 	}
 
-	@GetMapping("/edit-employees/{id}")
-	public String showFormForUpdate(@PathVariable ( value = "id") long id, Model model) {
-
-		// get employee from the service
-		Employees employees = employeesService.getEmployeesById(id);
-
-		// set employee as a model attribute to pre-populate the form
+	@GetMapping("/edit/{id}")
+	public String showEditEmployeesForm(@PathVariable("id") Long id, Model model) {
+		Employees employees = employeesService.getEmployeesById(id).orElseThrow(() -> new IllegalArgumentException("Invalid employees Id:" + id));
 		model.addAttribute("employees", employees);
-		return "edit_employees";
+		return "edit-employees";
 	}
-	@PostMapping("/edit-employees/{id}")
-	public String EditEmployees(@ModelAttribute("employees") Employees employees) {
-		// save employee to database
-		employeesService.saveEmployees(employees);
+
+	@PostMapping("/update/{id}")
+	public String updateEmployees(@PathVariable("id") Long id, @ModelAttribute("employees") Employees employees) {
+		employeesService.updateEmployees(employees);
 		return "redirect:/employees";
 	}
 
-	@GetMapping("/deleteEmployees/{id}")
-	public String deleteEmployees(@PathVariable (value = "id") long id) {
-
-		// call delete employee method
-		this.employeesService.deleteEmployeesById(id);
+	@GetMapping("/delete/{id}")
+	public String deleteEmployees(@PathVariable("id") Long id) {
+		employeesService.deleteEmployees(id);
 		return "redirect:/employees";
-	}
-
-
-
-	@GetMapping("/page/{pageNo}")
-	public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
-								@RequestParam("sortField") String sortField,
-								@RequestParam("sortDir") String sortDir,
-								Model model) {
-		int pageSize = 5;
-
-		Page<Employees> page = employeesService.findPaginated(pageNo, pageSize, sortField, sortDir);
-		List<Employees> listEmployees = page.getContent();
-
-		model.addAttribute("currentPage", pageNo);
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("totalItems", page.getTotalElements());
-
-		model.addAttribute("sortField", sortField);
-		model.addAttribute("sortDir", sortDir);
-		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-
-		model.addAttribute("listEmployees", listEmployees);
-		return "employees";
 	}
 	
 }

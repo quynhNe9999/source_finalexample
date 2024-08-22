@@ -45,42 +45,47 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form role="form" th:action="@{'/edit-user/' + ${user.id}}" th:object="${user}" method="post">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Tên đăng nhập</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Tên đăng nhập" value="quynhtd">
+                  <label for="username">Tên đăng nhập</label>
+                  <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Tên đăng nhập">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Email</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" value="tdquynh09@gmail.com">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Email">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Mật khẩu</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Mật khẩu" value="123123">
+                  <label for="password">Mật khẩu</label>
+                  <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Mật khẩu">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">CHỨC VỤ</label>
-                  <select name="" id="input" class="form-control" required="required">
-                    <option value="ADMIN">ROLE_ADMIN</option>
-                    <option value="MANAGE">ROLE_MANAGE</option>
-                    <option value="EMPLOYEE">ROLE_EMPLOYEE</option>
+                  <label for="dateTao">Mật khẩu</label>
+                  <input type="date" class="form-control" id="dateTao" th:field="*{dateTao}" placeholder="Ngày tạo">
+                </div>
+
+                <div class="form-group">
+                  <label for="role_id">CHỨC VỤ</label>
+                  <select name="role_id" id="role_id" class="form-control" required>
+                    <option value="" disabled selected>CHỌN CHỨC VỤ</option>
+                    <option value="1">ROLE_ADMIN</option>
+                    <option value="2">ROLE_MANAGE</option>
+                    <option value="3">ROLE_EMPLOYEE</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn trạng thái</label>
+                  <label for="status">Chọn trạng thái</label>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="" id="input" value="" checked="checked">
+                      <input type="radio" name="status" id="active" th:field="*{status}" value="ACTIVE" th:checked="${user.status == 'ACTIVE'}">
                       Hoạt động
                     </label>
                     <label>
-                      <input type="radio" name="" id="input" value="" >
+                      <input type="radio" name="status" id="inactive" th:field="*{status}" value="INACTIVE" th:checked="${user.status == 'INACTIVE'}">
                       Không hoạt động
                     </label>
                   </div>
                 </div>
-                
               </div>
               <!-- /.box-body -->
 

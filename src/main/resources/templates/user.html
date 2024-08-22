@@ -31,22 +31,22 @@
     </section>
 
     <section class="content">
-
       <div class="col-xs-12">
           <div class="box">
-            <div class="box-header">
-           <a href="add-user" class="btn btn-success">+Thêm mới người dùng</a>
+            <form action="#" th:action="@{user}" method="get">
+              <div class="box-header">
+                <a href="add-user" class="btn btn-success">+Thêm mới người dùng</a>
+                <div class="box-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="keyword" class="form-control pull-right" placeholder="Tìm kiếm">
 
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Tìm kiếm">
-
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    <div class="input-group-btn">
+                      <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <tbody><tr>
@@ -58,7 +58,7 @@
                   <th>Trạng thái</th>
                   <th>Tùy chọn</th>
                 </tr>
-                <tr th:each="user : ${listUsers}">
+                <tr th:each="user : ${listUsers.getContent()}">
                   <td th:text="${user.username}">Tên Đăng Nhập</td>
                   <td th:text="${user.email}">Email</td>
                   <td th:text="${user.dateTao}">Ngày tạo</td>
@@ -68,70 +68,95 @@
                   <td>
                     <a th:href="@{'/edit-user/' + ${user.id}}"class="btn btn-primary">Sửa</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a th:href="@{'/delete-user/' + ${user.id}}" class="btn btn-danger">Xóa</a>
+                    <a th:href="@{'/delete-user/' + ${user.id}}" class="btn btn-danger" onclick="confirmDelete(event)" >Xóa</a>
                   </td>
                 </tr>
-                <tr>
-                  <td>hoa98</td>
-                  <td>user123@gmail.com</td>
-                  <td>10-11-2024</td>
-                  <td>[ROLE_MANAGE]</td>
-                  <td>Nguyen Van A</td>
-                  <td>Hoạt động</td>
-                  <td>
-                    <a href="" class="btn btn-primary">Sửa</a>
-                    &nbsp;&nbsp;&nbsp;
-                    <a href="" class="btn btn-danger">Xóa</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>nam02</td>
-                  <td>user@gmail.com</td>
-                  <td>10-10-2018</td>
-                  <td>[ROLE_ADMIN]</td>
-                  <td>Nguyen Van Nam</td>
-                  <td>Hoạt động</td>
-                  <td>
-                    <a href="" class="btn btn-primary">Sửa</a>
-                    &nbsp;&nbsp;&nbsp;
-                    <a href="" class="btn btn-danger">Xóa</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>quynhne</td>
-                  <td>user1231@gmail.com</td>
-                  <td>10-12-2024</td>
-                  <td>[ROLE_MANAGE]</td>
-                  <td>Nguyen Van C</td>
-                  <td>Hoạt động</td>
-                  <td>
-                    <a href="" class="btn btn-primary">Sửa</a>
-                    &nbsp;&nbsp;&nbsp;
-                    <a href="" class="btn btn-danger">Xóa</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>thanhthanh</td>
-                  <td>user123123@gmail.com</td>
-                  <td>09-09-2024</td>
-                  <td>[ROLE_MANAGE]</td>
-                  <td>Nguyen Thi Thanh</td>
-                  <td>Hoạt động</td>
-                  <td>
-                    <a href="" class="btn btn-primary">Sửa</a>
-                    &nbsp;&nbsp;&nbsp;
-                    <a href="" class="btn btn-danger">Xóa</a>
-                  </td>
-                </tr>
+<!--                <tr>-->
+<!--                  <td>hoa98</td>-->
+<!--                  <td>user123@gmail.com</td>-->
+<!--                  <td>10-11-2024</td>-->
+<!--                  <td>[ROLE_MANAGE]</td>-->
+<!--                  <td>Nguyen Van A</td>-->
+<!--                  <td>Hoạt động</td>-->
+<!--                  <td>-->
+<!--                    <a href="" class="btn btn-primary">Sửa</a>-->
+<!--                    &nbsp;&nbsp;&nbsp;-->
+<!--                    <a href="" class="btn btn-danger">Xóa</a>-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td>nam02</td>-->
+<!--                  <td>user@gmail.com</td>-->
+<!--                  <td>10-10-2018</td>-->
+<!--                  <td>[ROLE_ADMIN]</td>-->
+<!--                  <td>Nguyen Van Nam</td>-->
+<!--                  <td>Hoạt động</td>-->
+<!--                  <td>-->
+<!--                    <a href="" class="btn btn-primary">Sửa</a>-->
+<!--                    &nbsp;&nbsp;&nbsp;-->
+<!--                    <a href="" class="btn btn-danger">Xóa</a>-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td>quynhne</td>-->
+<!--                  <td>user1231@gmail.com</td>-->
+<!--                  <td>10-12-2024</td>-->
+<!--                  <td>[ROLE_MANAGE]</td>-->
+<!--                  <td>Nguyen Van C</td>-->
+<!--                  <td>Hoạt động</td>-->
+<!--                  <td>-->
+<!--                    <a href="" class="btn btn-primary">Sửa</a>-->
+<!--                    &nbsp;&nbsp;&nbsp;-->
+<!--                    <a href="" class="btn btn-danger">Xóa</a>-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td>thanhthanh</td>-->
+<!--                  <td>user123123@gmail.com</td>-->
+<!--                  <td>09-09-2024</td>-->
+<!--                  <td>[ROLE_MANAGE]</td>-->
+<!--                  <td>Nguyen Thi Thanh</td>-->
+<!--                  <td>Hoạt động</td>-->
+<!--                  <td>-->
+<!--                    <a href="" class="btn btn-primary">Sửa</a>-->
+<!--                    &nbsp;&nbsp;&nbsp;-->
+<!--                    <a href="" class="btn btn-danger">Xóa</a>-->
+<!--                  </td>-->
+<!--                </tr>-->
               </tbody></table>
+
+              <!-- Liên kết phân trang -->
+              <div>
+                <p th:if="${page.hasContent()}">
+                  Page <span th:text="${page.number + 1}"></span> of <span th:text="${page.totalPages}"></span>
+                </p>
+
+                <div>
+                  <a th:href="@{/user(page=${page.number - 1}, size=${page.size}, keyword=${keyword})}"
+                     th:if="${page.hasPrevious()}"
+                     aria-label="Previous page">Trước</a>
+
+                  <a th:href="@{/user(page=${page.number + 1}, size=${page.size}, keyword=${keyword})}"
+                     th:if="${page.hasNext()}"
+                     aria-label="Next page">Tiếp</a>
+                </div>
+                <p>Tổng số bản ghi: <span th:text="${totalRecords}">(bản ghi)</span></p>
+              </div>
             </div>
           </div>
         </div>
-
     </section>
   </div>
   <div th:replace="fragments/footer :: footer"></div>
 </div>
+
+<script>
+  function confirmDelete(event) {
+    if (!confirm('Bạn có muốn xóa bản ghi đã chọn không?')) {
+      event.preventDefault(); // Ngăn chặn hành động xóa nếu người dùng không xác nhận
+    }
+  }
+</script>
 
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-ui.js"></script>

@@ -1,64 +1,66 @@
 package com.quynhtadinh.finalexample.controller;
 
 import com.quynhtadinh.finalexample.entity.Customers;
+import com.quynhtadinh.finalexample.entity.Customers;
 import com.quynhtadinh.finalexample.entity.User;
 import com.quynhtadinh.finalexample.service.CustomersService;
+import com.quynhtadinh.finalexample.service.CustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/customers")
 public class CustomersController {
+
 	@Autowired
 	private CustomersService customersService;
-			
-	@GetMapping("/customers")
-	public String getStringCustomers( Model model) {
-		List<Customers> listCustomers = customersService.getAllCustomers();
-//        System.out.println(users);
-		model.addAttribute("listUsers",listCustomers);
+
+	@GetMapping
+	public String listProducts(@RequestParam(name = "keyword", required = false) String keyword,
+							   @RequestParam(name = "page", defaultValue = "0") int page,
+							   Model model) {
+		Page<Customers> listCategories = customersService.searchCustomers(keyword, page, 10);
+		if (listCategories == null || listCategories.getContent().isEmpty()) {
+			model.addAttribute("errorMessage", "No categories found.");
+		}
+		model.addAttribute("listCategories", listCategories);
 		return "customers";
 	}
 
-	@GetMapping("/add-customers")
-	public String showCreateForm(Model model) {
+	@GetMapping("/add")
+	public String showAddCustomersForm(Model model) {
 		model.addAttribute("customers", new Customers());
 		return "add-customers";
 	}
 
-	@PostMapping("/add-customers")
-	public String createCustomers(@ModelAttribute("customers") Customers customers) {
+	@PostMapping("/save")
+	public String saveCustomers(@ModelAttribute("customers") Customers customers) {
 		customersService.saveCustomers(customers);
 		return "redirect:/customers";
 	}
 
-	@GetMapping("/edit-customers/{id}")
-	public String showEditForm(@PathVariable Long id, Model model) {
-		Optional<Customers> customers = Optional.ofNullable(customersService.getCustomersById(id));
-		if (customers.isPresent()) {
-			model.addAttribute("customers", customers.get());
-			return "edit-customers";
-		} else {
-			return "redirect:/customers";
-		}
+	@GetMapping("/edit/{id}")
+	public String showEditCustomersForm(@PathVariable("id") Long id, Model model) {
+		Customers Customers = customersService.getCustomersById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Customers Id:" + id));
+		model.addAttribute("Customers", Customers);
+		return "edit-Customers";
 	}
 
-	@PostMapping("/edit-customers/{id}")
-	public String updatecustomers(@PathVariable Long id, @ModelAttribute("customers") Customers newCustomers) {
-		customersService.updateCustomers(id,newCustomers);
-		return "redirect:/customers";
+	@PostMapping("/update/{id}")
+	public String updateCustomers(@PathVariable("id") Long id, @ModelAttribute("Customers") Customers customers) {
+		customersService.updateCustomers(customers);
+		return "redirect:/Customers";
 	}
 
-	@GetMapping("/delete-customers/{id}")
-	public String deletecustomers(@PathVariable Long id) {
-		customersService.deleteCustomersById(id);
-		return "redirect:/customers";
+	@GetMapping("/delete/{id}")
+	public String deleteCustomers(@PathVariable("id") Long id) {
+		customersService.deleteCustomers(id);
+		return "redirect:/Customers";
 	}
 }
