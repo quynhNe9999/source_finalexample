@@ -39,7 +39,7 @@
 				<div class="box">
 					<form action="#" th:action="@{/employees}" method="get">
 					<div class="box-header">
-						<a href="employees/add" class="btn btn-success">+Thêm mới Nhân viên</a>
+						<a href="add-employees" class="btn btn-success">+Thêm mới Nhân viên</a>
 						<div class="box-tools">
 							<div class="input-group input-group-sm" style="width: 150px;">
 								<input type="text" name="keyword" class="form-control pull-right" placeholder="Tìm kiếm">
@@ -55,74 +55,17 @@
 					<div class="box-body table-responsive no-padding">
 		<table  class="table table-hover">
 			<tbody>
-<!--			<tr>-->
-<!--&lt;!&ndash;				<td>Mã nhân viên </td>&ndash;&gt;-->
-<!--				<td>Tên Nhân viên</td>-->
-<!--				<td>Địa chỉ</td>-->
-<!--				<td>Số điện thoại</td>-->
-<!--				<td>Email</td>-->
-<!--				<td>Vị trí</td>-->
-<!--				<td>Ngày Sinh</td>-->
-<!--				<td>Mã cửa hàng</td>-->
-<!--				<td>Chức năng</td>-->
-<!--			</tr>-->
-<!--			<tr>-->
-<!--				&lt;!&ndash;				<td>Mã nhân viên </td>&ndash;&gt;-->
-<!--				<td>Tạ Đình Quỳnh</td>-->
-<!--				<td>Thanh oai, Hà Nội</td>-->
-<!--				<td>0984368800</td>-->
-<!--				<td>tdquynh09@gmail.com</td>-->
-<!--				<td>Nhân Viên bán hàng</td>-->
-<!--				<td>09-03-2002</td>-->
-<!--				<td>W1</td>-->
-<!--				<td>-->
-<!--					<a href="" class="btn btn-primary">Sửa</a>-->
-<!--					&nbsp;&nbsp;&nbsp;-->
-<!--					<a href="" class="btn btn-danger">Xóa</a>-->
-<!--				</td>-->
-<!--			<tr>-->
-<!--				&lt;!&ndash;				<td>Mã nhân viên </td>&ndash;&gt;-->
-<!--				<td>Nguyen Van A</td>-->
-<!--				<td>Hà đông, Hà Nội</td>-->
-<!--				<td>012369825</td>-->
-<!--				<td>nam02@gmail.com</td>-->
-<!--				<td>Nhân Viên</td>-->
-<!--				<td>15-08-2002</td>-->
-<!--				<td>W2</td>-->
-<!--				<td>-->
-<!--					<a href="" class="btn btn-primary">Sửa</a>-->
-<!--					&nbsp;&nbsp;&nbsp;-->
-<!--					<a href="" class="btn btn-danger">Xóa</a>-->
-<!--				</td>-->
-<!--			<tr>-->
-<!--				&lt;!&ndash;				<td>Mã nhân viên </td>&ndash;&gt;-->
-<!--				<td>Nguyễn Văn B</td>-->
-<!--				<td>Hà Nội</td>-->
-<!--				<td>0980544500</td>-->
-<!--				<td>Buad123@gmail.com</td>-->
-<!--				<td>Quản lý</td>-->
-<!--				<td>02-03-1998</td>-->
-<!--				<td>W1</td>-->
-<!--				<td>-->
-<!--					<a href="" class="btn btn-primary">Sửa</a>-->
-<!--					&nbsp;&nbsp;&nbsp;-->
-<!--					<a href="" class="btn btn-danger">Xóa</a>-->
-<!--				</td>-->
-<!--			<tr>-->
-<!--				&lt;!&ndash;				<td>Mã nhân viên </td>&ndash;&gt;-->
-<!--				<td>Đỗ Văn A</td>-->
-<!--				<td>Thanh oai</td>-->
-<!--				<td>0369545243</td>-->
-<!--				<td>dovana@gmail.com</td>-->
-<!--				<td>Nhân Viên bán hàng</td>-->
-<!--				<td>02-05-2000</td>-->
-<!--				<td>W1</td>-->
-<!--				<td>-->
-<!--					<a href="" class="btn btn-primary">Sửa</a>-->
-<!--					&nbsp;&nbsp;&nbsp;-->
-<!--					<a href="" class="btn btn-danger">Xóa</a>-->
-<!--				</td>-->
-<!--			</tr>-->
+			<tr>
+				<td>Tên Nhân viên</td>
+				<td>Địa chỉ</td>
+				<td>Số điện thoại</td>
+				<td>Email</td>
+				<td>Vị trí</td>
+				<td>Ngày Sinh</td>
+				<td>Mã cửa hàng</td>
+<!--				<td>Quyền truy cập</td>-->
+				<td>Chức năng</td>
+			</tr>
 				<tr th:each="employees : ${listEmployees.getContent()}">
 					<td th:text="${employees.name}"></td>
 					<td th:text="${employees.address}"></td>
@@ -130,17 +73,89 @@
 					<td th:text="${employees.email}"></td>
 					<td th:text="${employees.position}"></td>
 					<td th:text="${employees.dateOfBirth}"></td>
-
-					<td> <a th:href="@{/employees/edit{id}(id=${employees.id})}" class="btn btn-primary">Sửa</a>
-						<a th:href="@{/employees/delete{id}(id=${employees.id})}" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">Xóa</a>
+					<td th:text="${employees.store}"></td>
+<!--					<td th:text="${employees.roles}"></td>-->
+					<td>
+						<a th:href="@{'/edit-employees/' + ${employees.employee_id}}"class="btn btn-primary">Sửa</a>
+						<a th:href="@{'/delete-employees/' + ${employees.employee_id}}" class="btn btn-danger" onclick="confirmDelete(event)" >Xóa</a>
 					</td>
 				</tr>
+
+			<!--			<tr>-->
+			<!--				&lt;!&ndash;				<td>Mã nhân viên </td>&ndash;&gt;-->
+			<!--				<td>Tạ Đình Quỳnh</td>-->
+			<!--				<td>Thanh oai, Hà Nội</td>-->
+			<!--				<td>0984368800</td>-->
+			<!--				<td>tdquynh09@gmail.com</td>-->
+			<!--				<td>Nhân Viên bán hàng</td>-->
+			<!--				<td>09-03-2002</td>-->
+			<!--				<td>W1</td>-->
+			<!--				<td>-->
+			<!--					<a href="" class="btn btn-primary">Sửa</a>-->
+			<!--					&nbsp;&nbsp;&nbsp;-->
+			<!--					<a href="" class="btn btn-danger">Xóa</a>-->
+			<!--				</td>-->
+			<!--			<tr>-->
+			<!--				&lt;!&ndash;				<td>Mã nhân viên </td>&ndash;&gt;-->
+			<!--				<td>Nguyen Van A</td>-->
+			<!--				<td>Hà đông, Hà Nội</td>-->
+			<!--				<td>012369825</td>-->
+			<!--				<td>nam02@gmail.com</td>-->
+			<!--				<td>Nhân Viên</td>-->
+			<!--				<td>15-08-2002</td>-->
+			<!--				<td>W2</td>-->
+			<!--				<td>-->
+			<!--					<a href="" class="btn btn-primary">Sửa</a>-->
+			<!--					&nbsp;&nbsp;&nbsp;-->
+			<!--					<a href="" class="btn btn-danger">Xóa</a>-->
+			<!--				</td>-->
+			<!--			<tr>-->
+			<!--				&lt;!&ndash;				<td>Mã nhân viên </td>&ndash;&gt;-->
+			<!--				<td>Nguyễn Văn B</td>-->
+			<!--				<td>Hà Nội</td>-->
+			<!--				<td>0980544500</td>-->
+			<!--				<td>Buad123@gmail.com</td>-->
+			<!--				<td>Quản lý</td>-->
+			<!--				<td>02-03-1998</td>-->
+			<!--				<td>W1</td>-->
+			<!--				<td>-->
+			<!--					<a href="" class="btn btn-primary">Sửa</a>-->
+			<!--					&nbsp;&nbsp;&nbsp;-->
+			<!--					<a href="" class="btn btn-danger">Xóa</a>-->
+			<!--				</td>-->
+			<!--			<tr>-->
+			<!--				&lt;!&ndash;				<td>Mã nhân viên </td>&ndash;&gt;-->
+			<!--				<td>Đỗ Văn A</td>-->
+			<!--				<td>Thanh oai</td>-->
+			<!--				<td>0369545243</td>-->
+			<!--				<td>dovana@gmail.com</td>-->
+			<!--				<td>Nhân Viên bán hàng</td>-->
+			<!--				<td>02-05-2000</td>-->
+			<!--				<td>W1</td>-->
+			<!--				<td>-->
+			<!--					<a href="" class="btn btn-primary">Sửa</a>-->
+			<!--					&nbsp;&nbsp;&nbsp;-->
+			<!--					<a href="" class="btn btn-danger">Xóa</a>-->
+			<!--				</td>-->
+			<!--			</tr>-->
 			</tbody></table>
-			<div>
-				<span>Trang hiện tại: <span th:text="${listEmployees.number + 1}"></span> / <span th:text="${listEmployees.totalPages}"></span></span>
-				<a th:href="@{/employees(page=${listEmployees.number - 1})}" th:if="${listEmployees.hasPrevious()}">Trước</a>
-				<a th:href="@{/employees(page=${listEmployees.number + 1})}" th:if="${listEmployees.hasNext()}">Sau</a>
-			</div>
+				<!-- Liên kết phân trang -->
+				<div>
+					<p th:if="${page.hasContent()}">
+						Page <span th:text="${page.number + 1}"></span> of <span th:text="${page.totalPages}"></span>
+					</p>
+
+					<div>
+						<a th:href="@{/employees(page=${page.number - 1}, size=${page.size}, keyword=${keyword})}"
+						   th:if="${page.hasPrevious()}"
+						   aria-label="Previous page">Trước</a>
+
+						<a th:href="@{/employees(page=${page.number + 1}, size=${page.size}, keyword=${keyword})}"
+						   th:if="${page.hasNext()}"
+						   aria-label="Next page">Tiếp</a>
+					</div>
+					<p>Tổng số bản ghi: <span th:text="${totalRecords}">(bản ghi)</span></p>
+				</div>
 	</div>
 	<!-- /.box-body -->
 	</div>
@@ -153,6 +168,14 @@
 	</div>
 	<div th:replace="fragments/footer :: footer"></div>
 	</div>
+
+<script>
+	function confirmDelete(event) {
+		if (!confirm('Bạn có muốn xóa bản ghi đã chọn không?')) {
+			event.preventDefault(); // Ngăn chặn hành động xóa nếu người dùng không xác nhận
+		}
+	}
+</script>
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/jquery-ui.js"></script>
 	<script src="/js/bootstrap.min.js"></script>

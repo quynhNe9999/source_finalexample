@@ -46,9 +46,6 @@ public class Employees {
         return this.name;
     }
 
-    public long getEmployee_id() {
-        return employee_id;
-    }
 
     public void setEmployee_id(long employee_id) {
         this.employee_id = employee_id;
@@ -125,4 +122,5 @@ public class Employees {
     public void setUser(User user) {
         this.user = user;
     }
+
 }
