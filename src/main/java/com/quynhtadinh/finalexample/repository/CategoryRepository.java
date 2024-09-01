@@ -1,16 +1,15 @@
 package com.quynhtadinh.finalexample.repository;
 
-import com.quynhtadinh.finalexample.entity.User;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.quynhtadinh.finalexample.entity.Category;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
-import java.util.Optional;
+import com.quynhtadinh.finalexample.entity.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     @Query("SELECT e FROM Category e WHERE e.name LIKE %:keyword% ")

@@ -1,16 +1,15 @@
 package com.quynhtadinh.finalexample.repository;
 
-import com.quynhtadinh.finalexample.entity.Employees;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.quynhtadinh.finalexample.entity.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
-import java.util.Optional;
+import com.quynhtadinh.finalexample.entity.User;
 
 
 public interface UserRepository extends JpaRepository<User, Long> {

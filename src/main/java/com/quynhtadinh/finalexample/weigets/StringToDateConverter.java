@@ -1,10 +1,10 @@
 package com.quynhtadinh.finalexample.weigets;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 @Component
 public class StringToDateConverter implements Converter<String, Date> {

@@ -1,18 +1,16 @@
 package com.quynhtadinh.finalexample.service;
 
-import com.quynhtadinh.finalexample.entity.Product;
-import com.quynhtadinh.finalexample.entity.Store;
-import com.quynhtadinh.finalexample.repository.ProductRepository;
-import com.quynhtadinh.finalexample.repository.StoreRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+import com.quynhtadinh.finalexample.entity.Store;
+import com.quynhtadinh.finalexample.repository.StoreRepository;
 
 @Service
 public class StoreService {

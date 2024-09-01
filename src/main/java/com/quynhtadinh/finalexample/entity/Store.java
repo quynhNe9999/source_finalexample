@@ -1,10 +1,14 @@
 package com.quynhtadinh.finalexample.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import lombok.Data;
 
 @Entity
 @Data
@@ -13,7 +17,7 @@ public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JoinColumn(name = "store_id")
-    private String store_id;
+    private Long store_id;
     @JoinColumn(name = "name")
     private String name;
     @JoinColumn(name = "address")
@@ -27,11 +31,11 @@ public class Store {
     @JoinColumn(name = "manager_id")
     private Employees manager;
 
-    public String getStore_id() {
+    public Long getStore_id() {
         return store_id;
     }
 
-    public void setStore_id(String store_id) {
+    public void setStore_id(Long store_id) {
         this.store_id = store_id;
     }
 

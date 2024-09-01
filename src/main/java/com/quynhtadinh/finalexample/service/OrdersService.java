@@ -1,13 +1,10 @@
 package com.quynhtadinh.finalexample.service;
 
-import com.quynhtadinh.finalexample.entity.Customers;
-import com.quynhtadinh.finalexample.entity.OrderDetails;
-import com.quynhtadinh.finalexample.entity.Orders;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import com.quynhtadinh.finalexample.entity.Orders;
 
 @Service
 public interface OrdersService {

@@ -1,18 +1,17 @@
 package com.quynhtadinh.finalexample.service;
 
-import com.quynhtadinh.finalexample.entity.Category;
-import com.quynhtadinh.finalexample.entity.Customers;
-import com.quynhtadinh.finalexample.repository.CategoryRepository;
-import com.quynhtadinh.finalexample.repository.CustomersRepository;
+import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+import com.quynhtadinh.finalexample.entity.Customers;
+import com.quynhtadinh.finalexample.repository.CustomersRepository;
 
 @Service
 public class CustomersService {
