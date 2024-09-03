@@ -65,8 +65,8 @@ public class EmployeesService {
         return employeesRepository.findById(id);
     }
 
-    public Employees saveEmployees(Employees Category) {
-        return employeesRepository.save(Category);
+    public Employees saveEmployees(Employees employees) {
+        return employeesRepository.save(employees);
     }
 
     public void deleteEmployeesById(Long id) {

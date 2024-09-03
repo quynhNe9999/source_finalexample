@@ -6,6 +6,7 @@ import com.quynhtadinh.finalexample.entity.User;
 import com.quynhtadinh.finalexample.repository.CategoryRepository;
 import com.quynhtadinh.finalexample.service.CategoryService;
 import com.quynhtadinh.finalexample.service.ProductService;
+import com.quynhtadinh.finalexample.service.SuppliersService;
 import com.quynhtadinh.finalexample.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,8 +29,11 @@ public class CategoryController {
 
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private SuppliersService suppliersService;
     @Autowired
     private CategoryRepository categoryRepository;
+    
 
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
 	public ModelAndView home(@RequestParam(required = false, name = "keyword" )String keyword,
@@ -57,8 +61,9 @@ public class CategoryController {
 	}
 
 	@RequestMapping(value = "/add-category", method = RequestMethod.GET)
-	public String categoryAdd(Model model) {
+	public String categoryAdd(Model model,Pageable pageable) {
 		model.addAttribute("category", new Category());
+	    model.addAttribute("suppliers", suppliersService.findAll(pageable)); // Lấy danh sách tất cả các suppliers
 
 		return "add-category";
 	}
@@ -67,10 +72,10 @@ public class CategoryController {
 	public String registrations(@ModelAttribute("category") Category category, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
-			return "add-user";
+			return "add-category";
 		}
 		categoryService.save(category);
-		return "redirect:/user";
+		return "redirect:/category";
 	}
 
 	@GetMapping("/edit-category/{id}")

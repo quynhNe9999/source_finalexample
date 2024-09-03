@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.quynhtadinh.finalexample.entity.Category;
+import com.quynhtadinh.finalexample.entity.Suppliers;
 import com.quynhtadinh.finalexample.repository.CategoryRepository;
 
 @Service
@@ -20,7 +21,7 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
 
-    public void save(Category category) {
+    public void save(Category category ) { 
         categoryRepository.save(category);
     }
 

@@ -62,8 +62,8 @@ public class CustomersService {
         return customersRepository.findById(id);
     }
 
-    public Customers saveCustomers(Customers Category) {
-        return customersRepository.save(Category);
+    public Customers saveCustomers(Customers customers) {
+        return customersRepository.save(customers);
     }
 
     public void deleteCustomersById(Long id) {

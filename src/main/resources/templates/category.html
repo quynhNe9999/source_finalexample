@@ -53,21 +53,29 @@
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
-                <tbody><tr>
-                  <th>Mã sản phẩm</th>
-                  <th>Tên sản phẩm</th>
-                  <th>Nam sản xuất</th>
-                  <th>Hạn sử dụng</th>
-                  <th>Phân loại</th>
-<!--                  <th>Ảnh sản phẩm</th>-->
-                  <th>Tùy chọn</th>
-                </tr>
-                <tr th:each="category : ${listCategories.getContent()}">
-                  <td th:text="${category.category_id}">ID</td>
-                  <td th:text="${category.name}">Tên sản phẩm</td>
-                  <td th:text="${category.description}">Mô tả</td>
-                  <td th:text="${category.price}">Giá</td>
-                  <td th:text="${category.stock}">Cổ phần</td>
+                <tbody>
+        	<tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Image</th>
+            <th>Supplier</th>
+            <th>Actions</th>
+        	</tr>
+	    <tbody>
+        <tr th:each="category : ${categories}">
+            <td th:text="${category.category_id}"></td>
+            <td th:text="${category.name}"></td>
+            <td th:text="${category.description}"></td>
+            <td th:text="${category.price}"></td>
+            <td th:text="${category.stock}"></td>
+            <td>
+                <img th:src="@{'/images/' + ${category.image}}" width="100" height="100"/>
+            </td>
+			<td th:text="${category.supplier != null ? category.supplier.name : 'No Supplier'}"></td>
+            
                   <td>
                     <a th:href="@{'/edit-category/' + ${category.category_id}}"class="btn btn-primary">Sửa</a>
                     &nbsp;&nbsp;&nbsp;

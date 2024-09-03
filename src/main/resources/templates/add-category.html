@@ -66,7 +66,21 @@
                   <label for="stock">Cổ phần</label>
                   <input type="text" class="form-control" id="stock" placeholder="Cổ phần">
                 </div>
+                
+                <div class="form-group">
+                  <label for="image">Cổ phần</label>
+                  <input type="upload" class="form-control" id="image" placeholder="Ảnh sản phẩm">
+                </div>
+                <div class="form-group">
+                  <label for="supplier">Cổ phần</label>
+					<select th:field="*{supplier}">
+					    <option th:each="supplier : ${suppliers}" th:value="${supplier}" th:text="${supplier.name}"></option>
+					</select>
+                </div>
               </div>
+              </div>
+              
+              
               <!-- /.box-body -->
 
               <div class="box-footer">

@@ -1,5 +1,6 @@
 package com.quynhtadinh.finalexample.service;
 
+import com.quynhtadinh.finalexample.entity.Category;
 import com.quynhtadinh.finalexample.entity.Suppliers;
 import com.quynhtadinh.finalexample.repository.SuppliersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,8 @@ public class SuppliersService {
     public Page<Suppliers> searchSuppliers(String keyword, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return suppliersRepository.findByNameContaining(keyword, pageable);
+    }
+    public Page<Suppliers> findAll(Pageable pageable) {
+        return suppliersRepository.findAll(pageable);
     }
 }
