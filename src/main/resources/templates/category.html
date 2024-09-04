@@ -61,7 +61,7 @@
             <th>Price</th>
             <th>Stock</th>
             <th>Image</th>
-            <th>Supplier</th>
+            <th>Ngày nhập</th>
             <th>Actions</th>
         	</tr>
 	    <tbody>
@@ -71,11 +71,13 @@
             <td th:text="${category.description}"></td>
             <td th:text="${category.price}"></td>
             <td th:text="${category.stock}"></td>
-            <td>
-                <img th:src="@{'/images/' + ${category.image}}" width="100" height="100"/>
+          <td th:text="${#dates.format({category.createDate}, 'dd-MM-yyyy')}"></td>
+
+          <td>
+                <img th:src="@{'/category/display' + ${category.category_id}}" width="100" height="100"/>
             </td>
 			<td th:text="${category.supplier != null ? category.supplier.name : 'No Supplier'}"></td>
-            
+
                   <td>
                     <a th:href="@{'/edit-category/' + ${category.category_id}}"class="btn btn-primary">Sửa</a>
                     &nbsp;&nbsp;&nbsp;
@@ -83,23 +85,23 @@
                   </td>
                 </tr>
                 </tbody></table>
-              <!-- Liên kết phân trang -->
-              <div>
-                <p th:if="${page.hasContent()}">
-                  Page <span th:text="${page.number + 1}"></span> of <span th:text="${page.totalPages}"></span>
-                </p>
+<!--              &lt;!&ndash; Liên kết phân trang &ndash;&gt;-->
+<!--              <div>-->
+<!--                <p th:if="${page.hasContent()}">-->
+<!--                  Page <span th:text="${page.number + 1}"></span> of <span th:text="${page.totalPages}"></span>-->
+<!--                </p>-->
 
-                <div>
-                  <a th:href="@{/category(page=${page.number - 1}, size=${page.size}, keyword=${keyword})}"
-                     th:if="${page.hasPrevious()}"
-                     aria-label="Previous page">Trước</a>
+<!--                <div>-->
+<!--                  <a th:href="@{/category(page=${page.number - 1}, size=${page.size}, keyword=${keyword})}"-->
+<!--                     th:if="${page.hasPrevious()}"-->
+<!--                     aria-label="Previous page">Trước</a>-->
 
-                  <a th:href="@{/category(page=${page.number + 1}, size=${page.size}, keyword=${keyword})}"
-                     th:if="${page.hasNext()}"
-                     aria-label="Next page">Tiếp</a>
-                </div>
-                <p>Tổng số bản ghi: <span th:text="${totalRecords}">(bản ghi)</span></p>
-              </div>
+<!--                  <a th:href="@{/category(page=${page.number + 1}, size=${page.size}, keyword=${keyword})}"-->
+<!--                     th:if="${page.hasNext()}"-->
+<!--                     aria-label="Next page">Tiếp</a>-->
+<!--                </div>-->
+<!--                <p>Tổng số bản ghi: <span th:text="${totalRecords}">(bản ghi)</span></p>-->
+<!--              </div>-->
             </div>
             <!-- /.box-body -->
           </div>

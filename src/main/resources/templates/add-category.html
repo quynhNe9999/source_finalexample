@@ -48,39 +48,38 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="category_id">Mã sản phẩm</label>
-                  <input type="text" class="form-control" id="category_id" placeholder="Mã sản phẩm">
+                  <input type="text" th:field="*{categoryId}" class="form-control" id="category_id" placeholder="Mã sản phẩm">
                 </div>
                 <div class="form-group">
                   <label for="name">Tên sản phẩm</label>
-                  <input type="text" class="form-control" id="name" placeholder="Tên sản phẩm">
+                  <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Tên sản phẩm">
                 </div>
                 <div class="form-group">
                   <label for="description">Mô tả sản phẩm</label>
-                  <input type="text" class="form-control" id="description" placeholder="Mô tả">
+                  <input type="text" th:field="*{description}" class="form-control" id="description" placeholder="Mô tả">
                 </div>
                 <div class="form-group">
                   <label for="price">Giá sản phẩm</label>
-                  <input type="text" class="form-control" id="price" placeholder="Giá sản phẩm">
+                  <input type="text" th:field="*{price}" class="form-control" id="price" placeholder="Giá sản phẩm">
                 </div>
                 <div class="form-group">
                   <label for="stock">Cổ phần</label>
-                  <input type="text" class="form-control" id="stock" placeholder="Cổ phần">
-                </div>
-                
-                <div class="form-group">
-                  <label for="image">Cổ phần</label>
-                  <input type="upload" class="form-control" id="image" placeholder="Ảnh sản phẩm">
+                  <input type="text" th:field="*{stock}" class="form-control" id="stock" placeholder="Cổ phần">
                 </div>
                 <div class="form-group">
-                  <label for="supplier">Cổ phần</label>
-					<select th:field="*{supplier}">
-					    <option th:each="supplier : ${suppliers}" th:value="${supplier}" th:text="${supplier.name}"></option>
-					</select>
+                  <label for="image">Ảnh sản phẩm</label>
+                  <input type="file" th:field="*{image}" class="form-control" id="image">
+                </div>
+                <div class="form-group">
+                  <label for="supplier">Nhà cung cấp</label>
+                  <select th:field="*{supplier}" class="form-control">
+                    <option th:each="supplier : ${suppliers}" th:value="${supplier}" th:text="${supplier.name}"></option>
+                  </select>
                 </div>
               </div>
               </div>
-              
-              
+
+
               <!-- /.box-body -->
 
               <div class="box-footer">

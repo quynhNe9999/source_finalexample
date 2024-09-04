@@ -45,6 +45,7 @@ public class EmployeesService {
     public Employees update(Employees employees) {
         Employees updateEmployees = employeesRepository.findById(employees.getEmployee_id()).orElse(null);
         if (updateEmployees != null) {
+            updateEmployees.setEmployee_id(employees.getEmployee_id());
             updateEmployees.setName(employees.getName());
             updateEmployees.setAddress(employees.getAddress());
             updateEmployees.setEmail(employees.getEmail());

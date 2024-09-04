@@ -1,11 +1,18 @@
 package com.quynhtadinh.finalexample.entity;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Data
@@ -14,81 +21,34 @@ import javax.persistence.*;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id", nullable = false)
-    private Long category_id;
+    private Long categoryId;
 
-    @Column(name = "name", nullable = false)
+    @NotNull
+    @Size(min = 2, max = 100)
     private String name;
 
-    @Column(name = "description")
+    @Size(max = 255)
     private String description;
 
-    @Column(name = "price")
-    private Double price;
+    @NotNull
+    @DecimalMin(value = "0.0", inclusive = false)
+    private BigDecimal price;
 
-    @Column(name = "stock")
+    @NotNull
+    @Min(value = 0)
     private Integer stock;
 
-    @Column(name = "image")
+    @Lob
+    @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
     private byte[] image;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date", nullable = false)
+    private Date createDate;
+
     @ManyToOne
-    @JoinColumn(name = "supplier_id")
+    @JoinColumn(name = "supplier_id", nullable = false)
     private Suppliers supplier;
 
-    public Long getCategory_id() {
-        return category_id;
-    }
 
-    public void setCategory_id(Long category_id) {
-        this.category_id = category_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
-    public Suppliers getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(Suppliers supplier) {
-        this.supplier = supplier;
-    }
 }
