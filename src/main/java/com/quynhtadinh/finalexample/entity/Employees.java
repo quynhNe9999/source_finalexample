@@ -21,8 +21,8 @@ import lombok.Data;
 public class Employees {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id")
-    private long employee_id;
+    @Column(name = "id")
+    private long id;
     @Column(name = "name")
     private String name;
     @Column(name = "address")
@@ -54,8 +54,8 @@ public class Employees {
     }
 
 
-    public void setEmployee_id(long employee_id) {
-        this.employee_id = employee_id;
+    public void setEmployee_id(long id) {
+        this.id = id;
     }
 
     public String getName() {

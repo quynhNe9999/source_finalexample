@@ -13,6 +13,11 @@
   <link rel="stylesheet" href="/css/style.css" />
   <script src="/js/angular.min.js"></script>
   <script src="/js/app.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -41,23 +46,24 @@
             <div class="box-header with-border">
               <h3 class="box-title">Thêm mới Khách hàng</h3>
             </div>
-            <form role="form" action="#" th:action="@{/add-customers}" th:object="${customers}"
-              <div class="box-body">
+            <form id="form" action="#" th:action="@{/add-customers}" th:object="${customers}" method="post">
+<!--            <form id="form">-->
+            <div class="box-body">
                 <div class="form-group">
                   <label for="name">Tên khách hàng</label>
-                  <input type="text" class="form-control" id="name" placeholder="Tên khách hàng">
+                  <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Tên khách hàng">
                 </div>
                 <div class="form-group">
                   <label for="address">Địa chỉ</label>
-                  <input type="text" class="form-control" id="address" placeholder="Địa chỉ">
+                  <input type="text" class="form-control" th:field="*{address}" id="address" placeholder="Địa chỉ">
                 </div>
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="email">
+                  <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="email">
                 </div>
                 <div class="form-group">
                   <label for="phone">Số điện thoại</label>
-                  <input type="number" class="form-control" id="phone" placeholder="Số điện thoại">
+                  <input type="number" class="form-control" th:field="*{phone}" id="phone" placeholder="Số điện thoại">
                 </div>
               </div>
                 <div class="box-footer">
@@ -70,6 +76,10 @@
 
         </div>
       <!-- /.box -->
+      <p class="text-center">
+        <img src="/images/loader.gif" alt="loader" style="width: 150px;height: 120px;" id="loader">
+      </p>
+      <script src="/js/customer.js"></script>
 
     </section>
   </div>

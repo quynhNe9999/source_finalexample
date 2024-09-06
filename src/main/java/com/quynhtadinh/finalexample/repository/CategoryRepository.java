@@ -13,15 +13,5 @@ import org.springframework.data.repository.query.Param;
 import com.quynhtadinh.finalexample.entity.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> ,CrudRepository<Category, Long> {
-//    @Query("SELECT e FROM Category e WHERE e.name LIKE %:keyword% ")
-//    Page<Category> FindAllByUserName(Optional<String> keyword, Pageable pageable);
-//
-//    @Query("SELECT p FROM Category p WHERE p.name LIKE %:keyword%")
-//    List<Category> searchCategory(@Param("keyword") String keyword);
-//
-//    Page<Category> findByNameContainingOrDescriptionContaining(String name,String description, Pageable pageable);
-//
-//    @Query("SELECT COUNT(u) FROM Category u")
-//    long countAllCategory();
 
 }

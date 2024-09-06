@@ -127,16 +127,16 @@ public class ImageGalleryController {
 					model.addAttribute("price", imageGallery.get().getPrice());
 					return "imagedetails";
 				}
-				return "redirect:/home";
+				return "redirect:/image";
 			}
-		return "redirect:/home";
+		return "redirect:/image";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "redirect:/home";
+			return "redirect:/image";
 		}
 	}
 
-	@GetMapping("/image/show")
+	@GetMapping("/image")
 	String show(Model map) {
 		List<ImageGallery> images = imageGalleryService.getAllActiveImages();
 		map.addAttribute("images", images);

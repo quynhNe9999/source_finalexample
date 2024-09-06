@@ -43,9 +43,8 @@ public class EmployeesService {
     }
 
     public Employees update(Employees employees) {
-        Employees updateEmployees = employeesRepository.findById(employees.getEmployee_id()).orElse(null);
+        Employees updateEmployees = employeesRepository.findById(employees.getId()).orElse(null);
         if (updateEmployees != null) {
-            updateEmployees.setEmployee_id(employees.getEmployee_id());
             updateEmployees.setName(employees.getName());
             updateEmployees.setAddress(employees.getAddress());
             updateEmployees.setEmail(employees.getEmail());
@@ -76,9 +75,9 @@ public class EmployeesService {
     @Transactional
     public Employees updateEmployees(Employees newEmployees) {
         try {
-            return employeesRepository.findById(newEmployees.getEmployee_id())
+            return employeesRepository.findById(newEmployees.getId())
                     .map(existingEmployees -> {
-                        existingEmployees.setEmployee_id(newEmployees.getEmployee_id());
+                        existingEmployees.setEmployee_id(newEmployees.getId());
                         existingEmployees.setName(newEmployees.getName());
                         existingEmployees.setAddress(newEmployees.getAddress());
                         existingEmployees.setEmail(newEmployees.getEmail());
@@ -89,7 +88,7 @@ public class EmployeesService {
                         return employeesRepository.save(existingEmployees);
                     })
                     .orElseGet(() -> {
-                        newEmployees.setEmployee_id(newEmployees.getEmployee_id());
+                        newEmployees.setEmployee_id(newEmployees.getId());
                         return employeesRepository.save(newEmployees);
                     });
         } catch (Exception e) {

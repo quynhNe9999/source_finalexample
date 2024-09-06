@@ -21,8 +21,8 @@ import lombok.Data;
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name = "order_id")
-    private long order_id;
+    @JoinColumn(name = "id")
+    private long id;
     @JoinColumn(name = "orderDate")
     private Date orderDate;
     @JoinColumn(name = "totalAmount")
@@ -38,11 +38,11 @@ public class Orders {
     private Set<OrderDetails> orderDetails;
 
     public long getOrder_id() {
-        return order_id;
+        return id;
     }
 
-    public void setOrder_id(long order_id) {
-        this.order_id = order_id;
+    public void setOrder_id(long id) {
+        this.id = id;
     }
 
     public Date getOrderDate() {

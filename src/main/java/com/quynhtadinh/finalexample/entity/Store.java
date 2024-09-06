@@ -16,8 +16,8 @@ import lombok.Data;
 public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name = "store_id")
-    private Long store_id;
+    @JoinColumn(name = "id")
+    private Long id;
     @JoinColumn(name = "name")
     private String name;
     @JoinColumn(name = "address")
@@ -32,11 +32,11 @@ public class Store {
     private Employees manager;
 
     public Long getStore_id() {
-        return store_id;
+        return id;
     }
 
-    public void setStore_id(Long store_id) {
-        this.store_id = store_id;
+    public void setStore_id(Long id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -13,6 +13,11 @@
   <link rel="stylesheet" href="/css/style.css" />
   <script src="/js/angular.min.js"></script>
   <script src="/js/app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -41,62 +46,75 @@
             <div class="box-header with-border">
               <h3 class="box-title">Thêm mới sản phẩm</h3>
             </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form role="form" action="#" th:action="@{/add-category}" th:object="${category}"
-                  method="post">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="category_id">Mã sản phẩm</label>
-                  <input type="text" th:field="*{categoryId}" class="form-control" id="category_id" placeholder="Mã sản phẩm">
-                </div>
+              <form id="form" action="#" th:action="@{/add-category}" th:object="${category}" method="post">
+                <div class="contact-grids1 w3agile-6">
+                <div class="box-body">
+<!--                <div class="form-group">-->
+<!--                  <label for="categoryId">Mã sản phẩm</label>-->
+<!--                  <input type="text" class="form-control" id="categoryId" name="categoryId" placeholder="Mã sản phẩm" required="required">-->
+<!--                  <p id="error_categoryId"></p>-->
+<!--                </div>-->
                 <div class="form-group">
                   <label for="name">Tên sản phẩm</label>
-                  <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Tên sản phẩm">
+                  <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Tên sản phẩm">
+                  <p id="error_name"></p>
                 </div>
                 <div class="form-group">
                   <label for="description">Mô tả sản phẩm</label>
-                  <input type="text" th:field="*{description}" class="form-control" id="description" placeholder="Mô tả">
+                  <input type="text"  class="form-control" th:field="*{description}" id="description" placeholder="Mô tả">
+                    <p id="error_description"></p>
+
                 </div>
                 <div class="form-group">
                   <label for="price">Giá sản phẩm</label>
-                  <input type="text" th:field="*{price}" class="form-control" id="price" placeholder="Giá sản phẩm">
+                  <input type="text" class="form-control" th:field="*{price}" id="price" placeholder="Giá sản phẩm">
+                  <p id="error_price"></p>
                 </div>
                 <div class="form-group">
                   <label for="stock">Cổ phần</label>
-                  <input type="text" th:field="*{stock}" class="form-control" id="stock" placeholder="Cổ phần">
+                  <input type="text" class="form-control" th:field="*{stock}" id="stock"  placeholder="Cổ phần">
+                    <p id="error_stock"></p>
                 </div>
                 <div class="form-group">
                   <label for="image">Ảnh sản phẩm</label>
-                  <input type="file" th:field="*{image}" class="form-control" id="image">
+                  <input type="file" class="form-control" placeholder="Ảnh sản phẩm" th:field="*{image}" id="image" required="required">
+                  <p id="error_file"></p>
                 </div>
                 <div class="form-group">
-                  <label for="supplier">Nhà cung cấp</label>
-                  <select th:field="*{supplier}" class="form-control">
-                    <option th:each="supplier : ${suppliers}" th:value="${supplier}" th:text="${supplier.name}"></option>
+                  <label for="suppliers">Nhà cung cấp</label>
+                  <select th:field="*{suppliers}" class="form-control">
+                    <option th:each="suppliers : ${suppliers}"
+                            th:value="${suppliers}"
+                            th:text="${suppliers.name}">
+                    </option>
                   </select>
+                    <p id="error_suppliers"></p>
                 </div>
               </div>
-              </div>
-
-
               <!-- /.box-body -->
 
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Thêm mới sản phẩm</button>
+                  <a href="/category" style="float:left;" class="btn btn-success text-right">Trở về</a>
               </div>
+                </div>
+              <br>
+                    <div id="success" class="text-center" style="color:green;"></div>
+                    <div id="error" class="text-center" style="color:red;"></div>
             </form>
+
           </div>
-
-          <!-- /.box -->
-
-        </div>
-      <!-- /.box -->
+     </div>
+        <p class="text-center">
+            <img src="/images/loader.gif" alt="loader" style="width: 150px;height: 120px;" id="loader">
+        </p>
+      <script src="/js/category.js"></script>
 
     </section>
   </div>
   <div th:replace="fragments/footer :: footer"></div>
 </div>
+
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery-ui.js"></script>
 <script src="/js/bootstrap.min.js"></script>

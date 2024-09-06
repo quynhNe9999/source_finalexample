@@ -90,7 +90,6 @@ public class EmployeesController {
 		try {
 			Employees existingEmployees = employeesService.getEmployeesById(id)
 					.orElseThrow(() -> new IllegalArgumentException("Người dùng không tồn tại: " + id));
-			existingEmployees.setEmployee_id(newEmployees.getEmployee_id());
 			existingEmployees.setName(newEmployees.getName());
 			existingEmployees.setAddress(newEmployees.getAddress());
 			existingEmployees.setEmail(newEmployees.getEmail());

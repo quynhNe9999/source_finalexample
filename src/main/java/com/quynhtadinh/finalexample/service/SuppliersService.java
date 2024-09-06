@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,5 +40,9 @@ public class SuppliersService {
     }
     public Page<Suppliers> findAll(Pageable pageable) {
         return suppliersRepository.findAll(pageable);
+    }
+
+    public List<Suppliers> getAllActiveSuppliers() {
+        return suppliersRepository.findAll();
     }
 }

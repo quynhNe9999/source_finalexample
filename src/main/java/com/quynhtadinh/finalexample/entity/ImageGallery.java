@@ -1,5 +1,7 @@
 package com.quynhtadinh.finalexample.entity;
 
+import lombok.Data;
+
 import java.util.Arrays;
 import java.util.Date;
 import javax.persistence.Column;
@@ -14,6 +16,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "image_gallery")
+@Data
 public class ImageGallery {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,54 +41,6 @@ public class ImageGallery {
     private Date createDate;
 
 	public ImageGallery() {}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-		public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public byte[] getImage() {
-		return image;
-	}
-
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
 
 	@Override
 	public String toString() {

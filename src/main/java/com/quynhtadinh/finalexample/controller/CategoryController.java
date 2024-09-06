@@ -2,7 +2,9 @@ package com.quynhtadinh.finalexample.controller;
 
 import com.quynhtadinh.finalexample.entity.Category;
 
+import com.quynhtadinh.finalexample.entity.Suppliers;
 import com.quynhtadinh.finalexample.service.CategoryService;
+import com.quynhtadinh.finalexample.service.SuppliersService;
 import net.bytebuddy.asm.Advice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -160,16 +162,34 @@ public class CategoryController {
 	private CategoryService categoryService;
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private SuppliersService suppliersService;
 
-	@GetMapping(value = {"/add-category"})
-	public String addProductPage() {
-		return "add-category";
+//	@GetMapping(value = {"/add-category"})
+//	public String addProductPage(Model map) {
+//
+//		map.addAttribute("suppliers", suppliersService.getAllActiveSuppliers());
+//
+//		return "add-category";
+//	}
+
+	@GetMapping("/add-category")
+	public String showAddCategoryForm(Model model) {
+		model.addAttribute("category", new Category());
+		model.addAttribute("suppliers", suppliersService.getAllActiveSuppliers());
+		return "add-category";  // Tên template Thymeleaf
+	}
+	@PostMapping(value = { "/add-category"})
+	public String addCategoryPages(@ModelAttribute("category") Category category) {
+		categoryService.saveCategory(category);
+		return "redirect:/category";
 	}
 
 	@PostMapping("/category/saveCategoryDetails")
 	public @ResponseBody ResponseEntity<?> createProduct(@RequestParam("name") String name,
-														 @RequestParam("price") double price, @RequestParam("description") String description, @RequestParam("stock") Integer stock, Model model, HttpServletRequest request
-			, final @RequestParam("image") MultipartFile file) {
+			@RequestParam("price") double price, @RequestParam("description") String description,
+			@RequestParam("stock") Integer stock, @RequestParam("suppliers") Suppliers suppliers,
+			Model model, HttpServletRequest request, final @RequestParam("image") MultipartFile file) {
 		try {
 			//String uploadDirectory = System.getProperty("user.dir") + uploadFolder;
 			String uploadDirectory = request.getServletContext().getRealPath(uploadFolder);
@@ -188,6 +208,7 @@ public class CategoryController {
 			log.info("description: " + descriptions[0]);
 			log.info("price: " + price);
 			log.info("stock: " + stock);
+			log.info("suppliers: " + suppliers);
 			log.info("createDate: " + createDate);
 			try {
 				File dir = new File(uploadDirectory);
@@ -207,15 +228,17 @@ public class CategoryController {
 			Category category = new Category();
 			category.setName(names[0]);
 			category.setImage(image);
-			category.setPrice(BigDecimal.valueOf(price));
+			category.setPrice(price);
 			category.setDescription(descriptions[0]);
 			category.setStock(stock);
 			category.setCreateDate(createDate);
+			suppliers.setName(name);
+			suppliersService.getAllActiveSuppliers();
 
 			categoryService.saveCategory(category);
 
 			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
-			return new ResponseEntity<>("Product Saved With File - " + fileName, HttpStatus.OK);
+			return new ResponseEntity<>("Category Saved With File - " + fileName, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.info("Exception: " + e);
@@ -243,7 +266,7 @@ public class CategoryController {
 
 				log.info("products :: " + category);
 				if (category.isPresent()) {
-					model.addAttribute("id", category.get().getCategoryId());
+					model.addAttribute("id", category.get().getId());
 					model.addAttribute("description", category.get().getDescription());
 					model.addAttribute("name", category.get().getName());
 					model.addAttribute("price", category.get().getPrice());

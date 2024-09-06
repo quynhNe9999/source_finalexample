@@ -18,8 +18,8 @@ import lombok.Data;
 public class OrderDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name = "order_detail_id")
-    private long order_detail_id;
+    @JoinColumn(name = "id")
+    private long id;
     @JoinColumn(name = "quantity")
     private long quantity;
     @JoinColumn(name = "price")
@@ -35,11 +35,11 @@ public class OrderDetails {
 
 
     public long getOrder_detail_id() {
-        return order_detail_id;
+        return id;
     }
 
-    public void setOrder_detail_id(long order_detail_id) {
-        this.order_detail_id = order_detail_id;
+    public void setOrder_detail_id(long id) {
+        this.id = id;
     }
 
     public long getQuantity() {

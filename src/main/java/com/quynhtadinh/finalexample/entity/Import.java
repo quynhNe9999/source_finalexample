@@ -18,8 +18,8 @@ import lombok.Data;
 public class Import {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name = "import_id")
-    private long import_id;
+    @JoinColumn(name = "id")
+    private long id;
     @JoinColumn(name = "importDate")
     private Date importDate;
     @JoinColumn(name = "totalCost")
@@ -54,11 +54,11 @@ public class Import {
     }
 
     public long getImport_id() {
-        return import_id;
+        return id;
     }
 
-    public void setImport_id(long import_id) {
-        this.import_id = import_id;
+    public void setImport_id(long id) {
+        this.id = id;
     }
 
 }

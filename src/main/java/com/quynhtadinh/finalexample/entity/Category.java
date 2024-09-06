@@ -12,6 +12,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Date;
 
 @Entity
@@ -21,23 +22,20 @@ import java.util.Date;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long categoryId;
+    @Column(name = "id", nullable = false, unique = true)
+    private Long id;
 
-    @NotNull
-    @Size(min = 2, max = 100)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Size(max = 255)
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @NotNull
-    @DecimalMin(value = "0.0", inclusive = false)
-    private BigDecimal price;
+    @Column(name = "price",nullable = false, precision = 10, scale = 2)
+    private double price;
 
-    @NotNull
-    @Min(value = 0)
-    private Integer stock;
-
+    @Column(name = "stock",nullable = false, precision = 10, scale = 2)
+    private double stock;
     @Lob
     @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
     private byte[] image;
@@ -50,5 +48,12 @@ public class Category {
     @JoinColumn(name = "supplier_id", nullable = false)
     private Suppliers supplier;
 
+    public Category() {}
+
+    @Override
+    public String toString() {
+        return "Category [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price + ", image="
+                + Arrays.toString(image) + ", createDate=" + createDate + "]";
+    }
 
 }
