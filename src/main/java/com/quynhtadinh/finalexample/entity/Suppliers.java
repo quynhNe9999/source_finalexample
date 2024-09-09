@@ -1,11 +1,6 @@
 package com.quynhtadinh.finalexample.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 
@@ -13,19 +8,25 @@ import lombok.Data;
 @Data
 @Table(name = "suppliers")
 public class Suppliers {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name = "id")
-    private long id;
-    @JoinColumn(name = "name")
+    @Column(name = "id", nullable = false, unique = true)
+    private Long id;
+
+    @Column(name = "name")
     private String name;
-    @JoinColumn(name = "address")
+
+    @Column(name = "address")
     private String address;
-    @JoinColumn(name = "phone")
+
+    @Column(name = "phone")
     private String phone;
-    @JoinColumn(name = "email")
+
+    @Column(name = "email")
     private String email;
-    @JoinColumn(name = "status")
+
+    @Column(name = "status")
     private String status;
 
 }

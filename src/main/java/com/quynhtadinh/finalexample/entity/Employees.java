@@ -54,7 +54,7 @@ public class Employees {
     }
 
 
-    public void setEmployee_id(long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

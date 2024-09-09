@@ -48,12 +48,8 @@
 					</div>
 					<!-- /.box-header -->
 					<!-- form start -->
-					<form action="#" th:action="@{/edit-employees/{employee_id}}" th:object="${employees}" method="post">
+					<form action="#" th:action="@{/edit-employees/{id}}" th:object="${employees}" method="post">
 						<div class="box-body">
-							<div class="form-group">
-								<label for="employee_id">Mã nhân viên</label>
-								<input type="text" class="form-control" id="employee_id" placeholder="Mã nhân viên" value="">
-							</div>
 						<div class="box-body">
 							<div class="form-group">
 								<label for="name">Tên nhân viên</label>
@@ -89,7 +85,7 @@
 							<input type="text" class="form-control" id="stores" placeholder="Mã cửa hàng" value="">
 						</div>
 
-<!--						</div>-->
+						</div>
 						<!-- /.box-body -->
 
 						<div class="box-footer">

@@ -77,7 +77,7 @@ public class EmployeesService {
         try {
             return employeesRepository.findById(newEmployees.getId())
                     .map(existingEmployees -> {
-                        existingEmployees.setEmployee_id(newEmployees.getId());
+                        existingEmployees.setId(newEmployees.getId());
                         existingEmployees.setName(newEmployees.getName());
                         existingEmployees.setAddress(newEmployees.getAddress());
                         existingEmployees.setEmail(newEmployees.getEmail());
@@ -88,7 +88,7 @@ public class EmployeesService {
                         return employeesRepository.save(existingEmployees);
                     })
                     .orElseGet(() -> {
-                        newEmployees.setEmployee_id(newEmployees.getId());
+                        newEmployees.setId(newEmployees.getId());
                         return employeesRepository.save(newEmployees);
                     });
         } catch (Exception e) {

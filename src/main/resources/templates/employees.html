@@ -76,8 +76,8 @@
 					<td th:text="${employees.store}"></td>
 <!--					<td th:text="${employees.roles}"></td>-->
 					<td>
-						<a th:href="@{'/edit-employees/' + ${employees.employee_id}}"class="btn btn-primary">Sửa</a>
-						<a th:href="@{'/delete-employees/' + ${employees.employee_id}}" class="btn btn-danger" onclick="confirmDelete(event)" >Xóa</a>
+						<a th:href="@{'/edit-employees/' + ${employees.id}}"class="btn btn-primary">Sửa</a>
+						<a th:href="@{'/delete-employees/' + ${employees.id}}" class="btn btn-danger" onclick="confirmDelete(event)" >Xóa</a>
 					</td>
 				</tr>
 
