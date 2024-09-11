@@ -44,12 +44,20 @@ public class CustomersController {
 	model.addAttribute("customers", new Customers());
 		return "add-customers";
 	}
-	@PostMapping(value = { "/add-customers"})
+
+	@PostMapping(value = { "/save"})
 	public String addCustomersPages(@ModelAttribute("customers") Customers customers) {
 	customersService.saveCustomers(customers);
 		return "redirect:/customers";
 	}
 
+	@RequestMapping("/edit-customers/{id}")
+	public ModelAndView showEditProductPage(@PathVariable(name = "id") Long id) {
+		ModelAndView mav = new ModelAndView("edit-customers");
+		Customers customers = customersService.getCustomersById(id).get();
+		mav.addObject("customers", customers);
+		return mav;
+	}
 
 	@GetMapping("/delete-customers/{id}")
 	public String deleteCustomers(@PathVariable Long id) {
