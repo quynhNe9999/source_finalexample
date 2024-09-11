@@ -82,10 +82,10 @@
                 </div>
                 <div class="form-group">
                   <label for="suppliers">Nhà cung cấp</label>
-                  <select th:field="*{suppliers}" class="form-control">
-                    <option th:each="suppliers : ${suppliers}"
-                            th:value="${suppliers}"
-                            th:text="${suppliers.name}">
+                  <select th:field="*{supplier}" id="suppliers" class="form-control">
+                    <option th:each="supplier : ${supplier}"
+                            th:value="${supplier}"
+                            th:text="${supplier.name}">
                     </option>
                   </select>
                     <p id="error_suppliers"></p>

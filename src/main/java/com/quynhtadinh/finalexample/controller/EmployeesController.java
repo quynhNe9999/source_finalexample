@@ -3,6 +3,8 @@ package com.quynhtadinh.finalexample.controller;
 import com.quynhtadinh.finalexample.entity.Employees;
 import com.quynhtadinh.finalexample.repository.EmployeesRepository;
 import com.quynhtadinh.finalexample.service.EmployeesService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -28,87 +31,39 @@ public class EmployeesController {
 	@Autowired
 	private EmployeesRepository employeesRepository;
 
-	@RequestMapping(value = "/employees", method = RequestMethod.GET)
-	public ModelAndView home(@RequestParam(required = false, name = "keyword" )String keyword,
-							 @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, Model model
-			, Pageable pageable) throws IOException {
-		pageable = PageRequest.of(page, size);
 
-		Page<Employees> listEmployees;
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-		if (keyword != null && !keyword.isEmpty()) {
-			listEmployees =  employeesService.searchEmployees(Optional.of(keyword), pageable);
-		} else {
-			listEmployees = employeesService.findAll(pageable);
-		}
-
-		Page<Employees> employees = employeesService.findAll(pageable);
-		long countAllUsers = employeesRepository.count();
-		model.addAttribute("totalRecords", countAllUsers);
-		model.addAttribute("employees", employees.getContent());
-		model.addAttribute("page", employees);
-		model.addAttribute("keyword", keyword);
-		Map<String, Object> modelMap = new HashMap<>();
-		modelMap.put("listEmployees", listEmployees);
-		return new ModelAndView("employees", modelMap);
+	@GetMapping("/employees")
+	String showEmployees(Model map) {
+		List<Employees> employees = employeesService.getAllActiveEmployees();
+		map.addAttribute("employees", employees);
+		return "employees";
 	}
 
-	@RequestMapping(value = "/add-employees", method = RequestMethod.GET)
-	public String EmployeesAdd(Model model) {
+	@GetMapping(value = { "/add-employees"})
+	public String addEmployees(Model model) {
 		model.addAttribute("employees", new Employees());
-
 		return "add-employees";
 	}
 
-	@RequestMapping(value = "/add-employees", method = RequestMethod.POST)
-	public String registrations(@ModelAttribute("employees") Employees employees, BindingResult bindingResult, Model model) {
-
-		if (bindingResult.hasErrors()) {
-			return "add-employees";
-		}
-		employeesService.save(employees);
+	@PostMapping(value = { "/saveEmployees"})
+	public String addEmployeesPages(@ModelAttribute("employees") Employees employees) {
+		employeesService.saveEmployees(employees);
 		return "redirect:/employees";
 	}
 
-	@GetMapping("/edit-employees/{id}")
-	public String showEditForm(@PathVariable Long id, Model model) {
-		Optional<Employees> employees = employeesService.getEmployeesById(id);
-		if (employees.isPresent()) {
-			model.addAttribute("Employees", employees.get());
-			return "edit-employees";
-		} else {
-			return "redirect:/employees";
-		}
-	}
-	@PostMapping("/edit-employees/{id}")
-	public String updateEmployeess(@PathVariable Long id, @ModelAttribute("employees") Employees newEmployees, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			model.addAttribute("message", "Có lỗi xảy ra khi cập nhật người dùng");
-			return "edit-employees"; // Hoặc trang lỗi tương ứng
-		}
-
-		try {
-			Employees existingEmployees = employeesService.getEmployeesById(id)
-					.orElseThrow(() -> new IllegalArgumentException("Người dùng không tồn tại: " + id));
-			existingEmployees.setName(newEmployees.getName());
-			existingEmployees.setAddress(newEmployees.getAddress());
-			existingEmployees.setEmail(newEmployees.getEmail());
-			existingEmployees.setPhone(newEmployees.getPhone());
-			existingEmployees.setDateOfBirth(newEmployees.getDateOfBirth());
-			existingEmployees.setStore(newEmployees.getStore());
-			existingEmployees.setPosition(newEmployees.getPosition());
-
-			employeesService.update(existingEmployees);
-			return "redirect:/employees";
-		} catch (Exception e) {
-			model.addAttribute("message", "Có lỗi xảy ra khi cập nhật người dùng: " + e.getMessage());
-			return "edit-employees"; // Hoặc trang lỗi tương ứng
-		}
+	@RequestMapping("/edit-employees/{id}")
+	public ModelAndView showEditEmployeesPage(@PathVariable(name = "id") Long id) {
+		ModelAndView mav = new ModelAndView("edit-employees");
+		Employees employees = employeesService.getEmployeesById(id).get();
+		mav.addObject("employees", employees);
+		return mav;
 	}
 
 	@GetMapping("/delete-employees/{id}")
 	public String deleteEmployees(@PathVariable Long id) {
-		employeesService.deleteEmployeesById(id);
+		employeesService.deleteEmployees(id);
 		return "redirect:/employees";
 	}
 

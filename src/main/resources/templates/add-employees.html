@@ -43,29 +43,29 @@
 					</div>
 					<!-- /.box-header -->
 					<!-- form start -->
-					<form role="form" action="#" th:action="@{/add-employees}" th:object="${employees}"
+					<form role="form" action="#" th:action="@{/saveEmployees}" th:object="${employees}"
 						  method="post">
 						<div class="box-body">
 
 							<div class="form-group">
 								<label for="name">Tên nhân viên</label>
-								<input type="text" class="form-control" id="name" placeholder="Tên nhân viên">
+								<input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Tên nhân viên">
 							</div>
 							<div class="form-group">
 								<label for="address">Địa chỉ</label>
-								<input type="text" class="form-control" id="address" placeholder="Địa chỉ">
+								<input type="text" class="form-control" id="address" th:field="*{address}" placeholder="Địa chỉ">
 							</div>
 							<div class="form-group">
 								<label for="phone">Số điện thoại</label>
-								<input type="text" class="form-control" id="phone" placeholder="Số điện thoại">
+								<input type="text" class="form-control" id="phone" th:field="*{phone}" placeholder="Số điện thoại">
 							</div>
 							<div class="form-group">
 								<label for="email">Email</label>
-								<input type="email" class="form-control" id="email" placeholder="Email">
+								<input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Email">
 							</div>
 							<div class="form-group">
-							  <label for="positon">Chọn Vị trí</label>
-							  <select name="positon" id="positon" class="form-control" required="required">
+							  <label for="position">Chọn Vị trí</label>
+							  <select name="position" id="position" class="form-control" th:field="*{position}" required="required">
 								<option value="">Chọn vị trí</option>
 								<option value="MANAGE">Quản lý cửa hàng</option>
 								<option value="EMPLOYEE">Nhân viên</option>
@@ -73,13 +73,35 @@
 							</div>
 							<div class="form-group">
 								<label for="dateOfBirth">Ngày Sinh</label>
-								<input type="date" class="form-control" id="dateOfBirth" placeholder="Ngày Sinh">
+								<input type="date" class="form-control" id="dateOfBirth" th:field="*{dateOfBirth}" placeholder="Ngày Sinh">
 							</div>
 							<div class="form-group">
-								<label for="stores">Mã cửa hàng</label>
-								<input type="text" class="form-control" id="stores" placeholder="Mã cửa hàng">
+								<label for="store">Mã cửa hàng</label>
+								<select th:field="*{store}" id="store" class="form-control">
+									<option th:each="store : ${store}"
+											th:value="${store}"
+											th:text="${store.name}">
+									</option>
+								</select>
 							</div>
-
+							<div class="form-group">
+								<label for="role">Quyền truy cập</label>
+								<select th:field="*{role}" id="role" class="form-control">
+									<option th:each="role : ${role}"
+											th:value="${role}"
+											th:text="${role.name}">
+									</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="user">Mã người dùng</label>
+								<select th:field="*{user}" id="user" class="form-control">
+									<option th:each="user : ${user}"
+											th:value="${user}"
+											th:text="${user.username}">
+									</option>
+								</select>
+							</div>
 						</div>
 						<!-- /.box-body -->
 

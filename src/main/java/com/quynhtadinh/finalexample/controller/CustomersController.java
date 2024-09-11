@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Controller
+//@RequestMapping("/customers")
 public class CustomersController {
 
 	@Autowired
@@ -45,7 +46,7 @@ public class CustomersController {
 		return "add-customers";
 	}
 
-	@PostMapping(value = { "/save"})
+	@PostMapping(value = { "/saveCustomers"})
 	public String addCustomersPages(@ModelAttribute("customers") Customers customers) {
 	customersService.saveCustomers(customers);
 		return "redirect:/customers";
