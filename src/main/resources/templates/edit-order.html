@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Blank Page</title>
-  <!-- Tell the browser to be responsive to screen width -->
+  <title>Admin Wine</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/AdminLTE.css">
-  <link rel="stylesheet" href="css/_all-skins.min.css">
-  <link rel="stylesheet" href="css/jquery-ui.css">
-  <link rel="stylesheet" href="css/style.css" />
-  <script src="js/angular.min.js"></script>
-  <script src="js/app.js"></script>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/AdminLTE.css">
+  <link rel="stylesheet" href="/css/_all-skins.min.css">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="/js/angular.min.js"></script>
+  <script src="/js/app.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -29,7 +32,7 @@
     <section class="content-header">
       <h1>
         Sửa đơn hàng
-       
+
       </h1>
       <ol class="breadcrumb">
         <li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -50,44 +53,48 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form action="#" th:action="@{/saveOrders}" th:object="${orders}" method="post">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Tên Menu</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Giới thiệu" value="Học Bổng">
+                  <label for="id">ID đơn hàng</label>
+                  <input type="text" class="form-control" id="id" th:field="*{id}" readonly="readonly" placeholder="ID đơn hàng" value="">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn Menu Cha</label>
-                  <select name="" id="input" class="form-control" required="required">
-                    <option value="">Đào tạo</option>
-                    <option value="">Học bổng</option>
-                  </select>
+                  <label for="customerName">Tên khách hàng</label>
+                  <input type="text" class="form-control" id="customerName" th:field="*{customer.name}" placeholder="Tên khách hàng" value="">
                 </div>
-
+<!--                <div class="form-group">-->
+<!--                  <label for="user">Tên khách hàng</label>-->
+<!--                  <select th:field="*{customer}" id="user" class="form-control" placeholder="Tên khách hàng">-->
+<!--                    <option th:each="customer : ${customer}"-->
+<!--                            th:value="${customer}"-->
+<!--                            th:text="${customer.name}">-->
+<!--                    </option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                  <label for="orderDate">Ngày tạo đơn hàng</label>-->
+<!--                  <input type="date" class="form-control" id="orderDate" th:field="*{orderDate}" placeholder="Ngày tạo đơn hàng" value="">-->
+<!--                </div>-->
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn Vị trí</label>
-                  <select name="" id="input" class="form-control" required="required">
-                    <option value="">1</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
+                  <label for="totalAmount">Tổng số sản phẩm</label>
+                  <input type="number" class="form-control" id="totalAmount" th:field="*{totalAmount}" placeholder="Tổng số sản phẩm" value="">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn trạng thái</label>
-                  <div class="radio">
+                  <label for="status">Trạng thái</label>
+                  <div class="radio" th:field="*{status}">
                     <label>
-                      <input type="radio" name="" id="input" value="" checked="checked">
-                      Hiện
+                      <input type="radio" name="" id="status" value="A">
+                      Hoạt động
                     </label>
                     <label>
-                      <input type="radio" name="" id="input" value="" >
-                      Ẩn
+                      <input type="radio" name="" id="status" value="I" >
+                      Không hoạt động
                     </label>
                   </div>
                 </div>
-                
               </div>
+
               <!-- /.box-body -->
 
               <div class="box-footer">
@@ -95,7 +102,7 @@
               </div>
             </form>
           </div>
-       
+
           <!-- /.box -->
 
         </div>

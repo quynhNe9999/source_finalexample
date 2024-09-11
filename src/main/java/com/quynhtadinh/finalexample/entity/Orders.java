@@ -30,7 +30,7 @@ public class Orders {
     @JoinColumn(name = "status")
     private String status;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "customer_id")
     private Customers customer;
 

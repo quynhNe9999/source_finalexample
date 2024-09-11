@@ -1,20 +1,43 @@
 package com.quynhtadinh.finalexample.service;
 
-import java.util.List;
-
+import com.quynhtadinh.finalexample.entity.Customers;
+import com.quynhtadinh.finalexample.repository.CustomersRepository;
+import com.quynhtadinh.finalexample.repository.OrdersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.quynhtadinh.finalexample.entity.Orders;
 
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
+
 @Service
-public interface OrdersService {
-    Orders getOrdersById(Long id);
+public class OrdersService {
 
-    Orders updateOrders(Orders orders);
+        @Autowired
+        private OrdersRepository ordersRepository;
 
-    void deleteOrdersById(Long id);
+        @Autowired
+        private CustomersRepository customersRepository;
 
-    List<Orders> getAllOrders();
+        @Transactional
+        public void saveOrders(Orders orders) {
+            Customers customer = orders.getCustomer();
+            if (false) {
+                customersRepository.save(customer);
+            }
+            ordersRepository.save(orders);
+        }
 
-    Orders saveOrders(Orders orders);
-}
+        public List<Orders> getAllActiveOrders() {
+            return ordersRepository.findAll();
+        }
+
+        public Optional<Orders> getOrdersById(Long id) {
+            return ordersRepository.findById(id);
+        }
+        public void deleteOrders(Long id) {
+            ordersRepository.deleteById(id);
+        }
+    }
+
