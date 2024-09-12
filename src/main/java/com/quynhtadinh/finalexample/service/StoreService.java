@@ -3,6 +3,7 @@ package com.quynhtadinh.finalexample.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.quynhtadinh.finalexample.entity.Employees;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,26 +22,14 @@ public class StoreService {
         storeRepository.save(store);
     }
 
-    public Store updateStore(Store store) {
-        return storeRepository.save(store);
-    }
-
-    public void deleteStore(Long id) {
-        storeRepository.deleteById(id);
+    public List<Store> getAllActiveStore() {
+        return storeRepository.findAll();
     }
 
     public Optional<Store> getStoreById(Long id) {
         return storeRepository.findById(id);
     }
-
-    public Page<Store> searchStores(String keyword, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return storeRepository.findByNameContaining(keyword, pageable);
+    public void deleteStore(Long id) {
+        storeRepository.deleteById(id);
     }
-
-    public List<Store> getAllStores() {
-        return storeRepository.findAll();
-    }
-
-
 }

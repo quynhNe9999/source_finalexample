@@ -3,18 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Blank Page</title>
-  <!-- Tell the browser to be responsive to screen width -->
+  <title>Admin Wine</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/AdminLTE.css">
-  <link rel="stylesheet" href="css/_all-skins.min.css">
-  <link rel="stylesheet" href="css/jquery-ui.css">
-  <link rel="stylesheet" href="css/style.css" />
-  <script src="js/angular.min.js"></script>
-  <script src="js/app.js"></script>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/AdminLTE.css">
+  <link rel="stylesheet" href="/css/_all-skins.min.css">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="/js/angular.min.js"></script>
+  <script src="/js/app.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -50,43 +48,31 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form role="form"  th:action="@{/saveStore}" th:object="${store}" method="post">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Tên Menu</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Giới thiệu" value="Học Bổng">
+                  <label for="id">ID cửa hàng</label>
+                  <input type="text" class="form-control" id="id" th:field="*{id}" readonly="readonly" placeholder="Tên cửa hàng" value="">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn Menu Cha</label>
-                  <select name="" id="input" class="form-control" required="required">
-                    <option value="">Đào tạo</option>
-                    <option value="">Học bổng</option>
+                  <label for="name">Tên cửa hàng</label>
+                  <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Tên cửa hàng" value="">
+                </div>
+                <div class="form-group">
+                  <label for="address">Address</label>
+                  <input type="text" class="form-control" id="address" th:field="*{address}" placeholder="Address" value="">
+                </div>
+                <div class="form-group">
+                  <label for="phone">Số điện thoại</label>
+                  <input type="text" class="form-control" id="phone" th:field="*{phone}" placeholder="Số điện thoại" value="">
+                </div>
+                <div class="form-group">
+                  <label for="status">Trạng thái</label>
+                  <select id="status" th:field="*{status}">
+                    <option value="ACTIVE">Hoạt động</option>
+                    <option value="INACTIVE">Không hoạt động</option>
                   </select>
                 </div>
-
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn Vị trí</label>
-                  <select name="" id="input" class="form-control" required="required">
-                    <option value="">1</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Chọn trạng thái</label>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="" id="input" value="" checked="checked">
-                      Hiện
-                    </label>
-                    <label>
-                      <input type="radio" name="" id="input" value="" >
-                      Ẩn
-                    </label>
-                  </div>
-                </div>
-                
               </div>
               <!-- /.box-body -->
 
