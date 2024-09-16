@@ -24,7 +24,6 @@
     <div th:replace="fragments/header :: header"></div>
     <div th:replace="fragments/sidebar :: sidebar"></div>
 
-    Content Wrapper. Contains page content
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
@@ -59,7 +58,7 @@
                             <tr th:each="orders, hh : ${orders}">
                                 <td th:text="${orders.id}"></td>
                                 <td th:text="${orders.customer != null ? orders.customer.name : ''}"></td>
-                                <td th:text="${orders.orderDate}"></td>
+                                <td th:text="${#dates.format({orders.orderDate}, 'dd-MM-yyyy')}"/></td>
                                 <td th:text="${orders.totalAmount}"></td>
                                 <td th:text="${orders.status}"></td>
                                 <td>

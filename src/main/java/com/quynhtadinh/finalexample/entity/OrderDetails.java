@@ -20,8 +20,10 @@ public class OrderDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JoinColumn(name = "id")
     private long id;
+
     @JoinColumn(name = "quantity")
     private long quantity;
+
     @JoinColumn(name = "price")
     private Float price;
 

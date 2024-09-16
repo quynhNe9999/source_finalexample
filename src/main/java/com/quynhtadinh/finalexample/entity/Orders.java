@@ -1,19 +1,12 @@
 package com.quynhtadinh.finalexample.entity;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Data
@@ -23,10 +16,14 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JoinColumn(name = "id")
     private long id;
-    @JoinColumn(name = "orderDate")
+
+    @CreationTimestamp
+    @JoinColumn(name = "order_date" , nullable = false)
     private Date orderDate;
-    @JoinColumn(name = "totalAmount")
+
+    @JoinColumn(name = "total_amount")
     private Float totalAmount;
+
     @JoinColumn(name = "status")
     private String status;
 
@@ -35,53 +32,6 @@ public class Orders {
     private Customers customer;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OrderDetails> orderDetails;
+    private List<OrderDetails> orderDetails;
 
-    public long getOrder_id() {
-        return id;
-    }
-
-    public void setOrder_id(long id) {
-        this.id = id;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public Float getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(Float totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Customers getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customers customer) {
-        this.customer = customer;
-    }
-
-    public Set<OrderDetails> getOrderDetails() {
-        return orderDetails;
-    }
-
-    public void setOrderDetails(Set<OrderDetails> orderDetails) {
-        this.orderDetails = orderDetails;
-    }
 }

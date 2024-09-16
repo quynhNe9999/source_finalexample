@@ -82,23 +82,16 @@
                 </div>
                 <div class="form-group">
                   <label for="status">Trạng thái</label>
-                  <div class="radio" th:field="*{status}">
-                    <label>
-                      <input type="radio" name="" id="status" value="A">
-                      Hoạt động
-                    </label>
-                    <label>
-                      <input type="radio" name="" id="status" value="I" >
-                      Không hoạt động
-                    </label>
-                  </div>
+                  <select id="status" th:field="*{status}">
+                    <option value="A">Hoạt động</option>
+                    <option value="I">Không hoạt động</option>
+                  </select>
                 </div>
-              </div>
-
               <!-- /.box-body -->
 
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Cập nhật đơn hàng</button>
+              </div>
               </div>
             </form>
           </div>

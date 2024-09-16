@@ -64,21 +64,15 @@
                   <label for="totalAmount">Tổng số sản phẩm</label>
                   <input type="number" class="form-control" id="totalAmount" th:field="*{totalAmount}" placeholder="Tổng số sản phẩm">
                 </div>
-                <div class="form-group">
-                  <label for="status">Trạng thái</label>
-                  <div class="radio" id="status" th:field="*{status}">
-                    <label>
-                      <input type="radio" value="A">
-                      Hoạt động
-                    </label>
-                    <label>
-                      <input type="radio" value="I" >
-                      Không hoạt động
-                    </label>
+                  <div class="form-group">
+                      <label for="status">Trạng thái</label>
+                      <select id="status" th:field="*{status}">
+                          <option value="A">Hoạt động</option>
+                          <option value="I">Không hoạt động</option>
+                      </select>
                   </div>
                 </div>
 
-              </div>
               <!-- /.box-body -->
 
               <div class="box-footer">

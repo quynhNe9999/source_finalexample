@@ -1,5 +1,6 @@
 package com.quynhtadinh.finalexample.controller;
 
+import com.quynhtadinh.finalexample.entity.OrderDetails;
 import com.quynhtadinh.finalexample.entity.Orders;
 import com.quynhtadinh.finalexample.repository.OrdersRepository;
 import com.quynhtadinh.finalexample.service.OrdersService;
@@ -31,7 +32,7 @@ public class OrdersController {
 		return "orders";
 	}
 
-	@GetMapping(value = { "/add-orders"})
+	@GetMapping(value = { "/add-order"})
 	public String addOrders(Model model) {
 		model.addAttribute("orders", new Orders());
 		return "add-order";
@@ -50,12 +51,17 @@ public class OrdersController {
 		mav.addObject("orders", orders);
 		return mav;
 	}
+	@PostMapping(value = { "/saveOrdersDetails"})
+	public void updateOrder(Orders order, List<OrderDetails> newOrderDetails) {
+		order.getOrderDetails().clear();
+		order.getOrderDetails().addAll(newOrderDetails);
+		ordersRepository.save(order);
 
+	}
 	@GetMapping("/delete-orders/{id}")
 	public String deleteOrders(@PathVariable Long id) {
 		ordersService.deleteOrders(id);
 		return "redirect:/orders";
 	}
-
 
 }
