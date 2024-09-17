@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin Wine</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/AdminLTE.css">
+    <link rel="stylesheet" href="/css/_all-skins.min.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <div th:replace="fragments/header :: header"></div>
+    <div th:replace="fragments/sidebar :: sidebar"></div>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Quản lý sản phẩm
+                <small>(Thêm mới sản phẩm)</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="category">Quản lý sản phẩm</a></li>
+                <li class="active">Thêm mới sản phẩm</li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="col-md-8">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Thêm mới sản phẩm</h3>
+                    </div>
+                        <form th:action="@{/saveProducts}" th:object="${products}" method="post">
+                        <div class="contact-grids1 w3agile-6">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <input type="hidden" th:field="*{id}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Tên sản phẩm:</label>
+                                <input type="text" class="form-control" id="name" th:field="*{name}" required="required" />
+                            </div>
+                           <div class="form-group">
+                                <label for="description">Mô tả:</label>
+                                <textarea id="description" class="form-control" th:field="*{description}"></textarea>
+                           </div>
+                           <div class="form-group">
+                                <label for="price">Giá:</label>
+                                <input type="number" class="form-control" id="price" th:field="*{price}" required="required" />
+                           </div>
+                           <div class="form-group">
+                                <label for="stock">Số lượng:</label>
+                                <input type="number" class="form-control" id="stock" th:field="*{stock}" required="required" />
+                           </div>
+                        </div>
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">Thêm mới sản phẩm</button>
+                            </div>
+                        </div>
+                </form>
+
+            </div>
+    </div>
+    </section>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/adminlte.min.js"></script>
+<script src="/js/dashboard.js"></script>
+<script src="/tinymce/tinymce.min.js"></script>
+<script src="/tinymce/config.js"></script>
+<script src="/js/function.js"></script>
+</body>
+</html>
