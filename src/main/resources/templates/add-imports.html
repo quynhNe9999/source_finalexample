@@ -27,7 +27,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="kho">Quản lý kho tổng</a></li>
+        <li><a href="imports">Quản lý kho tổng</a></li>
         <li class="active">Thêm mới kho Sản phẩm</li>
       </ol>
     </section>
@@ -43,47 +43,53 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form role="form"  th:action="@{/saveImports}" th:object="${imports}" method="post">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="import_id">Mã nhập kho</label>
-                  <input type="text" class="form-control" id="import_id" placeholder="Mã nhập kho">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Mã nhà cung cấp</label>
-                  <input type="text" class="form-control" id="supplier_id" placeholder="Tên nhà cung cấp">
-                </div>
-                <div class="form-group">
-                  <label for="supplier_name">Tên nhà cung cấp</label>
-                  <input type="text" class="form-control" id="supplier_name" placeholder="Banner trang chủ">
-                </div>
-<!--                <div class="form-group">-->
-<!--                  <label for="id">Mã sản phẩm</label>-->
-<!--                  <input type="text" class="form-control" id="id" placeholder="Mã sản phẩm">-->
-<!--                </div>-->
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Số lượng</label>
-                  <input type="text" class="form-control" id="quantity" placeholder="Số lượng">
-                </div>
-                <div class="form-group">
-                  <label for="price">Đơn giá</label>
-                  <input type="text" class="form-control" id="price" placeholder="Đơn giá">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Thành tiền</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Thành tiền">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Hàng nhập xuất</label>
-                  <select name="" id="input" class="form-control" required="required">
-                    <option value="">Hàng nhập xuất</option>
-                    <option value="N">Nhập</option>
-                    <option value="X">Xuất</option>
+                  <label for="suppliers">Nhà cung cấp</label>
+                  <select th:field="*{supplier}" id="suppliers" class="form-control">
+                    <option th:each="supplier : ${supplier}"
+                            th:value="${supplier}"
+                            th:text="${supplier.name}">
+                    </option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Ngày nhập xuất</label>
-                  <input type="date" class="form-control" id="datekho" placeholder="Ngày nhập xuất">
+                  <label for="product.name">Tên sản phẩm</label>
+                  <select th:field="*{product}" id="product.name" class="form-control">
+                    <option th:each="product : ${product}"
+                            th:value="${product}"
+                            th:text="${product.name}">
+                    </option>
+                  </select>
+                </div>
+<!--                <div class="form-group">-->
+<!--                  <label for="nhapXuat">Nhập Xuất</label>-->
+<!--                  <input type="text" class="form-control" id="nhapXuat" placeholder="Banner trang chủ">-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                  <label for="exampleInputEmail1">Số lượng</label>-->
+<!--                  <input type="text" class="form-control" id="quantity" placeholder="Số lượng">-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                  <label for="price">Đơn giá</label>-->
+<!--                  <input type="text" class="form-control" id="price" placeholder="Đơn giá">-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                  <label for="exampleInputEmail1">Thành tiền</label>-->
+<!--                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Thành tiền">-->
+<!--                </div>-->
+                <div class="form-group">
+                  <label for="nhapXuat">Hàng nhập xuất</label>
+                  <select name="" id="nhapXuat"  th:field="*{nhapXuat}" class="form-control" required="required">
+                    <option value="">Hàng nhập xuất</option>
+                    <option value="Nhập">Nhập</option>
+                    <option value="Xuất">Xuất</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="importDate">Ngày nhập xuất</label>
+                  <input type="date" class="form-control" id="importDate"  th:field="*{importDate}" placeholder="Ngày nhập xuất">
                 </div>
               </div>
               <!-- /.box-body -->

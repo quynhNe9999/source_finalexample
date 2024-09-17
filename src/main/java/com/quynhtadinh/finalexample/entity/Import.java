@@ -22,44 +22,21 @@ public class Import {
     private long id;
     @JoinColumn(name = "importDate")
     private Date importDate;
+
     @JoinColumn(name = "totalCost")
     private Float totalCost;
+
+    @JoinColumn(name = "nhap_xuat")
+    private String nhapXuat;
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")
     private Suppliers supplier;
 
-    public Suppliers getSupplier() {
-        return supplier;
-    }
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    public void setSupplier(Suppliers supplier) {
-        this.supplier = supplier;
-    }
-
-    public Float getTotalCost() {
-        return totalCost;
-    }
-
-    public void setTotalCost(Float totalCost) {
-        this.totalCost = totalCost;
-    }
-
-    public Date getImportDate() {
-        return importDate;
-    }
-
-    public void setImportDate(Date importDate) {
-        this.importDate = importDate;
-    }
-
-    public long getImport_id() {
-        return id;
-    }
-
-    public void setImport_id(long id) {
-        this.id = id;
-    }
 
 }
 
