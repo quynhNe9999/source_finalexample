@@ -43,53 +43,38 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form role="form"  th:action="@{/saveSuppliers}" th:object="${suppliers}" method="post">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="username">Tên đăng nhập</label>
-                  <input type="text" class="form-control" id="username" placeholder="Tên đăng nhập">
+                  <label for="name">Tên cửa hàng</label>
+                  <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Tên cửa hàng">
+                </div>
+                <div class="form-group">
+                  <label for="address">Address</label>
+                  <input type="text" class="form-control" id="address" th:field="*{address}" placeholder="Address">
+                </div>
+                <div class="form-group">
+                  <label for="phone">Số điện thoại</label>
+                  <input type="text" class="form-control" id="phone" th:field="*{phone}" placeholder="Số điện thoại">
                 </div>
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="email">
-                </div>
-                <div class="form-group">
-                  <label for="password">Mật khẩu</label>
-                  <input type="password" class="form-control" id="password" placeholder="Mật khẩu">
-                </div>                <div class="form-group">
-                  <label for="passwordConfirm">Nhập lại mật khẩu</label>
-                  <input type="password" class="form-control" id="passwordConfirm" placeholder="Nhập lại mật khẩu">
-                </div>
-
-                <div class="form-group">
-                  <label for="role">CHỨC VỤ</label>
-                  <select name="" id="role"  class="form-control" required="required">
-                    <option value="">CHỨC VỤ</option>
-                    <option value="1">ADMIN</option>
-                    <option value="2">USER</option>
-                    <option value="3">EMPLOYEE</option>
-                  </select>
+                  <input type="text" class="form-control" id="email" th:field="*{email}" placeholder="Email">
                 </div>
                 <div class="form-group">
                   <label for="status">Trạng thái</label>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="" id="status" value="A">
-                      Hoạt động
-                    </label>
-                    <label>
-                      <input type="radio" name="" id="status" value="I" >
-                      Không hoạt động
-                    </label>
-                  </div>
+                  <select id="status" th:field="*{status}">
+                    <option value="A">Hoạt động</option>
+                    <option value="I">Không hoạt động</option>
+                  </select>
                 </div>
-                
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Thêm mới nhà cung cấp</button>
               </div>
+            </form>
             </form>
           </div>
        

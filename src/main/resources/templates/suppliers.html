@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminWine</title>
+  <title>Admin Wine</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/font-awesome.min.css">
@@ -36,22 +41,13 @@
           <div class="box">
             <form action="#" th:action="@{/suppliers}" method="get">
             <div class="box-header">
-                 <a href="suppliers/add" class="btn btn-success">+Thêm mới nhà cung cấp</a>
-                <div class="box-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Tìm kiếm">
-
-                    <div class="input-group-btn">
-                      <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                    </div>
-                  </div>
-                </div>
+                 <a href="add-suppliers" class="btn btn-success">+Thêm mới nhà cung cấp</a>
             </div>
             </form>
 
             <div class="box-body table-responsive no-padding">
-              <table class="table table-hover">
-                <tbody><tr>
+              <table id="example" class="table table-striped table-bordered text-center">
+                <thead><tr>
                   <th>Mã nhà cung cấp</th>
                   <th>Tên nhà cung cấp</th>
                   <th>Địa chỉ</th>
@@ -60,8 +56,10 @@
                   <th>Trạng thái</th>
                   <th>Tùy chọn</th>
                 </tr>
-                <tr th:each="suppliers : ${listSuppliers}">
-                  <td th:text="${suppliers.supplier_id}">Mã nhà cung cấp</td>
+                </thead>
+                <tbody>
+                <tr th:each="suppliers, hh : ${suppliers}">
+                  <td th:text="${suppliers.id}">Mã nhà cung cấp</td>
                   <td th:text="${suppliers.name}">Tên nhà cung cấp</td>
                   <td th:text="${suppliers.address}">Địa chỉ</td>
                   <td th:text="${suppliers.phone}">Số điện thoại</td>
@@ -70,10 +68,10 @@
                   <td>
                     <a th:href="@{'/edit-supplier/' + ${supplier.id}}" class="btn btn-primary">Sửa</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a th:href="@{'/delete-suppliers/' + ${supplier.id}}" class="btn btn-danger">Xóa</a>
+                    <a th:href="@{'/delete-suppliers/' + ${supplier.id}}" class="btn btn-danger" onclick=" return confirm('Bạn có chắc chắn muốn xóa Nhà Cung cấp này không?')">Xóa</a>
                   </td>
                 </tr>
-              </tbody></table>
+                </tbody></table>
             </div>
           </div>
         </div>
@@ -82,14 +80,29 @@
   </div>
   <div th:replace="fragments/footer :: footer"></div>
 </div>
+<script>
+  function confirmDelete(event) {
+    if (!confirm('Bạn có muốn xóa bản ghi đã chọn không?')) {
+      event.preventDefault(); // Ngăn chặn hành động xóa nếu người dùng không xác nhận
+    }
+  }
+</script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/adminlte.min.js"></script>
+<script src="/js/dashboard.js"></script>
+<script src="/tinymce/tinymce.min.js"></script>
+<script src="/tinymce/config.js"></script>
+<script src="/js/function.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable();
+  } );
+</script>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/adminlte.min.js"></script>
-<script src="js/dashboard.js"></script>
-<script src="tinymce/tinymce.min.js"></script>
-<script src="tinymce/config.js"></script>
-<script src="js/function.js"></script>
 </body>
 </html>

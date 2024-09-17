@@ -185,7 +185,7 @@ public class CategoryController {
 		return "redirect:/category";
 	}
 
-	@PostMapping("/category/saveCategoryDetails")
+	@PostMapping("/saveCategoryDetails")
 	public @ResponseBody ResponseEntity<?> createProduct(@RequestParam("name") String name,
 			@RequestParam("price") double price, @RequestParam("description") String description,
 			@RequestParam("stock") Integer stock, @RequestParam("suppliers") Suppliers suppliers,
