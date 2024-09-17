@@ -66,9 +66,9 @@
                   <td th:text="${suppliers.email}">Email</td>
                   <td th:text="${suppliers.status}"> Trạng thái</td>
                   <td>
-                    <a th:href="@{'/edit-supplier/' + ${supplier.id}}" class="btn btn-primary">Sửa</a>
+                    <a th:href="@{'/edit-supplier/' + ${suppliers.id}}" class="btn btn-primary">Sửa</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a th:href="@{'/delete-suppliers/' + ${supplier.id}}" class="btn btn-danger" onclick=" return confirm('Bạn có chắc chắn muốn xóa Nhà Cung cấp này không?')">Xóa</a>
+                    <a th:href="@{'/delete-suppliers/' + ${suppliers.id}}" class="btn btn-danger" onclick=" return confirm('Bạn có chắc chắn muốn xóa Nhà Cung cấp này không?')">Xóa</a>
                   </td>
                 </tr>
                 </tbody></table>
