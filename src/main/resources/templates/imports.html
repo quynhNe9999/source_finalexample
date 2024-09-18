@@ -73,8 +73,8 @@
                     <tbody>
                     <tr th:each="import1, hh : ${imports}">
                         <td th:text="${import1.id}"></td>
-                        <td th:text="${import1.supplier.id}"></td>
-                        <td th:text="${import1.supplier.name}"></td>
+                        <td th:text="${import1.supplier != null ? import1.supplier.id : ''}"></td>
+                        <td th:text="${import1.supplier != null ? import1.supplier.name : ''}"></td>
                         <td th:text="${import1.product != null ? import1.product.name : ''}"></td>
                         <td th:text="${import1.product != null ? import1.product.id : ''}"></td>
                         <td th:text="${import1.product != null ? import1.product.price : ''}"></td>

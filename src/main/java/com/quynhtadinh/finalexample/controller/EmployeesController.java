@@ -3,6 +3,9 @@ package com.quynhtadinh.finalexample.controller;
 import com.quynhtadinh.finalexample.entity.Employees;
 import com.quynhtadinh.finalexample.repository.EmployeesRepository;
 import com.quynhtadinh.finalexample.service.EmployeesService;
+import com.quynhtadinh.finalexample.service.RoleService;
+import com.quynhtadinh.finalexample.service.StoreService;
+import com.quynhtadinh.finalexample.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,14 @@ public class EmployeesController {
 	@Autowired
 	private EmployeesService employeesService;
 	@Autowired
+	private StoreService storeService;
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private RoleService roleService;
+
+	@Autowired
 	private EmployeesRepository employeesRepository;
 
 
@@ -44,6 +55,9 @@ public class EmployeesController {
 	@GetMapping(value = { "/add-employees"})
 	public String addEmployees(Model model) {
 		model.addAttribute("employees", new Employees());
+		model.addAttribute("store", storeService.getAllActiveStore()); // Add stores to model
+//		model.addAttribute("role", roleService.getAllActiveRole());    // Add roles to model
+		model.addAttribute("user", userService.getAllUsers());    // Add users to model
 		return "add-employees";
 	}
 
