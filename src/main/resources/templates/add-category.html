@@ -44,9 +44,9 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Thêm mới sản phẩm</h3>
+              <h3 class="box-title">Thêm mới danh mục sản phẩm</h3>
             </div>
-              <form id="form" action="#" th:action="@{/saveCategoryDetails}" th:object="${category}" method="post">
+              <form id="form" action="#" th:action="@{/saveCategory}" th:object="${category}" method="post">
                 <div class="contact-grids1 w3agile-6">
                 <div class="box-body">
 <!--                <div class="form-group">-->
@@ -57,58 +57,24 @@
                 <div class="form-group">
                   <label for="name">Tên sản phẩm</label>
                   <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Tên sản phẩm">
-                  <p id="error_name"></p>
                 </div>
                 <div class="form-group">
                   <label for="description">Mô tả sản phẩm</label>
                   <input type="text"  class="form-control" th:field="*{description}" id="description" placeholder="Mô tả">
-                    <p id="error_description"></p>
+                </div>
 
-                </div>
-                <div class="form-group">
-                  <label for="price">Giá sản phẩm</label>
-                  <input type="text" class="form-control" th:field="*{price}" id="price" placeholder="Giá sản phẩm">
-                  <p id="error_price"></p>
-                </div>
-                <div class="form-group">
-                  <label for="stock">Cổ phần</label>
-                  <input type="text" class="form-control" th:field="*{stock}" id="stock"  placeholder="Cổ phần">
-                    <p id="error_stock"></p>
-                </div>
-                <div class="form-group">
-                  <label for="image">Ảnh sản phẩm</label>
-                  <input type="file" class="form-control" placeholder="Ảnh sản phẩm" th:field="*{image}" id="image" required="required">
-                  <p id="error_file"></p>
-                </div>
-                <div class="form-group">
-                  <label for="suppliers">Nhà cung cấp</label>
-                  <select th:field="*{supplier}" id="suppliers" class="form-control">
-                    <option th:each="supplier : ${supplier}"
-                            th:value="${supplier}"
-                            th:text="${supplier.name}">
-                    </option>
-                  </select>
-                    <p id="error_suppliers"></p>
-                </div>
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Thêm mới sản phẩm</button>
-                  <a href="/category" style="float:left;" class="btn btn-success text-right">Trở về</a>
+                <button type="submit" class="btn btn-primary">Thêm mới danh mục sản phẩm</button>
               </div>
                 </div>
-              <br>
-                    <div id="success" class="text-center" style="color:green;"></div>
-                    <div id="error" class="text-center" style="color:red;"></div>
+
             </form>
 
           </div>
      </div>
-        <p class="text-center">
-            <img src="/images/loader.gif" alt="loader" style="width: 150px;height: 120px;" id="loader">
-        </p>
-      <script src="/js/category.js"></script>
 
     </section>
   </div>

@@ -22,9 +22,9 @@ public class Product {
     @Column(name = "stock")
     private Integer stock;
 
-//    @ManyToOne
-//    @JoinColumn(name = "category_id")
-//    private Category category;
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
 //    @ManyToOne
 //    @JoinColumn(name = "supplier_id")

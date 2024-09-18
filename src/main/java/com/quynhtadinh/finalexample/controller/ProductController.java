@@ -2,7 +2,9 @@ package com.quynhtadinh.finalexample.controller;
 
 import com.quynhtadinh.finalexample.entity.Product;
 import com.quynhtadinh.finalexample.entity.Store;
+import com.quynhtadinh.finalexample.service.CategoryService;
 import com.quynhtadinh.finalexample.service.ProductService;
+import com.quynhtadinh.finalexample.service.StoreService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private CategoryService categoryService;
+
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -34,6 +39,8 @@ public class ProductController {
     @GetMapping(value = { "/add-products"})
     public String addProduct(Model model) {
         model.addAttribute("products", new Product());
+        model.addAttribute("category", categoryService.getAllActiveCategory());
+
         return "add-products";
     }
 

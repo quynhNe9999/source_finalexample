@@ -1,19 +1,10 @@
 package com.quynhtadinh.finalexample.entity;
 
-import groovyjarjarantlr4.v4.runtime.misc.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -31,29 +22,24 @@ public class Category {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "price",nullable = false, precision = 10, scale = 2)
-    private double price;
-
-    @Column(name = "stock",nullable = false, precision = 10, scale = 2)
-    private double stock;
-    @Lob
-    @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
-    private byte[] image;
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date", nullable = false)
-    private Date createDate;
+    private LocalDateTime createDate;
 
-    @ManyToOne
-    @JoinColumn(name = "supplier_id", nullable = false)
-    private Suppliers supplier;
+//    @ManyToOne
+//    @JoinColumn(name = "supplier_id", nullable = false)
+//    private Suppliers supplier;
 
-    public Category() {}
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return "Category [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price + ", image="
-                + Arrays.toString(image) + ", createDate=" + createDate + "]";
+    public void addProduct(Product product) {
+        products.add(product);
+        product.setCategory(this);
     }
 
+    public void removeProduct(Product product) {
+        products.remove(product);
+        product.setCategory(null);
+    }
 }

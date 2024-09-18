@@ -20,15 +20,19 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-        public void saveCategory(Category category) {
-            categoryRepository.save(category);
-        }
 
-        public List<Category> getAllActiveCategory() {
-            return categoryRepository.findAll();
-        }
+    public void saveCategory(Category category) {
+        categoryRepository.save(category);
+    }
 
-        public Optional<Category> getCategoryById(Long id) {
-            return categoryRepository.findById(id);
-        }
+    public List<Category> getAllActiveCategory() {
+        return categoryRepository.findAll();
+    }
+
+    public Optional<Category> getCategoryById(Long id) {
+        return categoryRepository.findById(id);
+    }
+    public void deleteCategory(Long id) {
+        categoryRepository.deleteById(id);
+    }
 }
