@@ -14,4 +14,6 @@ import com.quynhtadinh.finalexample.entity.Customers;
 
 public interface CustomersRepository extends JpaRepository<Customers, Long>, CrudRepository<Customers, Long> {
 
+    Optional<Customers> findByName(String name);  // Tìm khách hàng theo tên
+
 }

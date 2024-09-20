@@ -23,7 +23,7 @@
 <div class="wrapper">
 <div th:replace="fragments/header :: header"></div>
   <div th:replace="fragments/sidebar :: sidebar"></div>
- 
+
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
@@ -59,9 +59,11 @@
                 <tr th:each="user, hh : ${listUsers}">
                   <td th:text="${user.username}">Tên Đăng Nhập</td>
                   <td th:text="${user.email}">Email</td>
-                  <td th:text="${user.dateTao}">Ngày tạo</td>
-                  <td th:text="${user.roles}">Vị trí</td>
-                  <td th:text="${user.employee}">Tên Nhân viên</td>
+                  <td th:text="${#dates.format(user.dateTao, 'dd/MM/yyyy')}">Ngày tạo</td>
+                  <td>
+                    <span th:each="role : ${user.roles}" th:text="${role.name}">Role Name</span>
+                  </td>
+                  <td th:text="${user.employee != null ? user.employee.name : ''}">Tên Nhân viên</td>
                   <td th:text="${user.status}"> Trạng thái</td>
                   <td>
                     <a th:href="@{'/edit-user/' + ${user.id}}"class="btn btn-primary">Sửa</a>

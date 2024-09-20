@@ -17,7 +17,7 @@ import com.quynhtadinh.finalexample.repository.UserRepository;
 import javax.transaction.Transactional;
 
 @Service
-public class UserService {  // Chuyển từ interface thành class
+public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
@@ -71,6 +71,9 @@ public class UserService {  // Chuyển từ interface thành class
 	}
 
 	public List<User> getAllUsers() {
+		return userRepository.findAll();
+	}
+	public List<User> getAllActiveUsers() {
 		return userRepository.findAll();
 	}
 

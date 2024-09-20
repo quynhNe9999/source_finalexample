@@ -39,7 +39,14 @@ public class OrdersController {
 	}
 
 	@PostMapping(value = { "/saveOrders"})
-	public String addOrdersPages(@ModelAttribute("orders") Orders orders) {
+	public String addOrdersPages(@ModelAttribute("orders") Orders orders,
+								 @RequestParam("name") String customerName,
+								 @RequestParam("email") String customerEmail,
+								 @RequestParam("address") String customerAddress,
+								 @RequestParam("phone") String customerPhone,
+								 List<OrderDetails> newOrderDetails) {
+
+		ordersService.saveOrderWithCustomer(orders, customerName, customerEmail, customerPhone, customerAddress);
 		ordersService.saveOrders(orders);
 		return "redirect:/orders";
 	}

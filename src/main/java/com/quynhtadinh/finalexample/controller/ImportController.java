@@ -1,7 +1,11 @@
 package com.quynhtadinh.finalexample.controller;
 
+import com.quynhtadinh.finalexample.entity.Category;
 import com.quynhtadinh.finalexample.entity.Import;
+import com.quynhtadinh.finalexample.entity.Suppliers;
+import com.quynhtadinh.finalexample.service.CategoryService;
 import com.quynhtadinh.finalexample.service.ImportService;
+import com.quynhtadinh.finalexample.service.SuppliersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,13 @@ public class ImportController {
 
 	@Autowired
 	private ImportService importService;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private SuppliersService suppliersService;
+
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/imports")
@@ -29,6 +40,9 @@ public class ImportController {
     @GetMapping(value = { "/add-imports"})
     public String addImport(Model model) {
         model.addAttribute("imports", new Import());
+        List<Suppliers> suppliers = suppliersService.getAllActiveSuppliers();
+        model.addAttribute("suppliers", suppliers);
+
         return "add-imports";
     }
 

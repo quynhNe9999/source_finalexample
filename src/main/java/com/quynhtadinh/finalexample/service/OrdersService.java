@@ -45,6 +45,26 @@ public class OrdersService {
 
         }
 
+    public Orders saveOrderWithCustomer(Orders order, String customerName, String customerEmail, String customerPhone, String customerAddress) {
+        // Kiểm tra khách hàng có tồn tại không
+        Customers customer = customersRepository.findByName(customerName)
+                .orElseGet(() -> {
+                    // Nếu không tồn tại, tạo khách hàng mới
+                    Customers newCustomer = new Customers();
+                    newCustomer.setName(customerName);
+                    newCustomer.setEmail(customerEmail);
+                    newCustomer.setPhone(customerPhone);
+                    newCustomer.setAddress(customerAddress);
+                    return customersRepository.save(newCustomer);
+                });
+
+        // Gán khách hàng vào đơn hàng
+        order.setCustomer(customer);
+
+        // Lưu đơn hàng
+        return ordersRepository.save(order);
+    }
+
 
         public List<Orders> getAllActiveOrders() {
             return ordersRepository.findAll();
