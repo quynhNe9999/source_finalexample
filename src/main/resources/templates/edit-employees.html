@@ -85,7 +85,7 @@
 						</div>
 						<div class="form-group">
 							<label for="store">Mã cửa hàng</label>
-							<select th:field="*{store}" id="store" class="form-control">
+							<select th:field="*{store.id}" id="store" class="form-control">
 								<option th:each="store : ${store}"
 										th:value="${store}"
 										th:text="${store.name}">
@@ -94,7 +94,7 @@
 						</div>
 						<div class="form-group">
 							<label for="role">Quyền truy cập</label>
-							<select th:field="*{role}" id="role" class="form-control">
+							<select th:field="*{role.name}" id="role" class="form-control">
 								<option th:each="role : ${role}"
 										th:value="${role}"
 										th:text="${role.name}">
@@ -110,6 +110,7 @@
 								</option>
 							</select>
 						</div>
+
 						<!-- /.box-body -->
 
 						<div class="box-footer">

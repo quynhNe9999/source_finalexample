@@ -1,7 +1,13 @@
 package com.quynhtadinh.finalexample.controller;
 
 import com.quynhtadinh.finalexample.entity.Employees;
+import com.quynhtadinh.finalexample.entity.Role;
+import com.quynhtadinh.finalexample.entity.Store;
+import com.quynhtadinh.finalexample.entity.User;
 import com.quynhtadinh.finalexample.repository.EmployeesRepository;
+import com.quynhtadinh.finalexample.repository.RoleRepository;
+import com.quynhtadinh.finalexample.repository.StoreRepository;
+import com.quynhtadinh.finalexample.repository.UserRepository;
 import com.quynhtadinh.finalexample.service.EmployeesService;
 import com.quynhtadinh.finalexample.service.RoleService;
 import com.quynhtadinh.finalexample.service.StoreService;
@@ -35,9 +41,16 @@ public class EmployeesController {
 	private StoreService storeService;
 	@Autowired
 	private UserService userService;
-
 	@Autowired
 	private RoleService roleService;
+
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private StoreRepository storeRepository;
+	@Autowired
+	private RoleRepository roleRepository;
+
 
 	@Autowired
 	private EmployeesRepository employeesRepository;
@@ -55,15 +68,25 @@ public class EmployeesController {
 	@GetMapping(value = { "/add-employees"})
 	public String addEmployees(Model model) {
 		model.addAttribute("employees", new Employees());
-		model.addAttribute("store", storeService.getAllActiveStore()); // Add stores to model
-//		model.addAttribute("role", roleService.getAllActiveRole());    // Add roles to model
-		model.addAttribute("user", userService.getAllUsers());    // Add users to model
+		List<Store> stores = storeService.getAllActiveStore();
+		model.addAttribute("stores", stores);
+		List<User> users =userService.getAllActiveUsers();
+		model.addAttribute("users", users);
+		List<Role> roles =roleService.getAllActiveRole();
+		model.addAttribute("roles", roles);
 		return "add-employees";
 	}
 
 	@PostMapping(value = { "/saveEmployees"})
 	public String addEmployeesPages(@ModelAttribute("employees") Employees employees) {
 		employeesService.saveEmployees(employees);
+		Role role = roleRepository.findById(employees.getRole().getId()).orElseThrow(() -> new RuntimeException("Role not found"));
+		Store store = storeRepository.findById(employees.getStore().getId()).orElseThrow(() -> new RuntimeException("Store not found"));
+		User user = userRepository.findById(employees.getUser().getId()).orElseThrow(() -> new RuntimeException("User not found"));
+
+		employees.setRole(role);
+		employees.setStore(store);
+		employees.setUser(user);
 		return "redirect:/employees";
 	}
 

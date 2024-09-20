@@ -75,8 +75,8 @@
 					<td th:text="${employees.position}">Vị trí</td>
 					<td th:text="${employees.dateOfBirth}">Ngày sinh</td>
 				<td th:text="${employees.store != null ? employees.store.name : ''}">Mã cửa hàng</td>
-				<td th:text="${employees.role != null ? employees.role.role_name : ''}">Quyền Truy Cập</td>
-				<td th:text="${employees.user != null ? employees.user.username : ''}">Mã người dùng</td>
+				<td th:text="${employees.role != null ? employees.role.name : 'Chưa được cấp quyền'}">Quyền Truy Cập</td>
+				<td th:text="${employees.user != null ? employees.user.username : 'Chưa có tài khoản'}">Mã người dùng</td>
 
 					<td>
 						<a th:href="@{'/edit-employees/' + ${employees.id}}"class="btn btn-primary">Sửa</a>
