@@ -54,16 +54,18 @@
                                 <th>Giá</th>
                                 <th>Số lượng</th>
                                 <th>Danh mục sản phẩm</th>
+                                <th>Nhà cung cấp</th>
                                 <th>Tùy chọn</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="product, hh : ${products}">
                                 <td th:text="${product.name}"></td>
+                                <td th:text="${product.category != null ? product.category.name : ''}"></td>
                                 <td th:text="${product.description}"></td>
                                 <td th:text="${product.price}"></td>
                                 <td th:text="${product.stock}"></td>
-                                <td th:text="${product.category.name}"></td>
+                                <td th:text="${product.supplier != null ? product.supplier.name : ''}"></td>
                                 <td>
                                     <a th:href="@{/edit-products/{id}(id=${product.id})}" class="btn btn-primary">Sửa</a>
                                     <a th:href="@{/delete-products/{id}(id=${product.id})}"  class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">Xóa</a>

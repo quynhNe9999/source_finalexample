@@ -56,6 +56,12 @@
                                 <label for="name">Tên sản phẩm:</label>
                                 <input type="text" class="form-control" id="name" th:field="*{name}" required="required" />
                             </div>
+                            <div class="form-group">
+                                <label for="category">Danh mục quà tặng</label>
+                                <select th:field="*{category}" id="category" class="form-control">
+                                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                                </select>
+                            </div>
                            <div class="form-group">
                                 <label for="description">Mô tả:</label>
                                 <textarea id="description" class="form-control" th:field="*{description}"></textarea>
@@ -68,6 +74,12 @@
                                 <label for="stock">Số lượng:</label>
                                 <input type="number" class="form-control" id="stock" th:field="*{stock}" required="required" />
                            </div>
+                            <div class="form-group">
+                                <label for="supplier">Nhà cung cấp</label>
+                                <select th:field="*{supplier.id}" id="supplier" class="form-control">
+                                    <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"></option>
+                                </select>
+                            </div>
                         </div>
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Cập nhật sản phẩm</button>
