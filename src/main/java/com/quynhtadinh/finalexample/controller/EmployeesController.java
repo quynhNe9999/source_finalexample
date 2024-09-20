@@ -91,9 +91,16 @@ public class EmployeesController {
 	}
 
 	@RequestMapping("/edit-employees/{id}")
-	public ModelAndView showEditEmployeesPage(@PathVariable(name = "id") Long id) {
+	public ModelAndView showEditEmployeesPage(@PathVariable(name = "id") Long id, Model model) {
 		ModelAndView mav = new ModelAndView("edit-employees");
 		Employees employees = employeesService.getEmployeesById(id).get();
+		model.addAttribute("employees", new Employees());
+		List<Store> stores = storeService.getAllActiveStore();
+		model.addAttribute("stores", stores);
+		List<User> users =userService.getAllActiveUsers();
+		model.addAttribute("users", users);
+		List<Role> roles =roleService.getAllActiveRole();
+		model.addAttribute("roles", roles);
 		mav.addObject("employees", employees);
 		return mav;
 	}

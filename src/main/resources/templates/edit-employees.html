@@ -83,31 +83,27 @@
 							<label for="dateOfBirth">Ngày Sinh</label>
 							<input type="date" class="form-control" id="dateOfBirth" th:field="*{dateOfBirth}" placeholder="Ngày Sinh" value="">
 						</div>
-						<div class="form-group">
-							<label for="store">Mã cửa hàng</label>
-							<select th:field="*{store.id}" id="store" class="form-control">
-								<option th:each="store : ${store}"
-										th:value="${store}"
-										th:text="${store.name}">
-								</option>
-							</select>
-						</div>
+						<!-- Lựa chọn vai trò -->
 						<div class="form-group">
 							<label for="role">Quyền truy cập</label>
-							<select th:field="*{role.name}" id="role" class="form-control">
-								<option th:each="role : ${role}"
-										th:value="${role}"
-										th:text="${role.name}">
-								</option>
+							<select th:field="*{role.id}" id="role" class="form-control">
+								<option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
 							</select>
 						</div>
+
+						<!-- Lựa chọn cửa hàng -->
 						<div class="form-group">
-							<label for="user">Mã người dùng</label>
-							<select th:field="*{user}" id="user" class="form-control">
-								<option th:each="user : ${user}"
-										th:value="${user}"
-										th:text="${user.username}">
-								</option>
+							<label for="store">Cửa hàng</label>
+							<select th:field="*{store.id}" id="store" class="form-control">
+								<option th:each="store : ${stores}" th:value="${store.id}" th:text="${store.name}"></option>
+							</select>
+						</div>
+
+						<!-- Lựa chọn người dùng -->
+						<div class="form-group">
+							<label for="user">Tên đăng nhập</label>
+							<select th:field="*{user.id}" id="user" class="form-control">
+								<option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
 							</select>
 						</div>
 
