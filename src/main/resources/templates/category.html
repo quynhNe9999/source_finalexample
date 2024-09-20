@@ -55,7 +55,7 @@
             <th>ID</th>
             <th>Tên danh mục</th>
             <th>Mô Tả</th>
-            <th>ngày tạo danh mục</th>
+            <th>Ngày tạo danh mục</th>
             <th>Hoạt động</th>
         	</tr>
                 </thead>
@@ -64,8 +64,7 @@
                 <td th:text="${category.id}"></td>
                 <td th:text="${category.name}"></td>
                 <td th:text="${category.description}"></td>
-                <td th:text="${#dates.format({category.createDate}, 'dd-MM-yyyy')}"/></td>
-
+                <td th:text="${category.dateTao != null ? #dates.format(category.dateTao, 'dd/MM/yyyy') : ''}">Ngày tạo</td>
                 <td>
                     <a th:href="@{'/edit-category/' + ${category.id}}"class="btn btn-primary">Sửa</a>
                     <a th:href="@{'/delete-category/' + ${category.id}}" class="btn btn-danger" onclick="confirmDelete(event)" >Xóa</a>

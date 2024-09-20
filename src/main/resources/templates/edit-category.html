@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Blank Page</title>
-  <!-- Tell the browser to be responsive to screen width -->
+  <title>Admin Wine</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/AdminLTE.css">
-  <link rel="stylesheet" href="css/_all-skins.min.css">
-  <link rel="stylesheet" href="css/jquery-ui.css">
-  <link rel="stylesheet" href="css/style.css" />
-  <script src="js/angular.min.js"></script>
-  <script src="js/app.js"></script>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/AdminLTE.css">
+  <link rel="stylesheet" href="/css/_all-skins.min.css">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="/js/angular.min.js"></script>
+  <script src="/js/app.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -49,18 +52,26 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form action="#" th:action="@{/edit-category/{id}(id=${category.id})}" th:object="${category}" method="post">
+            <form action="#" th:action="@{/saveCategory}" th:object="${category}" method="post">
               <div class="box-body">
                 <div class="form-group">
+                  <label for="name">ID danh mục</label>
+                  <input type="text" class="form-control" id="id" th:field="*{id}" readonly="readonly" placeholder="" value="">
+                </div>
+                <div class="form-group">
                   <label for="name">Tên danh mục sản phẩm</label>
-                  <input type="text" class="form-control" id="name" placeholder="Tên danh mục sản phẩm" value="">
+                  <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Tên danh mục sản phẩm" value="">
                 </div>
                 <div class="form-group">
                   <label for="description">Mô tả danh mục</label>
-                  <input type="text" class="form-control" id="description" placeholder="Mô tả danh mục" value="">
+                  <input type="text" class="form-control" id="description" th:field="*{description}" placeholder="Mô tả danh mục" value="">
+                </div>
+                <div class="form-group">
+                  <label for="dateTao">Ngày tạo danh mục</label>
+                  <input type="date" class="form-control" id="dateTao" th:field="*{dateTao}" placeholder="Ngày tạo danh mục" required="required">
                 </div>
               <!-- /.box-body -->
-
+              </div>
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Cập nhật danh mục sản phẩm</button>
               </div>

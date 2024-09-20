@@ -62,7 +62,10 @@
                   <label for="description">Mô tả sản phẩm</label>
                   <input type="text"  class="form-control" th:field="*{description}" id="description" placeholder="Mô tả">
                 </div>
-
+                <div class="form-group">
+                    <label for="dateTao">Ngày tạo danh mục</label>
+                    <input type="date" class="form-control" id="dateTao" th:field="*{dateTao}" placeholder="Ngày tạo Danh mục" required="required">
+                </div>
               </div>
               <!-- /.box-body -->
 
