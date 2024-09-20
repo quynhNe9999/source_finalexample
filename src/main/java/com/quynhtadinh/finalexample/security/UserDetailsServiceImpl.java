@@ -33,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : user.getRoles()){
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole_name().name()));
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName().name()));
 
         }
 
@@ -44,7 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		// TODO Auto-generated method stub
 		  Set<GrantedAuthority> authorities = new HashSet<>();
 	        for (Role role : roles) {
-	            authorities.add(new SimpleGrantedAuthority(role.getRole_name().name()));
+	            authorities.add(new SimpleGrantedAuthority(role.getName().name()));
 	            for (User user : role.getUsers()) {
 	                authorities.add(new SimpleGrantedAuthority(user.getUsername()));
 	            }
