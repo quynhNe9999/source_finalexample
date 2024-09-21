@@ -2,9 +2,11 @@ package com.quynhtadinh.finalexample.controller;
 
 import com.quynhtadinh.finalexample.entity.Category;
 import com.quynhtadinh.finalexample.entity.Import;
+import com.quynhtadinh.finalexample.entity.Product;
 import com.quynhtadinh.finalexample.entity.Suppliers;
 import com.quynhtadinh.finalexample.service.CategoryService;
 import com.quynhtadinh.finalexample.service.ImportService;
+import com.quynhtadinh.finalexample.service.ProductService;
 import com.quynhtadinh.finalexample.service.SuppliersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,8 @@ public class ImportController {
     private CategoryService categoryService;
 
     @Autowired
+    private ProductService productService;
+    @Autowired
     private SuppliersService suppliersService;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -42,7 +46,8 @@ public class ImportController {
         model.addAttribute("imports", new Import());
         List<Suppliers> suppliers = suppliersService.getAllActiveSuppliers();
         model.addAttribute("suppliers", suppliers);
-
+        List<Product> products = productService.getAllActiveProduct();
+        model.addAttribute("product", products);
         return "add-imports";
     }
 

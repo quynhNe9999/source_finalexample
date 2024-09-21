@@ -46,27 +46,24 @@
             <form role="form"  th:action="@{/saveImports}" th:object="${imports}" method="post">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="suppliers">Nhà cung cấp</label>
-                  <select th:field="*{supplier}" id="suppliers" class="form-control">
-                    <option th:each="supplier : ${supplier}"
-                            th:value="${supplier}"
-                            th:text="${supplier.name}">
-                    </option>
+                  <label for="supplier">Nhà cung cấp</label>
+                  <select th:field="*{supplier.id}" id="supplier" class="form-control">
+                    <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"></option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="product.name">Tên sản phẩm</label>
-                  <select th:field="*{product}" id="product.name" class="form-control">
+                  <label for="product">Tên sản phẩm</label>
+                  <select th:field="*{product.id}" id="product" class="form-control">
                     <option th:each="product : ${product}"
-                            th:value="${product}"
+                            th:value="${product.id}"
                             th:text="${product.name}">
                     </option>
                   </select>
                 </div>
-<!--                <div class="form-group">-->
-<!--                  <label for="nhapXuat">Nhập Xuất</label>-->
-<!--                  <input type="text" class="form-control" id="nhapXuat" placeholder="Banner trang chủ">-->
-<!--                </div>-->
+                <div class="form-group">
+                  <label for="ngaynhapXuat">Ngày Nhập Xuất</label>
+                  <input type="date" class="form-control" id="ngaynhapXuat" th:field="*{importDate}" placeholder="Ngày Nhập Xuất">
+                </div>
 <!--                <div class="form-group">-->
 <!--                  <label for="exampleInputEmail1">Số lượng</label>-->
 <!--                  <input type="text" class="form-control" id="quantity" placeholder="Số lượng">-->
@@ -87,15 +84,10 @@
                     <option value="Xuất">Xuất</option>
                   </select>
                 </div>
-                <div class="form-group">
-                  <label for="importDate">Ngày nhập xuất</label>
-                  <input type="date" class="form-control" id="importDate"  th:field="*{importDate}" placeholder="Ngày nhập xuất">
-                </div>
-              </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Thêm mới</button>
+                <button type="submit" class="btn btn-primary">Thêm mới kho sản phẩm</button>
               </div>
             </form>
           </div>
