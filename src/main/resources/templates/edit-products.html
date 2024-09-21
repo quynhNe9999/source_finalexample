@@ -46,7 +46,7 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Cập nhật cửa hàng</h3>
                     </div>
-                        <form th:action="@{/saveProducts}" th:object="${products}" method="post">
+                        <form th:action="@{/saveProducts}" th:object="${products}" method="post" enctype="multipart/form-data">
                         <div class="contact-grids1 w3agile-6">
                         <div class="box-body">
                             <div class="form-group">
@@ -74,6 +74,12 @@
                                 <label for="stock">Số lượng:</label>
                                 <input type="number" class="form-control" id="stock" th:field="*{stock}" required="required" />
                            </div>
+<!--                            <div class="form-group">-->
+<!--                                <label for="image">Ảnh sản phẩm:</label>-->
+<!--                                <input type="file" class="form-control" id="image" name="imageFile" th:field="*{image}" required="required" />-->
+<!--&lt;!&ndash;                                <img alt="" src="${pageContext.request.contextPath}/<c:url value="uploads"/>/images/${product.image}">&ndash;&gt;-->
+
+<!--                            </div>-->
                             <div class="form-group">
                                 <label for="supplier">Nhà cung cấp</label>
                                 <select th:field="*{supplier.id}" id="supplier" class="form-control">

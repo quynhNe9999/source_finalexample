@@ -82,8 +82,8 @@
                         <td th:text="${import1.nhapXuat}"></td>
                         <td th:text="${import1.importDate}"></td>
                         <td>
-                            <a th:href="@{/edit-imports/{id}(id=${import1.id})}" class="btn btn-primary">Update</a>
-                            <a th:href="@{/delete-imports/{id}(id=${import1.id})}" class="btn btn-danger">Delete</a>
+                            <a th:href="@{/edit-imports/{id}(id=${import1.id})}" class="btn btn-primary">Sửa</a>
+                            <a th:href="@{/delete-imports/{id}(id=${import1.id})}" class="btn btn-danger" onclick=" return confirm('Bạn có chắc chắn muốn xóa sản phẩm này trong kho không?')">Xóa</a>
                         </td>
                     </tr>
                     </tbody>

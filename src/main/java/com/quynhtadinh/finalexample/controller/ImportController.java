@@ -58,9 +58,13 @@ public class ImportController {
     }
 
     @RequestMapping("/edit-imports/{id}")
-    public ModelAndView showEditImportPage(@PathVariable(name = "id") Long id) {
+    public ModelAndView showEditImportPage(@PathVariable(name = "id") Long id, Model model) {
         ModelAndView mav = new ModelAndView("edit-imports");
         Import imports = importService.getImportById(id).get();
+        List<Suppliers> suppliers = suppliersService.getAllActiveSuppliers();
+        model.addAttribute("suppliers", suppliers);
+        List<Product> products = productService.getAllActiveProduct();
+        model.addAttribute("product", products);
         mav.addObject("imports", imports);
         return mav;
     }

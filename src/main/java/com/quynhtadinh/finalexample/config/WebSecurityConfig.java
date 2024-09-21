@@ -12,8 +12,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 
 @Configuration
@@ -38,32 +38,37 @@ public class WebSecurityConfig {
 	// Define access for each table
 	http.authorizeRequests()
 
-			.antMatchers("/resources/**", "/registration", "/static/**").permitAll()
-			.antMatchers("/store/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') or hasRole('ROLE_VIEWER')")
-			.antMatchers("/store/delete/**").access("hasRole('ROLE_ADMIN')")
+			.antMatchers("/resources/**", "/registration", "/static/**","/uploads/**").permitAll()
 
-			.antMatchers("/employees/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') or hasRole('ROLE_VIEWER')")
-			.antMatchers("/employees/delete/**").access("hasRole('ROLE_ADMIN')")
+			.antMatchers("/store/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE')")
+			.antMatchers("/delete-store/**","/add-store","/edit-store/**").access("hasRole('ROLE_ADMIN')")
 
-			.antMatchers("/user/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE')")
+			.antMatchers("/employees/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE')")
+			.antMatchers("/delete-employees/**","/add-employees","/edit-employees/**").access("hasRole('ROLE_ADMIN')")
 
-			.antMatchers("/suppliers/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') or hasRole('ROLE_VIEWER')")
-			.antMatchers("/suppliers/delete/**").access("hasRole('ROLE_ADMIN')")
+			.antMatchers("/user/**","/add-user","/edit-user/").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE')")
 
-			.antMatchers("/categories/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') or hasRole('ROLE_VIEWER')")
-			.antMatchers("/categories/delete/**").access("hasRole('ROLE_ADMIN')")
+			.antMatchers("/suppliers/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE')")
+			.antMatchers("/delete-suppliers/**","/add-suppliers","/edit-suppliers/**").access("hasRole('ROLE_ADMIN')")
 
-			.antMatchers("/customers/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') or hasRole('ROLE_VIEWER')")
-			.antMatchers("/customers/delete/**").access("hasRole('ROLE_ADMIN')")
+			.antMatchers("/category/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE')")
+			.antMatchers("/delete-category/**","/add-category","/edit-category/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE')")
 
-			.antMatchers("/orders/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') or hasRole('ROLE_VIEWER')")
-			.antMatchers("/orders/delete/**").access("hasRole('ROLE_ADMIN')")
 
-			.antMatchers("/orderDetails/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') or hasRole('ROLE_VIEWER')")
-			.antMatchers("/orderDetails/delete/**").access("hasRole('ROLE_ADMIN')")
+			.antMatchers("/customers/**","/add-customers","/edit-customers/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') ")
+			.antMatchers("/delete-customers/**","/add-customers","/edit-customers/**").access("hasRole('ROLE_ADMIN')")
 
-			.antMatchers("/import/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') or hasRole('ROLE_VIEWER')")
-			.antMatchers("/import/delete/**").access("hasRole('ROLE_ADMIN')")
+			.antMatchers("/orders/**","/add-orders","/edit-orders/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') ")
+			.antMatchers("/delete-orders/**","/add-orders","/edit-orders/**").access("hasRole('ROLE_ADMIN')")
+
+			.antMatchers("/orderDetails/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') ")
+			.antMatchers("/delete-orderDetails/**","/add-store","/edit-store/**").access("hasRole('ROLE_ADMIN')")
+
+			.antMatchers("/imports/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') ")
+			.antMatchers("/import/**","/add-import","/edit-import/**").access("hasRole('ROLE_ADMIN')")
+
+			.antMatchers("/products/**","/add-products","/edit-products/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGE') or hasRole('ROLE_EMPLOYEE') ")
+			.antMatchers("/products/**").access("hasRole('ROLE_ADMIN')")
 
 			.and().exceptionHandling().accessDeniedPage("/405");
 
@@ -80,7 +85,10 @@ public class WebSecurityConfig {
 }
 
 
-
+	@Bean
+	public MultipartResolver multipartResolver() {
+		return new StandardServletMultipartResolver();
+	}
 
 //	@Bean
 //	public SecurityFilterChain finterChain(HttpSecurity http) throws Exception {

@@ -6,10 +6,7 @@ import com.quynhtadinh.finalexample.entity.Store;
 import com.quynhtadinh.finalexample.entity.Suppliers;
 import com.quynhtadinh.finalexample.repository.CategoryRepository;
 import com.quynhtadinh.finalexample.repository.SuppliersRepository;
-import com.quynhtadinh.finalexample.service.CategoryService;
-import com.quynhtadinh.finalexample.service.ProductService;
-import com.quynhtadinh.finalexample.service.StoreService;
-import com.quynhtadinh.finalexample.service.SuppliersService;
+import com.quynhtadinh.finalexample.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +14,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Controller
@@ -38,6 +41,9 @@ public class ProductController {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private StorageService storageService;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -59,8 +65,12 @@ public class ProductController {
     }
 
     @PostMapping(value = { "/saveProducts"})
-    public String addProductPages(@ModelAttribute("products") Product products) {
+    public String addProductPages(@ModelAttribute("products") Product products
+//            ,@RequestParam("imageFile") MultipartFile imageFile
+    ) {
         // Gọi service để lưu product
+//        this.storageService.store(file);
+
         productService.saveProduct(products);
 
         // Tìm supplier và category theo ID
@@ -72,6 +82,25 @@ public class ProductController {
         // Sử dụng setter để gán supplier và category cho product
         products.setSupplier(suppliers);
         products.setCategory(category);
+//        if (!imageFile.isEmpty()) {
+//            String fileName = imageFile.getOriginalFilename();
+//            Path uploadPath = Paths.get("src/main/resources/static/uploads");
+//
+//            try {
+//                // Tạo thư mục nếu chưa tồn tại
+//                if (!Files.exists(uploadPath)) {
+//                    Files.createDirectories(uploadPath);
+//                }
+//
+//                // Lưu file vào thư mục uploads
+//                Files.copy(imageFile.getInputStream(), uploadPath.resolve(fileName));
+//
+//                // Lưu tên file vào trường image của product
+//                products.setImage(fileName);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         // Lưu lại product với các thông tin đã được gán
         productService.saveProduct(products);  // Nếu cần lưu lại sau khi gán

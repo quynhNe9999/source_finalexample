@@ -49,8 +49,7 @@
                   <th>Tên đăng nhập</th>
                   <th>Email</th>
                   <th>Ngày tạo</th>
-                  <th>Vị trí</th>
-                  <th>Tên nhân viên</th>
+                  <th>Quyền Truy Cập</th>
                   <th>Trạng thái</th>
                   <th>Tùy chọn</th>
                 </tr>
@@ -63,7 +62,6 @@
                   <td>
                     <span th:each="role : ${user.roles}" th:text="${role.name}">Role Name</span>
                   </td>
-                  <td th:text="${user.employee != null ? user.employee.name : ''}">Tên Nhân viên</td>
                   <td th:text="${user.status}"> Trạng thái</td>
                   <td>
                     <a th:href="@{'/edit-user/' + ${user.id}}"class="btn btn-primary">Sửa</a>

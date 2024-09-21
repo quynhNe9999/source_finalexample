@@ -56,38 +56,46 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="username">Tên đăng nhập</label>
-                  <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Tên đăng nhập">
+                  <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Tên đăng nhập" required="required">
                 </div>
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Email">
+                  <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Email" required="required">
                 </div>
                 <div class="form-group">
                   <label for="password">Mật khẩu</label>
-                  <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Mật khẩu">
+                  <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Mật khẩu" required="required">
                 </div>
                 <div class="form-group">
-                  <label for="dateTao">Mật khẩu</label>
-                  <input type="date" class="form-control" id="dateTao" th:field="*{dateTao}" placeholder="Ngày tạo">
+                  <label for="passwordConfirm">Nhập lại mật khẩu</label>
+                  <input type="password" class="form-control" id="passwordConfirm" th:field="*{passwordConfirm}" placeholder="Nhập lại mật khẩu" required="required">
                 </div>
-
                 <div class="form-group">
-                  <label for="roles">CHỨC VỤ</label>
-                  <select name="roles" id="roles"  th:field="*{setRoles(roles)}" class="form-control" required>
-                    <option disabled selected>CHỌN CHỨC VỤ</option>
-                    <option value="1">ADMIN</option>
-                    <option value="2">MANAGE</option>
-                    <option value="3">EMPLOYEE</option>
+                  <label for="dateTao">Ngày tạo tài khoản</label>
+                  <input type="date" class="form-control" id="dateTao" th:field="*{dateTao}" placeholder="Ngày tạo tài khoản" required="required">
+                </div>
+                <!-- Lựa chọn vai trò -->
+                <div class="form-group">
+                  <label for="roleId">Quyền Truy Cập</label>
+                  <select name="roleId" id="roleId" class="form-control" required>
+                    <option value="" disabled selected>Select Role</option>
+                    <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="status">Trạng thái</label>
-                  <select name="status" id="status" th:field="*{status}"  class="form-control" required>
+                  <select name="status" id="status" th:field="*{status}"  class="form-control" required="required">
                     <option value="" disabled selected>Trạng thái</option>
                     <option value="A">Hoạt động</option>
                     <option value="I">Không hoạt động</option>
                   </select>
                 </div>
+<!--                <div class="form-group">-->
+<!--                  <label for="employee">Mã nhân viên</label>-->
+<!--                  <select th:field="*{employee}" id="employee" class="form-control">-->
+<!--                    <option th:each="employee : ${employee}" th:value="${employee.id}" th:text="${employee.name}"></option>-->
+<!--                  </select>-->
+<!--                </div>-->
               </div>
               <!-- /.box-body -->
 
