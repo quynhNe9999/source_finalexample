@@ -18,7 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @EnableJpaRepositories("com.quynhtadinh.finalexample.repository")
-@ComponentScan("com.quynhtadinh.finalexamples")
+@ComponentScan("com.quynhtadinh.finalexample")
 public class WebSecurityConfig {
 
 	@Autowired

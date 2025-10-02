@@ -49,15 +49,6 @@ public class WebController {
     @Autowired
     OrderDetailRepository orderDetailRepository;
 
-    @GetMapping("/hello")
-    public String hello(){
-        return "hello";
-    }
-    @GetMapping("/home")
-    public String index() {
-        return "home";
-    }
-
     @GetMapping("/products")
     public String getListProducts(Model model,
                                   @RequestParam(name = "page", defaultValue = "1") Integer page,
@@ -206,29 +197,29 @@ public class WebController {
         return "checkout";
     }
 
-    @GetMapping("/prepare-shipping")
-    public String prepareShipping(Model model, @RequestParam(name = "name") String name,
-                                  @RequestParam(name = "phone") String phone,
-                                  @RequestParam(name = "address") String address,
-                                  @RequestParam(name = "note") String note, HttpSession session) {
-
-        List<Cart> listCart = (List<Cart>) session.getAttribute("listCart");
-        if (listCart == null || listCart.size() == 0) {
-            return "emptyCart";
-        }
-        //tính tổng tiền
-        double totalMoney = 0;
-        for (Cart c : listCart) {
-            totalMoney += c.getProductPrice() * c.getQuantity();
-        }
-        model.addAttribute("listCart", listCart);
-        model.addAttribute("totalMoney", MathFunction.getMoney(totalMoney));
-        model.addAttribute("name", name);
-        model.addAttribute("phone", phone);
-        model.addAttribute("address", address);
-        model.addAttribute("note", note);
-        return "prepareShipping";
-    }
+//    @GetMapping("/prepare-shipping")
+//    public String prepareShipping(Model model, @RequestParam(name = "name") String name,
+//                                  @RequestParam(name = "phone") String phone,
+//                                  @RequestParam(name = "address") String address,
+//                                  @RequestParam(name = "note") String note, HttpSession session) {
+//
+//        List<Cart> listCart = (List<Cart>) session.getAttribute("listCart");
+//        if (listCart == null || listCart.size() == 0) {
+//            return "emptyCart";
+//        }
+//        //tính tổng tiền
+//        double totalMoney = 0;
+//        for (Cart c : listCart) {
+//            totalMoney += c.getProductPrice() * c.getQuantity();
+//        }
+//        model.addAttribute("listCart", listCart);
+//        model.addAttribute("totalMoney", MathFunction.getMoney(totalMoney));
+//        model.addAttribute("name", name);
+//        model.addAttribute("phone", phone);
+//        model.addAttribute("address", address);
+//        model.addAttribute("note", note);
+//        return "prepareShipping";
+//    }
 
     @PostMapping("/prepare-shipping")
     public String postPrepareShipping(Model model, @RequestParam(name = "name") String name,
@@ -291,29 +282,5 @@ public class WebController {
         model.addAttribute("totalPage", products.getTotalPages());
         return "listProduct";
     }
-    
-    @GetMapping("/ui-about")
-    public String UiAbout() {
-        return "ui-about";
-    }
-    
-    @GetMapping("/ui-news")
-    public String UiNews() {
-        return "ui-news";
-    }
-    
-    @GetMapping("/ui-menu")
-    public String UiMenu() {
-        return "ui-menu";
-    }
-    
-    @GetMapping("/ui-promotion")
-    public String UiPromotion() {
-        return "ui-promotion";
-    }
-    
-    @GetMapping("/thanks")
-    public String getThank() {
-        return "thanks";
-    }
+
 }

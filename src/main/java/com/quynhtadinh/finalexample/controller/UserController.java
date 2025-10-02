@@ -137,14 +137,14 @@ public class UserController {
         return "redirect:/user";
     }
 //    @GetMapping("/editUser/{id}")
-    @RequestMapping(value = "/editUser/{id}", method = RequestMethod.GET)
-    public String  viewUpdateUser(@PathVariable("id") Long id,User user, Model model)
-    {
-    	
-        model.addAttribute("user", userService.findById(id));
-        return "updateUser";
-
-    }
+//    @RequestMapping(value = "/editUser/{id}", method = RequestMethod.GET)
+//    public String  viewUpdateUser(@PathVariable("id") Long id,User user, Model model)
+//    {
+//
+//        model.addAttribute("user", userService.findById(id));
+//        return "updateUser";
+//
+//    }
     
     //xoa sv
 //    @GetMapping("/deleteUser/{id}")
